@@ -789,11 +789,19 @@ body {
   box-shadow: 0 4px 16px rgba(15, 39, 217, 0.4);
   transition: all var(--transition);
   z-index: 1000;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .back-to-top:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(15, 39, 217, 0.5);
+}
+.back-to-top span {
+  position: relative;
+  top: -3px;
 }
 
 /* ============================================================
