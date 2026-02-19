@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       backToTopButton.style.opacity = '0';
       setTimeout(() => {
-        backToTopButton.style.display = 'none';
+        backToTopButton.style.display = 'flex';
       }, 300);
     }
   };

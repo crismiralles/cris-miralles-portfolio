@@ -893,6 +893,8 @@ body {
     right: 20px;
     width: 44px;
     height: 44px;
+    align-items: center;
+    justify-content: center;
   }
 }
 
