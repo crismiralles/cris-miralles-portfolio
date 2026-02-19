@@ -6,6 +6,79 @@
 document.addEventListener('DOMContentLoaded', function() {
   
   // ============================================================
+  // SKILLS FILTER FUNCTIONALITY
+  // ============================================================
+  
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const skillItems = document.querySelectorAll('.skill-item');
+  
+  // Track active filters (all active by default)
+  let activeFilters = new Set(['ux', 'ui', 'tools']);
+  
+  // Function to update visible skills
+  const updateSkillsVisibility = () => {
+    skillItems.forEach(skill => {
+      const category = skill.getAttribute('data-category');
+      
+      // Show skill if its category is active
+      if (activeFilters.has(category)) {
+        skill.classList.remove('hidden');
+      } else {
+        skill.classList.add('hidden');
+      }
+    });
+    
+    // Update filter button states
+    filterButtons.forEach(btn => {
+      const filter = btn.getAttribute('data-filter');
+      if (activeFilters.has(filter)) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  };
+  
+  // Add click handlers to filter buttons
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const filter = this.getAttribute('data-filter');
+      
+      // Toggle filter
+      if (activeFilters.has(filter)) {
+        activeFilters.delete(filter);
+      } else {
+        activeFilters.add(filter);
+      }
+      
+      // Update visibility
+      updateSkillsVisibility();
+      
+      // Analytics tracking
+      console.log(`Filter toggled: ${filter}, Active filters:`, Array.from(activeFilters));
+    });
+  });
+  
+  // Keyboard support for filter buttons
+  filterButtons.forEach((button, index) => {
+    button.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        button.click();
+      }
+      if (e.key === 'ArrowRight' && index < filterButtons.length - 1) {
+        e.preventDefault();
+        filterButtons[index + 1].focus();
+      }
+      if (e.key === 'ArrowLeft' && index > 0) {
+        e.preventDefault();
+        filterButtons[index - 1].focus();
+      }
+    });
+  });
+  
+  
+  // ============================================================
   // SMOOTH SCROLL FOR NAVIGATION LINKS
   // ============================================================
   

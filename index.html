@@ -18,7 +18,7 @@
 
   <!-- ======================== HERO SECTION ======================== -->
   <section class="hero" id="top">
-    <button class="logo-pill" aria-label="Logo">Nombre</button>
+    <button class="logo-pill" aria-label="Logo">Cristina Miralles</button>
 
     <div class="hero-content">
       <h1 class="hero-title">
@@ -54,7 +54,7 @@
         </li>
         <li>
           <a href="#community">
-            <span>Community Participation Platform &amp; tools</span>
+            <span>Community Participation Platform</span>
             <span class="arrow-icon" aria-hidden="true">↗</span>
           </a>
         </li>
@@ -72,9 +72,9 @@
       <!-- Left: Biography -->
       <div class="about-bio">
         <p class="about-eyebrow">Hello!</p>
-        <h2 class="about-greeting">My name is A</h2>
+        <h2 class="about-greeting">My name is Cristina Miralles</h2>
         <p class="about-text">
-          I'm a freelancing designer who constantly seeks new skills and explores diverse design solutions to deliver the best result in every project. My background in transaction has shaped the way I design interfaces, prioritising meaning, usability and clear communication across different contexts.
+          I'm a hardworking designer who constantly seeks new skills and explores diverse design solutions to deliver the best result in every project. My background in translation has shaped the way I design interfaces, prioritising meaning, usability and clear communication across different contexts.
         </p>
       </div>
 
@@ -83,60 +83,84 @@
         <h3 class="education-title">Education</h3>
 
         <article class="edu-item">
-          <p class="edu-dates">2018–2022</p>
-          <p class="edu-name">Interaction Design Foundation</p>
-          <p class="edu-degree">Autonomous Foundational Training in Interaction Design</p>
-        </article>
-
-        <article class="edu-item">
-          <p class="edu-dates">2013–2016</p>
-          <p class="edu-name">Universitat de Barcelona (UB)</p>
-          <p class="edu-degree">Bachelor's degree in Business Administration (ADE)</p>
+          <p class="edu-dates">2024–2026</p>
+          <p class="edu-name">Advance Vocational Training in Interaction Design</p>
+          <p class="edu-degree">IES Misteri d'Elx</p>
         </article>
 
         <article class="edu-item">
           <p class="edu-dates">2023–2024</p>
-          <p class="edu-name">Universitat Oberta de Catalunya (UOC)</p>
-          <p class="edu-degree">Diploma in Foundation and UI Prototyping</p>
+          <p class="edu-name">Master's degree in Translation Technologies</p>
+          <p class="edu-degree">Universitat Autònoma de Barcelona (UAB)</p>
+        </article>
+
+        <article class="edu-item">
+          <p class="edu-dates">2019–2023</p>
+          <p class="edu-name">Degree in Translation and Interpreting</p>
+          <p class="edu-degree">Universidad Autónoma de Madrid (UAM)</p>
         </article>
       </div>
     </section>
 
+  
     <!-- SKILLS SECTION -->
-    <section class="card skills-card">
-      <!-- Hard Skills -->
-      <div class="skills-column">
-        <h3 class="skills-section-title">Hard skills</h3>
-        
-        <div class="tags-wrap">
-          <span class="tag tag-ux">UX Product Design</span>
-          <span class="tag tag-ui">UI Visual Design</span>
-          <span class="tag tag-fig">Tools</span>
-        </div>
-        
-        <div class="tags-wrap">
-          <span class="tag tag-dark">User research</span>
-          <span class="tag tag-dark">Information architecture</span>
-          <span class="tag tag-dark">Wireframing</span>
-          <span class="tag tag-dark">Prototyping</span>
-          <span class="tag tag-dark">Usability testing</span>
-          <span class="tag tag-dark">Figma</span>
-          <span class="tag tag-dark">Adobe Photoshop</span>
-          <span class="tag tag-dark">Adobe Illustrator</span>
-          <span class="tag tag-dark">HTML &amp; CSS &amp; JavaScript</span>
-        </div>
+    <section class="card skills-card-full">
+      <h3 class="skills-section-title">Hard skills</h3>
+      
+      <!-- Filter Buttons -->
+      <div class="tags-wrap filter-buttons">
+        <button class="tag tag-ux filter-btn active" data-filter="ux">UX Product Design</button>
+        <button class="tag tag-ui filter-btn active" data-filter="ui">UI Visual Design</button>
+        <button class="tag tag-fig filter-btn active" data-filter="tools">Tools</button>
       </div>
+      
+      <!-- Skills List -->
+      <div class="tags-wrap skills-list" id="skillsList">
+        <!-- UX Skills -->
+        <span class="tag tag-dark skill-item" data-category="ux">User research</span>
+        <span class="tag tag-dark skill-item" data-category="ux">Personas &amp; User journeys</span>
+        <span class="tag tag-dark skill-item" data-category="ux">Information architecture</span>
+        <span class="tag tag-dark skill-item" data-category="ux">Wireframing</span>
+        <span class="tag tag-dark skill-item" data-category="ux">Prototyping</span>
+        <span class="tag tag-dark skill-item" data-category="ux">Usability testing</span>
+        <span class="tag tag-dark skill-item" data-category="ux">Heuristic evaluation</span>
+        <span class="tag tag-dark skill-item" data-category="ux">User flows</span>
+        <span class="tag tag-dark skill-item" data-category="ux">Accessibility (WCAG)</span>
+        <span class="tag tag-dark skill-item" data-category="ux">Card sorting</span>
+        
+        <!-- UI Skills -->
+        <span class="tag tag-dark skill-item" data-category="ui">Visual design</span>
+        <span class="tag tag-dark skill-item" data-category="ui">Typography</span>
+        <span class="tag tag-dark skill-item" data-category="ui">Design systems</span>
+        <span class="tag tag-dark skill-item" data-category="ui">Component libraries</span>
+        <span class="tag tag-dark skill-item" data-category="ui">Responsive design</span>
+        <span class="tag tag-dark skill-item" data-category="ui">Mobile-first design</span>
+        <span class="tag tag-dark skill-item" data-category="ui">Iconography</span>
+        <span class="tag tag-dark skill-item" data-category="ui">Branding</span>
+        <span class="tag tag-dark skill-item" data-category="ui">Micro-interactions</span>
+        
+        <!-- Tools -->
+        <span class="tag tag-dark skill-item" data-category="tools">Figma</span>
+        <span class="tag tag-dark skill-item" data-category="tools">Adobe Photoshop, Illustrator, InDesign, Premiere &amp; After Effects</span>
+        <span class="tag tag-dark skill-item" data-category="tools">Miro</span>
+        <span class="tag tag-dark skill-item" data-category="tools">FigJam</span>
+        <span class="tag tag-dark skill-item" data-category="tools">Notion</span>
+        <span class="tag tag-dark skill-item" data-category="tools">HTML &amp; CSS</span>
+        <span class="tag tag-dark skill-item" data-category="tools">JavaScript</span>
+        <span class="tag tag-dark skill-item" data-category="tools">Python (basic)</span>
+        <span class="tag tag-dark skill-item" data-category="tools">Git &amp; GitHub</span>
+      </div>
+    </section>
 
-      <!-- Soft Skills -->
-      <div class="skills-column">
-        <h3 class="skills-section-title">Soft skills</h3>
-        <ul class="soft-list">
-          <li>Analytical problem-solving thinking</li>
-          <li>Attention to detail and hierarchy</li>
-          <li>Communication and feedback-driven</li>
-          <li>Curiosity and commitment to continuous learning</li>
-        </ul>
-      </div>
+    <!-- SOFT SKILLS SECTION -->
+    <section class="card soft-skills-card">
+      <h3 class="skills-section-title">Soft skills</h3>
+      <ul class="soft-list">
+        <li>Analytical problem-solving thinking</li>
+        <li>Attention to detail and hierarchy</li>
+        <li>Communication and feedback-driven</li>
+        <li>Curiosity and commitment to continuous learning</li>
+      </ul>
     </section>
 
     <!-- PROJECT 1: Yoga & Wellness App -->
