@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pausana — Cristina Miralles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#ffffff;--bg2:#f5f5f3;--surface:#f0f0ee;--border:rgba(0,0,0,0.1);--ink:#111110;--ink-60:rgba(17,17,16,.55);--ink-30:rgba(17,17,16,.30);--accent:#4287f5;--serif:'Instrument Serif',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;--max-w:1080px}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max-w);margin:0 auto;padding:0 32px}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;display:flex;align-items:center;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    nav .container{display:flex;align-items:center;justify-content:space-between;width:100%}
+    .nav-back{font-size:14px;color:var(--ink-60);display:flex;align-items:center;gap:6px;transition:color .15s}
+    .nav-back:hover{color:var(--accent)}
+    .nav-name{font-family:var(--serif);font-size:16px}
+    .cs-hero{padding-top:56px;border-bottom:1px solid var(--border)}
+    .cs-hero-top{display:grid;grid-template-columns:240px 1fr;gap:0;padding:64px 0 40px;align-items:start}
+    .cs-meta{display:flex;flex-direction:column;gap:8px;padding-right:40px;border-right:1px solid var(--border)}
+    .cs-num{font-size:11px;color:var(--ink-30);letter-spacing:.08em;text-transform:uppercase}
+    .cs-tags{display:flex;flex-direction:column;gap:4px;margin-top:12px}
+    .cs-tag{font-size:12px;color:var(--ink-60)}
+    .cs-year{font-size:12px;color:var(--ink-30);margin-top:16px}
+    .cs-title-wrap{padding-left:48px}
+    .cs-title{font-family:var(--serif);font-size:clamp(48px,7vw,96px);font-weight:400;line-height:1.0;letter-spacing:-.01em;margin-bottom:20px}
+    .cs-title em{font-style:italic;color:var(--ink-60)}
+    .cs-subtitle{font-size:17px;font-weight:300;color:var(--ink-60);line-height:1.7;max-width:520px}
+    .cs-hero-img{width:100%;overflow:hidden;margin-top:40px;border-radius:8px;}
+    .cs-hero-img img{width:100%;height:auto;display:block;}
+    .cs-body{padding:80px 0}
+    .cs-section{display:grid;grid-template-columns:240px 1fr;gap:0;padding:56px 0;border-top:1px solid var(--border)}
+    .cs-section:last-child{border-bottom:1px solid var(--border)}
+    .cs-section-label{padding-right:40px;padding-top:4px}
+    .cs-section-num{font-size:11px;color:var(--ink-30);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px}
+    .cs-section-q{font-size:12px;color:var(--ink-60);line-height:1.5;font-weight:300}
+    .cs-section-title{font-family:var(--serif);font-size:clamp(22px,3vw,36px);font-weight:400;line-height:1.1;letter-spacing:-.01em;margin-bottom:24px}
+    .cs-p{font-size:15px;font-weight:300;line-height:1.75;color:var(--ink-60);max-width:580px;margin-bottom:16px}
+    .cs-p strong{color:var(--ink);font-weight:500}
+    .insights{display:flex;flex-direction:column;margin-top:28px}
+    .insight{padding:18px 0;border-top:1px solid var(--border);display:grid;grid-template-columns:24px 1fr;gap:16px;align-items:baseline}
+    .insight:last-child{border-bottom:1px solid var(--border)}
+    .insight-n{font-size:11px;color:var(--ink-30)}
+    .insight-text{font-size:14px;font-weight:300;color:var(--ink-60);line-height:1.65}
+    .insight-text strong{color:var(--ink);font-weight:500}
+    .cs-imgs{display:flex;flex-direction:column;gap:12px;margin:24px 0}
+    .cs-imgs img{width:100%;height:auto;border-radius:8px;display:block;border:1px solid var(--border);}
+    .cs-img-full{width:100%;height:auto;border-radius:8px;display:block;margin:24px 0;border:1px solid var(--border);}
+    .cs-next-wrap{padding:48px 0 80px;border-top:1px solid var(--border)}
+    .cs-next{display:flex;justify-content:space-between;align-items:center}
+    .cs-next-label{font-size:11px;color:var(--ink-30);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+    .cs-next-link{font-family:var(--serif);font-size:clamp(22px,3vw,36px);font-weight:400;transition:color .15s}
+    .cs-next-link:hover{color:var(--accent)}
+    @media(max-width:768px){.container{padding:0 20px}.cs-hero-top,.cs-section{grid-template-columns:1fr;gap:24px}.cs-meta{padding-right:0;border-right:none;border-bottom:1px solid var(--border);padding-bottom:20px}.cs-title-wrap{padding-left:0}.cs-section-label{padding-right:0}}
+  </style>
+</head>
+<body>
+<nav><div class="container"><a href="index.html" class="nav-back">← Volver al portfolio</a><span class="nav-name">Cristina Miralles</span></div></nav>
+
+<section class="cs-hero"><div class="container">
+  <div class="cs-hero-top">
+    <div class="cs-meta">
+      <span class="cs-num">Proyecto 01</span>
+      <div class="cs-tags">
+        <span class="cs-tag">App móvil</span>
+        <span class="cs-tag">UX Research</span>
+        <span class="cs-tag">Wellness</span>
+      </div>
+      <span class="cs-year">2026</span>
+    </div>
+    <div class="cs-title-wrap">
+      <h1 class="cs-title">Pau<em>sana</em></h1>
+      <p class="cs-subtitle">Una app de yoga diseñada desde y para las mujeres que se adapta a su tiempo, a su cuerpo y a cada momento de su vida.</p>
+    </div>
+  </div>
+  <div class="cs-hero-img">
+    <img src="img/img-mockups.png" alt="Pausana — mockups"/>
+  </div>
+</div></section>
+
+<div class="cs-body"><div class="container">
+
+  <!-- 01 PROBLEMA -->
+  <div class="cs-section">
+    <div class="cs-section-label">
+      <span class="cs-section-num">01</span>
+      <span class="cs-section-q">¿Qué problema intentas resolver?</span>
+    </div>
+    <div>
+      <h2 class="cs-section-title">El problema</h2>
+      <p class="cs-p">Las apps de yoga existentes no están diseñadas para la vida real de las mujeres. Asumen que tienes una hora libre, que tu cuerpo siempre está igual y que tu único obstáculo para practicar es la motivación.</p>
+      <p class="cs-p">Pero la realidad es otra: <strong>el tiempo es escaso, el cuerpo cambia</strong> por el ciclo menstrual, el embarazo, la perimenopausia o una lesión y ninguna app tiene en cuenta nada de eso. El resultado es una experiencia que no conecta con quien más lo necesita.</p>
+      <p class="cs-p">Pausana parte de una idea distinta: el yoga debería adaptarse a ti, no al revés. Clases personalizadas según el tiempo disponible, corrección de posturas en tiempo real con instructoras, y una práctica que tiene en cuenta tu momento vital no solo tu nivel técnico.</p>
+    </div>
+  </div>
+
+  <!-- 02 USUARIO -->
+  <div class="cs-section">
+    <div class="cs-section-label">
+      <span class="cs-section-num">02</span>
+      <span class="cs-section-q">¿Quién tiene este problema?</span>
+    </div>
+    <div>
+      <h2 class="cs-section-title">La usuaria</h2>
+      <p class="cs-p">Mujeres de entre 30 y 50 años que trabajan, muchas con hijos, y que quieren practicar yoga pero no encajan en el molde de usuaria que las apps actuales tienen en mente.</p>
+      <p class="cs-p">Algunas nunca han practicado y quieren empezar sin sentirse perdidas. Otras practicaron antes y lo dejaron, y buscan retomarlo sin presión. En ambos casos, Pausana es un <strong>camino de aprendizaje progresivo</strong>, no una biblioteca de clases sin contexto.</p>
+      <div class="insights">
+        <div class="insight"><span class="insight-n">A</span><span class="insight-text"><strong>Su momento del día:</strong> por la mañana temprano antes de que empiece todo, en la pausa del mediodía, o al terminar el trabajo. Huecos reales, no sesiones planificadas.</span></div>
+        <div class="insight"><span class="insight-n">B</span><span class="insight-text"><strong>Su relación con el yoga:</strong> el 50% practicó antes y lo dejó. El 24% practica ahora pero con baja frecuencia. Solo el 26% nunca lo ha probado.</span></div>
+        <div class="insight"><span class="insight-n">C</span><span class="insight-text"><strong>Su dispositivo:</strong> el 72% usa el móvil para practicar. La app tiene que funcionar en una pantalla pequeña, con una mano, en el suelo del salón.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 EVIDENCIA -->
+  <div class="cs-section">
+    <div class="cs-section-label">
+      <span class="cs-section-num">03</span>
+      <span class="cs-section-q">¿Cómo sé que es un problema real?</span>
+    </div>
+    <div>
+      <h2 class="cs-section-title">La evidencia</h2>
+      <p class="cs-p">Realicé encuestas cuantitativas para validar hipótesis sobre hábitos, preferencias y barreras. Los datos confirmaron lo que intuía y añadieron matices que cambiaron algunas decisiones de diseño.</p>
+      <div class="insights">
+        <div class="insight"><span class="insight-n">01</span><span class="insight-text"><strong>El tiempo es la barrera principal:</strong> el 40% de las encuestadas señaló la falta de tiempo como su mayor obstáculo. El 40% prefiere sesiones de 10-15 min y el 36% de 20-30 min. Nadie tiene una hora.</span></div>
+        <div class="insight"><span class="insight-n">02</span><span class="insight-text"><strong>Las rutinas guiadas son lo más valorado:</strong> el 76% valora las rutinas guiadas por encima de cualquier otra funcionalidad. No quieren decidir qué hacer, quieren que alguien les diga cómo empezar.</span></div>
+        <div class="insight"><span class="insight-n">03</span><span class="insight-text"><strong>El modelo de negocio tiene viabilidad:</strong> el 48% pagaría una suscripción. La función premium de videollamada con instructora responde directamente a esa disposición de pago.</span></div>
+        <div class="insight"><span class="insight-n">04</span><span class="insight-text"><strong>Reducir el estrés es la motivación real:</strong> el 38% menciona reducir el estrés como su principal razón para practicar, por encima de mejorar la postura (30%) o mantenerse activa (20%).</span></div>
+      </div>
+      <div class="cs-imgs">
+        <img src="img/img-encuesta-habitos.png" alt="Encuesta cuantitativa — Frecuencia y hábitos de práctica"/>
+        <img src="img/img-encuesta-motivaciones.png" alt="Encuesta cuantitativa — Preferencias y motivaciones"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESO -->
+  <div class="cs-section">
+    <div class="cs-section-label">
+      <span class="cs-section-num">↳</span>
+      <span class="cs-section-q">Proceso de diseño</span>
+    </div>
+    <div>
+      <h2 class="cs-section-title">Del card sorting a la arquitectura final</h2>
+      <p class="cs-p">Realicé un card sorting con dos usuarias para definir la arquitectura de información de la app. El resultado fue revelador: las participantes organizaron el contenido en una estructura con 6 secciones principales y múltiples subniveles, técnicamente correcta, pero demasiado compleja.</p>
+      <p class="cs-p">El primer mapa de navegación lo construí a partir de ese card sorting. Tenía de todo: blog, tienda, configuración, comunidad, historial... Cada función en su sitio, pero <strong>demasiadas cosas en demasiados sitios</strong>.</p>
+      <p class="cs-p">Ahí estaba el aprendizaje real: el card sorting no me dio la solución, me dio el problema. Si las usuarias con tiempo para hacer el ejercicio ya se perdían entre tantas opciones, una mujer con diez minutos libres no llegaría ni a encontrar la clase.</p>
+      <div class="insights">
+        <div class="insight"><span class="insight-n">→</span><span class="insight-text"><strong>Decisión:</strong> simplifiqué a 5 secciones con lógica clara: Perfil, Inicio, Prácticas, Acompañamiento y Mi Proceso. Cada sección tiene un propósito único y no se solapa con las demás.</span></div>
+        <div class="insight"><span class="insight-n">→</span><span class="insight-text"><strong>El cambio más importante:</strong> la función de videollamada y corrección de posturas, que era la más diferencial, pasó a tener su propio espacio en "Acompañamiento", visible desde el primer nivel, no enterrada en submenús.</span></div>
+        <div class="insight"><span class="insight-n">→</span><span class="insight-text"><strong>Lo que eliminé:</strong> tienda, blog y comunidad. Funciones interesantes, pero no esenciales para una usuaria que tiene diez minutos y quiere practicar.</span></div>
+      </div>
+      <div class="cs-imgs">
+        <img src="img/img-mapa-v1.png" alt="Mapa de navegación v1 — resultado del card sorting"/>
+        <img src="img/img-mapa-v2.png" alt="Mapa de navegación v2 — arquitectura simplificada final"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 COMPETENCIA -->
+  <div class="cs-section">
+    <div class="cs-section-label">
+      <span class="cs-section-num">04</span>
+      <span class="cs-section-q">¿Cómo se resuelve hoy? ¿Qué se ha probado antes?</span>
+    </div>
+    <div>
+      <h2 class="cs-section-title">El contexto actual</h2>
+      <p class="cs-p">Analicé las dos apps de yoga más usadas en España, Down Dog y Daily Yoga, a través de customer journey maps para entender dónde falla la experiencia para nuestra usuaria.</p>
+      <div class="insights">
+        <div class="insight"><span class="insight-n">→</span><span class="insight-text"><strong>Down Dog:</strong> onboarding agresivo con ofertas desde el primer momento, partes de la app sin traducir, menú poco intuitivo y contenido repetido entre secciones. La experiencia inicial genera desconfianza.</span></div>
+        <div class="insight"><span class="insight-n">→</span><span class="insight-text"><strong>Daily Yoga:</strong> clases que parecen generadas por IA, sin alternativa cuando tienes una lesión, carga lenta y dos secciones llamadas "Historial" que confunden al usuario.</span></div>
+        <div class="insight"><span class="insight-n">→</span><span class="insight-text"><strong>Lo que ninguna hace:</strong> ninguna adapta la práctica al ciclo menstrual, el embarazo o la perimenopausia. Y ninguna ofrece corrección de posturas — si no sabes si lo estás haciendo bien, practicar sola puede ser contraproducente.</span></div>
+      </div>
+      <div class="cs-imgs">
+        <img src="img/img-journey-downdog.png" alt="Customer Journey Map — Down Dog"/>
+        <img src="img/img-journey-dailyyoga.png" alt="Customer Journey Map — Daily Yoga"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 OPORTUNIDAD -->
+  <div class="cs-section">
+    <div class="cs-section-label">
+      <span class="cs-section-num">05</span>
+      <span class="cs-section-q">¿Qué oportunidad existe si lo resuelves?</span>
+    </div>
+    <div>
+      <h2 class="cs-section-title">La oportunidad</h2>
+      <p class="cs-p">No existe ninguna app de yoga que corrija posturas en tiempo real ni que adapte la práctica a la mujer como sujeto específico, no como usuaria genérica a la que se añade un filtro de "embarazo".</p>
+      <p class="cs-p">Pausana ocupa ese hueco: <strong>una herramienta diseñada desde el principio para el cuerpo y la vida de las mujeres</strong>. Clases adaptadas al tiempo real disponible, corrección de posturas con instructoras vía videollamada o chat, y una práctica que evoluciona con la usuaria ya sea que esté empezando, retomando o atravesando un momento físico concreto.</p>
+      <p class="cs-p">La oportunidad de negocio es clara: hay demanda validada, disposición de pago demostrada, y un segmento de mercado que las apps actuales están ignorando sistemáticamente.</p>
+      <div class="cs-imgs">
+        <img src="img/img-mockup2.png" alt="Pausana — detalle de pantalla"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- APRENDIZAJES -->
+  <div class="cs-section">
+    <div class="cs-section-label">
+      <span class="cs-section-num">↓</span>
+      <span class="cs-section-q">Aprendizajes</span>
+    </div>
+    <div>
+      <h2 class="cs-section-title">Lo que aprendí</h2>
+      <p class="cs-p">Este proyecto me enseñó que diseñar "para todos" a menudo significa diseñar para nadie. Las apps existentes intentan ser universales y en ese intento pierden a las usuarias que más se beneficiarían de una herramienta así.</p>
+      <p class="cs-p"><strong>Lo que cambiaría:</strong> habría realizado entrevistas cualitativas además de las encuestas cuantitativas. Los datos me dijeron el qué: la falta de tiempo, la preferencia por sesiones cortas — pero las conversaciones me habrían dicho mejor el por qué y el cómo se siente.</p>
+    </div>
+  </div>
+
+</div></div>
+
+<div class="container"><div class="cs-next-wrap"><div class="cs-next">
+  <div><p class="cs-next-label">Siguiente proyecto</p><a href="coming-soon.html" class="cs-next-link">Wish Stone →</a></div>
+  <a href="index.html" class="nav-back">← Volver al portfolio</a>
+</div></div></div>
+</body>
+</html>
