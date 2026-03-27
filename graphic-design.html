@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Graphic Design — Cristina Miralles</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+* { cursor: none !important; }
+body { font-family: 'Instrument Sans', sans-serif; scroll-behavior: smooth; }
+.font-headline { font-family: 'Space Grotesk', sans-serif; }
+#cursor {
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+  font-size: 22px; color: #f5d000; font-weight: 900;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease, font-size 0.2s ease;
+  line-height: 1; user-select: none;
+}
+#cursor.hover { font-size: 32px; }
+
+/* Graphic design grid items */
+.gd-item { transition: transform 0.4s cubic-bezier(.16,1,.3,1); }
+.gd-item:hover { transform: translateY(-4px); }
+.gd-img { filter: grayscale(100%); transition: filter 0.5s ease, transform 0.5s cubic-bezier(.16,1,.3,1); }
+.gd-item:hover .gd-img { filter: grayscale(0%); transform: scale(1.03); }
+
+/* Section label */
+.cat-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: #0D00FF; padding-bottom: 12px;
+  border-bottom: 2px solid #0D00FF;
+  display: block; margin-bottom: 32px;
+}
+.cat-count { color: #777; font-weight: 400; }
+
+/* Video container */
+.video-wrap { position: relative; background: #0a0a0a; }
+.video-wrap video { width: 100%; display: block; }
+.video-overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.4);
+  transition: opacity 0.3s;
+}
+.video-overlay.hidden { opacity: 0; pointer-events: none; }
+.play-btn {
+  width: 72px; height: 72px;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 24px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.play-btn:hover { background: #0D00FF; border-color: #0D00FF; }
+
+/* Img placeholder */
+.img-ph {
+  background: #e2e3e1;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 200px;
+}
+.img-ph span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: #999;
+  text-align: center; padding: 16px;
+}
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity: 1; transform: none; }
+</style>
+<script id="tailwind-config">
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: { "primary-fixed": "#0D00FF", "outline": "#777777", "surface": "#f9f9f7", "primary": "#000000" },
+      fontFamily: { "headline": ["Space Grotesk"], "body": ["Instrument Sans"], "label": ["Instrument Sans"] },
+      borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+    },
+  },
+}
+</script>
+</head>
+<body class="bg-[#f9f9f7] text-black selection:bg-[#0D00FF] selection:text-white overflow-x-hidden">
+
+<div id="cursor">✳</div>
+
+<!-- NAV -->
+<nav class="bg-[#f9f9f7] fixed top-0 w-full z-50 border-b border-black/10">
+<div class="flex justify-between items-center w-full px-8 py-5 max-w-full mx-auto">
+  <a class="text-base font-bold tracking-tighter text-black font-headline uppercase" href="index.html">Cristina Miralles</a>
+  <div class="hidden md:flex items-center space-x-10">
+    <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#work" data-es="Trabajo" data-en="Work">Trabajo</a>
+    <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#about" data-es="Sobre mí" data-en="About">Sobre mí</a>
+    <a class="font-headline uppercase tracking-widest text-xs text-[#0D00FF] border-b-2 border-[#0D00FF] pb-0.5" href="graphic-design.html" data-es="Diseño Gráfico" data-en="Graphic Design">Diseño Gráfico</a>
+    <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+  </div>
+  <button onclick="toggleLang()" id="langBtn" class="bg-black text-[#f9f9f7] px-6 py-2.5 text-xs font-headline uppercase tracking-widest active:scale-95 transition-transform hover:bg-[#0D00FF]">EN</button>
+</div>
+</nav>
+
+<main>
+<!-- HEADER -->
+<section class="pt-40 pb-24 px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+      <div class="md:col-span-7">
+        <span id="gd-label" class="block font-label text-[10px] uppercase tracking-[0.4em] mb-4 text-[#0D00FF] font-bold">Diseño Gráfico & Motion</span>
+        <h1 class="text-[9vw] md:text-[11vw] font-headline font-bold leading-[0.88] tracking-tighter uppercase">
+          Cristina<br/>Miralles
+        </h1>
+      </div>
+      <div class="md:col-span-4 md:col-start-9">
+        <p id="gd-sub" class="text-lg font-light leading-relaxed text-black/70">Una selección de proyectos académicos de diseño gráfico: packaging, identidad de marca, cartelería editorial y print.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGING -->
+<section class="px-8 pb-24" id="packaging">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal">
+      <span class="cat-label" id="cat-packaging">Packaging <span class="cat-count">— 03</span></span>
+    </div>
+
+    <!-- Featured -->
+    <div class="gd-item reveal mb-8 overflow-hidden">
+      <div class="aspect-[16/7] bg-[#e2e3e1] overflow-hidden relative">
+        <img src="img/portfolio-grafico/gfx-beve-packaging.png" alt="Beve — Packaging bebida vegetal" class="gd-img w-full h-full object-cover"
+             onerror="this.parentElement.className='img-ph aspect-[16/7]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Beve — Packaging bebida vegetal · Añade tu imagen',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+      </div>
+      <div class="flex justify-between items-start mt-4">
+        <div>
+          <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Packaging</span>
+          <h3 class="text-xl font-headline font-bold uppercase tracking-tight">Beve — Packaging bebida vegetal</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+      <div class="gd-item">
+        <div class="aspect-[4/3] bg-[#e2e3e1] overflow-hidden relative">
+          <img src="img/portfolio-grafico/gfx-croissant.png" alt="Maison Croissant" class="gd-img w-full h-full object-cover"
+               onerror="this.parentElement.className='img-ph aspect-[4/3]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Maison Croissant — Packaging',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+        </div>
+        <div class="flex justify-between items-start mt-4">
+          <div>
+            <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Packaging</span>
+            <h3 class="text-lg font-headline font-bold uppercase tracking-tight">Maison Croissant — Packaging</h3>
+          </div>
+        </div>
+      </div>
+      <div class="gd-item">
+        <div class="aspect-[4/3] bg-[#e2e3e1] overflow-hidden relative">
+          <img src="img/portfolio-grafico/gfx-pilas.png" alt="Pilas AA Alcalinas — Rediseño packaging" class="gd-img w-full h-full object-cover"
+               onerror="this.parentElement.className='img-ph aspect-[4/3]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Pilas AA Alcalinas — Redesign packaging',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+        </div>
+        <div class="flex justify-between items-start mt-4">
+          <div>
+            <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Packaging</span>
+            <h3 class="text-lg font-headline font-bold uppercase tracking-tight">Pilas AA Alcalinas — Rediseño</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTIDAD Y CARTELERÍA -->
+<section class="px-8 pb-24 bg-[#f4f4f2] py-20" id="identity">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal">
+      <span class="cat-label" id="cat-identity">Identidad &amp; Cartelería <span class="cat-count">— 04</span></span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+      <div class="gd-item">
+        <div class="aspect-square bg-[#e2e3e1] overflow-hidden relative">
+          <img src="img/portfolio-grafico/gfx-logo1.png" alt="Ragazzi — Alta gastronomía italiana" class="gd-img w-full h-full object-cover"
+               onerror="this.parentElement.className='img-ph aspect-square';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Ragazzi — Alta gastronomía italiana',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+        </div>
+        <div class="mt-4">
+          <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Identidad</span>
+          <h3 class="text-lg font-headline font-bold uppercase tracking-tight">Ragazzi — Alta gastronomía italiana</h3>
+        </div>
+      </div>
+      <div class="gd-item">
+        <div class="aspect-square bg-[#e2e3e1] overflow-hidden relative">
+          <img src="img/portfolio-grafico/gfx-logo2.png" alt="Ragazzi — Versión casual" class="gd-img w-full h-full object-cover"
+               onerror="this.parentElement.className='img-ph aspect-square';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Ragazzi — Versión casual',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+        </div>
+        <div class="mt-4">
+          <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Identidad</span>
+          <h3 class="text-lg font-headline font-bold uppercase tracking-tight">Ragazzi — Versión casual</h3>
+        </div>
+      </div>
+      <div class="gd-item">
+        <div class="aspect-[4/3] bg-[#e2e3e1] overflow-hidden relative">
+          <img src="img/portfolio-grafico/gfx-beve-cartel.png" alt="Beve — Cartel promocional" class="gd-img w-full h-full object-cover"
+               onerror="this.parentElement.className='img-ph aspect-[4/3]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Beve — Cartel promocional',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+        </div>
+        <div class="mt-4">
+          <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Cartelería</span>
+          <h3 class="text-lg font-headline font-bold uppercase tracking-tight">Beve — Cartel promocional</h3>
+        </div>
+      </div>
+      <div class="gd-item">
+        <div class="aspect-[4/3] bg-[#e2e3e1] overflow-hidden relative">
+          <img src="img/portfolio-grafico/gfx-coffee.png" alt="But First, Coffee — Cartel" class="gd-img w-full h-full object-cover"
+               onerror="this.parentElement.className='img-ph aspect-[4/3]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'But First, Coffee — Cartel',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+        </div>
+        <div class="mt-4">
+          <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Cartelería</span>
+          <h3 class="text-lg font-headline font-bold uppercase tracking-tight">But First, Coffee — Cartel</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDITORIAL & PRINT -->
+<section class="px-8 pb-24 py-20" id="editorial">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal">
+      <span class="cat-label" id="cat-editorial">Editorial &amp; Print <span class="cat-count">— 05</span></span>
+    </div>
+    <div class="gd-item reveal mb-8 overflow-hidden">
+      <div class="aspect-[16/7] bg-[#e2e3e1] overflow-hidden relative">
+        <img src="img/portfolio-grafico/gfx-moma.jpg" alt="MaMa — Cartel institucional" class="gd-img w-full h-full object-contain"
+             onerror="this.parentElement.className='img-ph aspect-[16/7]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'MaMa — Cartel institucional · Añade tu imagen',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+      </div>
+      <div class="mt-4"><span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Editorial</span><h3 class="text-xl font-headline font-bold uppercase tracking-tight">MoMa — Cartel institucional</h3></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 reveal">
+      <div class="gd-item">
+        <div class="aspect-[3/4] bg-[#e2e3e1] overflow-hidden relative">
+          <img src="img/portfolio-grafico/gfx-vinilo1.jpg" alt="Interludio — Formato de álbum" class="gd-img w-full h-full object-contain"
+               onerror="this.parentElement.className='img-ph aspect-[3/4]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Interludio — Álbum',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+        </div>
+        <div class="mt-4"><span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Editorial</span><h3 class="text-base font-headline font-bold uppercase tracking-tight">Interludio — Formato de álbum</h3></div>
+      </div>
+      <div class="gd-item">
+        <div class="aspect-[3/4] bg-[#e2e3e1] overflow-hidden relative">
+          <img src="img/portfolio-grafico/gfx-vinilo2.jpg" alt="Interludio — Contraportada" class="gd-img w-full h-full object-contain"
+               onerror="this.parentElement.className='img-ph aspect-[3/4]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Interludio — Contraportada',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+        </div>
+        <div class="mt-4"><span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Editorial</span><h3 class="text-base font-headline font-bold uppercase tracking-tight">Interludio — Contraportada</h3></div>
+      </div>
+      <div class="gd-item">
+        <div class="aspect-[3/4] bg-[#e2e3e1] overflow-hidden relative">
+          <img src="img/portfolio-grafico/gfx-infografia.png" alt="Infografía — Cuidado de personas" class="gd-img w-full h-full object-cover"
+               onerror="this.parentElement.className='img-ph aspect-[3/4]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Infografía — Tareas domésticas',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+        </div>
+        <div class="mt-4"><span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Print</span><h3 class="text-base font-headline font-bold uppercase tracking-tight">Infografía — Cuidado de personas a diario</h3></div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 reveal">
+      <div class="gd-item">
+        <div class="aspect-[4/3] bg-[#e2e3e1] overflow-hidden relative">
+          <img src="img/portfolio-grafico/gfx-triptico1.png" alt="Agenda Cultural Barcelona 2025 — Tríptico" class="gd-img w-full h-full object-cover"
+               onerror="this.parentElement.className='img-ph aspect-[4/3]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Agenda Cultural BCN 2025 — Tríptico',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+        </div>
+        <div class="mt-4"><span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Print</span><h3 class="text-lg font-headline font-bold uppercase tracking-tight">Agenda Cultural Barcelona 2025 — Tríptico</h3></div>
+      </div>
+      <div class="gd-item">
+        <div class="aspect-[4/3] bg-[#e2e3e1] overflow-hidden relative">
+          <img src="img/portfolio-grafico/gfx-triptico2.png" alt="Agenda Cultural Barcelona 2025 — Triptico" class="gd-img w-full h-full object-cover"
+               onerror="this.parentElement.className='img-ph aspect-[4/3]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Agenda Cultural BCN 2025 — Anuncio',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+        </div>
+        <div class="mt-4"><span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Print</span><h3 class="text-lg font-headline font-bold uppercase tracking-tight">Agenda Cultural Barcelona 2025 — Tríptico</h3></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOTION GRAPHICS -->
+<section class="bg-black px-8 py-24" id="motion">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal">
+      <span class="cat-label text-[#f5d000]" style="border-bottom-color:#f5d000;color:#f5d000" id="cat-motion">Motion Graphics <span style="color:#555;font-weight:400">— 01</span></span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-16 reveal">
+      <div class="md:col-span-5">
+        <h2 id="motion-title" class="text-4xl md:text-6xl font-headline font-bold uppercase tracking-tighter text-white leading-none mb-6">Motion<br/>Graphics</h2>
+        <p id="motion-sub" class="text-base font-body text-white/50 leading-relaxed">Animación y motion design creados con After Effects. Pieza donde el movimiento tiene propósito.</p>
+      </div>
+      <div class="md:col-span-7 md:col-start-6">
+        <!-- VIDEO PLAYER -->
+        <div class="video-wrap" id="videoWrap">
+          <!-- Replace src with your actual MP4 video path -->
+          <video id="motionVideo" poster="img/motion-poster.jpg" preload="metadata"
+                 onerror="document.getElementById('videoFallback').style.display='flex'">
+            <source src="video/motion.mp4" type="video/mp4"/>
+          </video>
+          <div id="videoFallback" class="aspect-video bg-[#111] flex-col items-center justify-center gap-4" style="display:none;min-height:300px">
+            <div class="text-[#f5d000] font-headline text-6xl font-bold">▶</div>
+            <p class="text-white/40 text-xs uppercase tracking-widest font-label text-center px-8">Añade tu vídeo MP4 en:<br/><span class="text-white/60">video/motion.mp4</span></p>
+          </div>
+          <div class="video-overlay" id="videoOverlay" onclick="playVideo()">
+            <button class="play-btn">▶</button>
+          </div>
+        </div>
+        <div class="mt-4 flex justify-between items-center">
+          <p class="text-white/40 text-xs uppercase tracking-widest font-label" id="motion-caption">After Effects · Motion Graphics</p>
+          <p class="text-white/20 text-xs font-label">2026</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-[#f4f4f2] border-t border-black/10">
+  <div class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-10 gap-6">
+    <a href="index.html" class="text-base font-black text-black font-headline uppercase">Cristina Miralles</a>
+    <p class="font-label text-[10px] tracking-[0.1em] uppercase text-[#777]">© 2025 Cristina Miralles. All rights reserved.</p>
+    <div class="flex gap-8">
+      <a href="index.html#work" class="font-label text-[10px] tracking-[0.1em] uppercase text-[#777] hover:text-[#0D00FF] transition-colors underline underline-offset-4">UX/UI Work</a>
+      <a class="font-label text-[10px] tracking-[0.1em] uppercase text-[#777] hover:text-[#0D00FF] transition-colors underline underline-offset-4" href="https://www.linkedin.com/in/cristina-miralles/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── CURSOR ─────────────────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .gd-item').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
+
+// ── VIDEO ──────────────────────────────────────────────────────
+function playVideo() {
+  const v = document.getElementById('motionVideo');
+  const overlay = document.getElementById('videoOverlay');
+  if (v.src || v.querySelector('source')) {
+    v.play();
+    overlay.classList.add('hidden');
+    v.addEventListener('pause', () => overlay.classList.remove('hidden'));
+    v.addEventListener('ended', () => overlay.classList.remove('hidden'));
+    v.controls = true;
+  }
+}
+
+// ── SCROLL REVEAL ──────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── LANG TOGGLE ────────────────────────────────────────────────
+const translations = {
+  es: {
+    'gd-label': 'Diseño Gráfico & Motion',
+    'gd-sub': 'Una selección de piezas de diseño gráfico — packaging, identidad de marca, cartelería editorial y print. Proyectos académicos y personales que muestran criterio visual, dominio tipográfico y capacidad de trabajo en distintos registros y formatos.',
+    'cat-packaging': 'Packaging <span class="cat-count">— 03</span>',
+    'cat-identity': 'Identidad &amp; Cartelería <span class="cat-count">— 04</span>',
+    'cat-editorial': 'Editorial &amp; Print <span class="cat-count">— 05</span>',
+    'cat-motion': 'Motion Graphics <span style="color:#555;font-weight:400">— 01</span>',
+    'motion-title': 'Motion<br/>Graphics',
+    'motion-sub': 'Animación y motion design creados con After Effects. Piezas donde el movimiento tiene propósito: cada transición comunica, cada timing es una decisión.',
+    'motion-caption': 'After Effects · Motion Reel',
+    'langBtn': 'EN',
+  },
+  en: {
+    'gd-label': 'Graphic Design & Motion',
+    'gd-sub': 'A selection of graphic design pieces — packaging, brand identity, editorial poster and print. Academic and personal projects that demonstrate visual judgement, typographic command and versatility across formats.',
+    'cat-packaging': 'Packaging <span class="cat-count">— 03</span>',
+    'cat-identity': 'Identity &amp; Posters <span class="cat-count">— 04</span>',
+    'cat-editorial': 'Editorial &amp; Print <span class="cat-count">— 05</span>',
+    'cat-motion': 'Motion Graphics <span style="color:#555;font-weight:400">— 01</span>',
+    'motion-title': 'Motion<br/>Graphics',
+    'motion-sub': 'Animation and motion design created in After Effects. Pieces where movement has purpose: every transition communicates, every timing is a decision.',
+    'motion-caption': 'After Effects · Motion Reel',
+    'langBtn': 'ES',
+  }
+};
+let currentLang = 'es';
+function toggleLang() {
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  const t = translations[currentLang];
+  for (const [id, val] of Object.entries(t)) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = val;
+  }
+  document.querySelectorAll('nav a[data-es]').forEach(a => { a.textContent = a.dataset[currentLang]; });
+  document.documentElement.lang = currentLang;
+}
+
+// Hash scroll for #motion
+if (window.location.hash === '#motion') {
+  setTimeout(() => document.getElementById('motion')?.scrollIntoView({ behavior: 'smooth' }), 300);
+}
+</script>
+</body>
+</html>

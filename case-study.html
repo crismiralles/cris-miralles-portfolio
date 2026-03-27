@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Case Study — Cristina Miralles</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+* { cursor: none !important; }
+body { font-family: 'Instrument Sans', sans-serif; scroll-behavior: smooth; }
+.font-headline { font-family: 'Space Grotesk', sans-serif; }
+#cursor {
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+  font-size: 22px; color: #f5d000; font-weight: 900;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease, font-size 0.2s ease;
+  line-height: 1; user-select: none;
+}
+#cursor.hover { font-size: 32px; }
+
+/* Image placeholder */
+.img-placeholder {
+  background: #e2e3e1; display: flex; align-items: center; justify-content: center;
+  color: #777; font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+}
+
+/* Section divider */
+.section-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: #0D00FF; margin-bottom: 12px; display: block;
+}
+
+/* Insight blockquote */
+.insight-block {
+  border-left: 3px solid #0D00FF;
+  padding-left: 28px; margin: 40px 0;
+}
+.insight-block p {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem; font-weight: 600;
+  line-height: 1.4; letter-spacing: -0.02em;
+  color: #1a1a1a; font-style: italic;
+}
+
+/* Learning box */
+.learning-box {
+  background: #1a1a1a; color: #f9f9f7;
+  padding: 48px; margin-top: 64px;
+}
+
+/* Nav project nav */
+.proj-nav a { transition: color 0.2s; }
+.proj-nav a:hover { color: #0D00FF; }
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* Image grid */
+.img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media(max-width:768px) {
+  .img-grid-2, .img-grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Cover images: grayscale until hover (no typography overlay) */
+.cover-img {
+  filter: grayscale(100%);
+  transition: filter 0.65s ease, transform 0.7s cubic-bezier(.16,1,.3,1);
+}
+.group:hover .cover-img {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+</style>
+<script id="tailwind-config">
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        "primary-fixed": "#0D00FF",
+        "surface-container-low": "#f4f4f2",
+        "outline": "#777777",
+        "secondary": "#5f5e5e",
+        "surface": "#f9f9f7",
+        "primary": "#000000",
+      },
+      fontFamily: { "headline": ["Space Grotesk"], "body": ["Instrument Sans"], "label": ["Instrument Sans"] },
+      borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+    },
+  },
+}
+</script>
+</head>
+<body class="bg-[#f9f9f7] text-black selection:bg-[#0D00FF] selection:text-white overflow-x-hidden">
+
+<div id="cursor">✳</div>
+
+<!-- NAV -->
+<nav class="bg-[#f9f9f7] fixed top-0 w-full z-50 border-b border-black/10">
+<div class="flex justify-between items-center w-full px-8 py-5 max-w-full mx-auto">
+  <a class="text-base font-bold tracking-tighter text-black font-headline uppercase" href="index.html">Cristina Miralles</a>
+  <div class="hidden md:flex items-center space-x-10">
+    <a class="font-headline uppercase tracking-widest text-xs text-[#0D00FF] border-b-2 border-[#0D00FF] pb-0.5" href="index.html#work" data-es="Trabajo" data-en="Work">Trabajo</a>
+    <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#about" data-es="Sobre mí" data-en="About">Sobre mí</a>
+    <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="graphic-design.html" data-es="Diseño Gráfico" data-en="Graphic Design">Diseño Gráfico</a>
+    <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+  </div>
+  <button onclick="toggleLang()" id="langBtn" class="bg-black text-[#f9f9f7] px-6 py-2.5 text-xs font-headline uppercase tracking-widest active:scale-95 transition-transform hover:bg-[#0D00FF]">EN</button>
+</div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     EACH PROJECT IS A <article> BLOCK — SHOWN/HIDDEN BY JS
+     ═══════════════════════════════════════════════════════════ -->
+
+<!-- ── PROJECT: PAUSANA ─────────────────────────────────────── -->
+<article id="proj-pausana" class="proj-article">
+<main>
+  <!-- HERO -->
+  <section class="pt-40 pb-0 px-8">
+    <div class="max-w-7xl mx-auto">
+      <span class="font-label text-[10px] uppercase tracking-[0.4em] text-[#0D00FF] font-bold mb-4 block">Case Study 01</span>
+      <h1 class="text-[10vw] md:text-[12vw] font-headline font-bold leading-[0.88] tracking-tighter uppercase mb-8">PAUSANA</h1>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
+        <div class="md:col-span-5">
+          <p class="text-xl md:text-2xl font-light leading-tight text-black/80" data-es="App de yoga diseñada específicamente para mujeres de 30 a 50 años. Práctica adaptada al ciclo hormonal y corrección de posturas en tiempo real." data-en="A yoga app designed specifically for women aged 30–50. Practice adapted to the hormonal cycle and real-time posture correction.">App de yoga diseñada específicamente para mujeres de 30 a 50 años. Práctica adaptada al ciclo hormonal y corrección de posturas en tiempo real.</p>
+        </div>
+        <div class="md:col-span-6 md:col-start-7 grid grid-cols-2 gap-6">
+          <div>
+            <span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1" data-es="Rol" data-en="Role">Rol</span>
+            <span class="font-headline text-sm font-bold uppercase" data-es="Lead UX/UI Designer" data-en="Lead UX/UI Designer">Lead UX/UI Designer</span>
+          </div>
+          <div>
+            <span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1" data-es="Año" data-en="Year">Año</span>
+            <span class="font-headline text-sm font-bold uppercase">2025/2026</span>
+          </div>
+          <div>
+            <span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1" data-es="Herramientas" data-en="Tools">Herramientas</span>
+            <span class="font-headline text-sm font-bold uppercase">Figma</span>
+          </div>
+          <div>
+            <span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1" data-es="Tipo" data-en="Type">Tipo</span>
+            <span class="font-headline text-sm font-bold uppercase" data-es="App Móvil · Salud" data-en="Mobile App · Health">App Móvil · Salud</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVER IMAGE -->
+  <div class="w-full aspect-[21/9] bg-[#1a1a1a] overflow-hidden relative group">
+    <img src="img/pausana/pausana-mockups.png" alt="Pausana" class="cover-img w-full h-full object-cover opacity-90"
+         onerror="this.style.display='none';"/>
+  </div>
+
+  <div class="px-8 max-w-7xl mx-auto py-24">
+
+    <!-- 01 EL PROBLEMA -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24 reveal">
+      <div class="md:col-span-3">
+        <span class="section-num">01</span>
+        <h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none" data-es="El problema" data-en="The Challenge">El problema</h2>
+      </div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80" data-es="El mercado de apps de yoga está saturado de herramientas diseñadas para todos. Las aplicaciones existentes como Down Dog o Daily Yoga ofrecen catálogos amplios, pero no tienen en cuenta un dato relevante: las mujeres constituyen la mayoría de los practicantes de yoga, y sus necesidades específicas no están resueltas por ninguna app del mercado." data-en="The yoga app market is saturated with tools designed for everyone. Existing applications offer wide catalogues but overlook a key fact: women make up the majority of yoga practitioners, and their specific needs are unaddressed.">El mercado de apps de yoga está saturado de herramientas diseñadas para todos. Las aplicaciones existentes como Down Dog o Daily Yoga ofrecen catálogos amplios, pero no tienen en cuenta un dato relevante: las mujeres constituyen la mayoría de los practicantes de yoga, y sus necesidades específicas no están resueltas por ninguna app del mercado.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80" data-es="El reto era diseñar una app de yoga para mujeres de entre 30 y 50 años, tanto principiantes como practicantes habituales, que les permitiera practicar con guía real, adaptar la práctica a su momento hormonal y acceder a corrección de posturas en tiempo real para evitar lesiones." data-en="The challenge: design a yoga app for women aged 30–50 — beginners and regulars alike — that would let them practise with real guidance, adapt sessions to their hormonal cycle, and access real-time posture correction to prevent injuries.">El reto era diseñar una app de yoga para mujeres de entre 30 y 50 años, que les permitiera practicar con guía real, adaptar la práctica a su momento hormonal y acceder a corrección de posturas en tiempo real para evitar lesiones.</p>
+        <div class="insight-block">
+          <p data-es="Una mujer con diez minutos libres no necesita mil opciones. Necesita encontrar su práctica en treinta segundos." data-en="A woman with ten free minutes doesn't need a thousand options. She needs to find her practice in thirty seconds.">"Una mujer con diez minutos libres no necesita mil opciones. Necesita encontrar su práctica en treinta segundos."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 LA INVESTIGACIÓN -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3">
+        <span class="section-num">02</span>
+        <h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none" data-es="La investigación" data-en="Research">La investigación</h2>
+      </div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80" data-es="Para entender el contexto comencé analizando las dos apps de referencia del sector: Down Dog y Daily Yoga. Elaboré 2 journey maps trazando la experiencia de una usuaria tipo en cada una, identificando fricciones, momentos de abandono y funciones infrautilizadas." data-en="To understand the context, I started by analysing the two sector reference apps: Down Dog and Daily Yoga. I created 2 journey maps tracing the experience of a typical user on each, identifying friction, drop-off moments and underused features.">Para entender el contexto comencé analizando las dos apps de referencia del sector: Down Dog y Daily Yoga. Elaboré 2 journey maps trazando la experiencia de una usuaria tipo en cada una, identificando fricciones, momentos de abandono y funciones infrautilizadas.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80" data-es="A partir de ahí construí 7 personas que representaban distintos perfiles dentro del público objetivo: diferente experiencia con el yoga, diferentes motivaciones (tonificación, reducción de estrés, flexibilidad) y diferente disponibilidad de tiempo." data-en="From there I built 7 personas representing distinct profiles within the target audience: varying experience with yoga, different motivations (toning, stress reduction, flexibility) and different time availability.">A partir de ahí construí 7 personas que representaban distintos perfiles dentro del público objetivo: diferente experiencia con el yoga, diferentes motivaciones y diferente disponibilidad de tiempo.</p>
+      </div>
+    </div>
+
+    <!-- Research images -->
+    <div class="img-grid-2 mb-24 reveal">
+      <div class="aspect-[4/3] img-placeholder" style="min-height:240px">
+        <img src="img/pausana/customer-journey-daily-yoga.png" alt="Journey Map" class="w-full h-full object-contain"
+             onerror="this.parentElement.style.cssText='background:#e2e3e1;display:flex;align-items:center;justify-content:center';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Journey Maps — Añade tu imagen',className:'text-[10px] uppercase tracking-widest text-[#777]'}))"/>
+      </div>
+      <div class="aspect-[4/3] img-placeholder" style="min-height:240px">
+        <img src="img/pausana/persona-pausana9.png" alt="User Personas" class="w-full h-full object-contain"
+             onerror="this.parentElement.style.cssText='background:#e2e3e1;display:flex;align-items:center;justify-content:center';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'User Personas — Añade tu imagen',className:'text-[10px] uppercase tracking-widest text-[#777]'}))"/>
+      </div>
+    </div>
+
+    <!-- 03 EL PROCESO -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3">
+        <span class="section-num">03</span>
+        <h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none" data-es="El proceso" data-en="Process">El proceso</h2>
+      </div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80" data-es="Con las personas y los journey maps como base, realicé un card sorting para construir el mapa de navegación inicial. El resultado fue una arquitectura con 6 secciones principales y múltiples subniveles. Cada función en su sitio, pero demasiadas cosas en demasiados sitios." data-en="Using the personas and journey maps as a base, I ran a card sorting exercise to build the initial navigation map. The result was an architecture with 6 main sections and multiple sub-levels. Every feature in its place — but too many things in too many places.">Con las personas y los journey maps como base, realicé un card sorting para construir el mapa de navegación inicial. El resultado fue una arquitectura con 6 secciones principales y múltiples subniveles. Cada función en su sitio, pero demasiadas cosas en demasiados sitios.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80" data-es="El card sorting no me dio la solución, me dio el problema. Tomé la decisión de simplificar radicalmente: de 6 secciones complejas a 5 con lógica clara. Eliminé la tienda, el blog y la comunidad: funciones interesantes, pero no esenciales para quien quiere practicar ahora." data-en="The card sorting didn't give me the solution — it gave me the problem. I made the decision to radically simplify: from 6 complex sections to 5 with clear logic. I cut the shop, blog and community: interesting features, but not essential for someone who wants to practise right now.">El card sorting no me dio la solución, me dio el problema. Tomé la decisión de simplificar radicalmente: de 6 secciones complejas a 5 con lógica clara. Eliminé la tienda, el blog y la comunidad: funciones interesantes, pero no esenciales para quien quiere practicar ahora.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80" data-es="El cambio más importante de arquitectura fue sacar la videollamada con instructores, la función más diferencial de toda la app, del fondo de un submenú y darle visibilidad directa desde el primer nivel, dentro de Acompañamiento." data-en="The most important architectural change was moving the video call with instructors — the most differentiating feature of the entire app — out of a sub-menu and giving it direct visibility at the first level, within 'Accompaniment'.">El cambio más importante de arquitectura fue sacar la videollamada con instructores del fondo de un submenú y darle visibilidad directa desde el primer nivel.</p>
+      </div>
+    </div>
+
+    <!-- Process images -->
+    <div class="img-grid-2 mb-24 reveal">
+      <div class="aspect-[4/3] bg-[#e2e3e1] flex items-center justify-center overflow-hidden" style="min-height:240px">
+        <img src="img/pausana/pausana-mapa-v1.png" alt="Mapa navegación v1" class="w-full h-full object-contain"
+             onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Mapa navegación v1',className:'text-[10px] uppercase tracking-widest text-[#777]'}))"/>
+      </div>
+      <div class="aspect-[4/3] bg-[#e2e3e1] flex items-center justify-center overflow-hidden" style="min-height:240px">
+        <img src="img/pausana/pausana-mapa-v2.png" alt="Mapa navegación v2" class="w-full h-full object-contain"
+             onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Mapa navegación v2',className:'text-[10px] uppercase tracking-widest text-[#777]'}))"/>
+      </div>
+    </div>
+
+    <!-- 04 LA SOLUCIÓN -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3">
+        <span class="section-num">04</span>
+        <h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none" data-es="La solución" data-en="Solution">La solución</h2>
+      </div>
+      <div class="md:col-span-8 md:col-start-5 space-y-4">
+        <p class="text-lg font-body leading-relaxed text-black/80" data-es="Pausana es una app de yoga diseñada específicamente para mujeres de 30 a 50 años, organizada en torno a cinco espacios:" data-en="Pausana is a yoga app designed specifically for women aged 30–50, organised around five spaces:">Pausana es una app de yoga diseñada específicamente para mujeres de 30 a 50 años, organizada en torno a cinco espacios:</p>
+        <ul class="space-y-3 pl-0">
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Inicio</strong> — acceso rápido a la práctica del día adaptada al estado actual de la usuaria</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Prácticas</strong> — biblioteca filtrable por duración, nivel, objetivo y momento hormonal</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Acompañamiento</strong> — videollamada y chat en directo con instructoras para corrección en tiempo real</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Mi Proceso</strong> — seguimiento de historial y progreso personal</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Perfil</strong> — configuración de preferencias</p></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Mockups -->
+    <div class="w-full aspect-[21/9] bg-[#111] overflow-hidden mb-8 reveal">
+      <img src="img/pausana/pausana-mockups2.png" alt="Pausana mockups" class="w-full h-full object-contain"
+           onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center text-[#444] text-[10px] uppercase tracking-widest\'>Mockups — Añade tus imágenes aquí</div>'"/>
+    </div>
+
+    <!-- 05 RESULTADO Y APRENDIZAJE -->
+    <div class="learning-box reveal">
+      <span class="section-num text-[#0D00FF]">05</span>
+      <h2 class="text-3xl md:text-4xl font-headline font-bold uppercase tracking-tight text-white mb-8" data-es="Resultado &amp; Aprendizaje" data-en="Outcome &amp; Learning">Resultado &amp; Aprendizaje</h2>
+      <p class="text-lg font-body leading-relaxed text-white/70 mb-6" data-es="Los tests de usabilidad validaron que la arquitectura simplificada reducía significativamente la fricción para encontrar una práctica. Todos los insights extraídos se implementaron en la versión final del prototipo." data-en="Usability tests validated that the simplified architecture significantly reduced friction in finding a practice. All insights were implemented in the final prototype.">Los tests de usabilidad validaron que la arquitectura simplificada reducía significativamente la fricción para encontrar una práctica. Todos los insights extraídos se implementaron en la versión final del prototipo.</p>
+      <p class="text-lg font-body leading-relaxed text-white/70" data-es="El aprendizaje más valioso: diseñar para todos es a menudo diseñar para nadie. La decisión de eliminar funciones — tienda, blog y comunidad — fue la más difícil y la más importante. Un buen diseño no es el que tiene todo, sino el que tiene lo justo." data-en="The most valuable lesson: designing for everyone is often designing for no one. Cutting features — shop, blog and community — was the hardest and most important decision. Good design isn't having everything; it's having exactly what's needed.">El aprendizaje más valioso: diseñar para todos es a menudo diseñar para nadie. La decisión de eliminar funciones fue la más difícil y la más importante. Un buen diseño no es el que tiene todo, sino el que tiene lo justo para que el usuario llegue donde necesita llegar.</p>
+    </div>
+
+  </div>
+
+  <!-- NEXT PROJECT NAV -->
+  <div class="bg-[#f4f4f2] border-t border-black/10 px-8 py-16">
+    <div class="max-w-7xl mx-auto flex justify-between items-center proj-nav">
+      <a href="index.html#work" class="font-headline text-xs uppercase tracking-widest text-[#777]" data-es="← Todos los proyectos" data-en="← All projects">← Todos los proyectos</a>
+      <a href="wish-stone.html" class="font-headline text-lg font-bold uppercase tracking-tight hover:text-[#0D00FF]" data-es="Siguiente: Wish Stone →" data-en="Next: Wish Stone →">Siguiente: Wish Stone →</a>
+    </div>
+  </div>
+</main>
+</article>
+
+<!-- ── PROJECT: WISH STONE ────────────────────────────────────── -->
+<article id="proj-wishstone" class="proj-article" style="display:none">
+<main>
+  <section class="pt-40 pb-0 px-8">
+    <div class="max-w-7xl mx-auto">
+      <span class="font-label text-[10px] uppercase tracking-[0.4em] text-[#0D00FF] font-bold mb-4 block">Case Study 02</span>
+      <h1 class="text-[10vw] md:text-[12vw] font-headline font-bold leading-[0.88] tracking-tighter uppercase mb-8">WISH STONE</h1>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
+        <div class="md:col-span-5">
+          <p class="text-xl md:text-2xl font-light leading-tight text-black/80" data-es="E-commerce de producto único que convierte una piedra de playa en un objeto de deseo. El reto no era diseñar una tienda — era construir una narrativa de marca." data-en="Single-product e-commerce that turns a beach stone into a desirable object. The challenge wasn't designing a shop — it was building a brand narrative.">E-commerce de producto único que convierte una piedra de playa en un objeto de deseo. El reto no era diseñar una tienda, era construir una narrativa de marca.</p>
+        </div>
+        <div class="md:col-span-6 md:col-start-7 grid grid-cols-2 gap-6">
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Rol</span><span class="font-headline text-sm font-bold uppercase">Lead UX/UI Designer</span></div>
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Año</span><span class="font-headline text-sm font-bold uppercase">2026</span></div>
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Herramientas</span><span class="font-headline text-sm font-bold uppercase">Figma</span></div>
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Tipo</span><span class="font-headline text-sm font-bold uppercase">E-Commerce · Luxury</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="w-full aspect-[21/9] bg-[#1a1a1a] overflow-hidden relative group">
+    <img src="img/wish-stone/home-wish-stone.png" alt="Wish Stone" class="cover-img w-full h-full object-contain opacity-90"
+         onerror="this.style.display='none';"/>
+  </div>
+  <div class="px-8 max-w-7xl mx-auto py-24">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24 reveal">
+      <div class="md:col-span-3"><span class="section-num">01</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">El problema</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80">Vender una piedra en internet es, en apariencia, un problema de producto. En realidad, es un problema de credibilidad y de narrativa. La Wish Stone es una piedra natural de playa con una línea ininterrumpida que la rodea, una rareza con una tradición folclórica: si trazas la línea con el dedo, pides un deseo y la regalas, ese deseo se cumplirá.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80">El reto no era diseñar un e-commerce, sino construir un entorno digital en el que un objeto físico, sencillo y cargado de simbolismo, fuera percibido como lo que realmente es: algo exclusivo, con identidad y con valor emocional.</p>
+        <div class="insight-block"><p>"Presentado sin contexto en una tienda online genérica, se convierte simplemente en una piedra."</p></div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3"><span class="section-num">02</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">La investigación</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80">El público objetivo: personas de 22 a 45 años con alta sensibilidad estética, consumidores de diseño, moda, arte e interiorismo, con interés en el bienestar emocional y el mindfulness. Un perfil que no compra productos, compra relatos.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80">La fricción principal estaba clara: la desconfianza inherente a comprar algo tan físico, tan táctil, tan cargado de intención como una piedra, a través de una pantalla. El diseño necesitaba hacer el trabajo que en una tienda física haría el dependiente: contar la historia del objeto y transferirle su valor antes de que el usuario llegara al botón de compra.</p>
+      </div>
+    </div>
+    <div class="mb-16 bg-[#e2e3e1] aspect-[21/9] flex items-center justify-center reveal overflow-hidden">
+      <img src="img/wish-stone/publico-objetivo.png" alt="Público objetivo" class="w-full h-full object-contain"
+           onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Público objetivo — Añade tu imagen',className:'text-[10px] uppercase tracking-widest text-[#777]'}))"/>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3"><span class="section-num">03</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">El proceso</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80">La decisión de diseño más importante fue sostener el lenguaje editorial a lo largo de todas las pantallas, incluyendo el checkout. Es sencillo ser editorial en una home. Lo complicado es mantener esa identidad cuando el diseño tiene que servir a una función estrictamente utilitaria.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80">La estructura que definí: Home → Product → Checkout (3 pasos) → Contact, con cada pantalla construida como si fuera una página de revista. El proceso pasó por wireframes en Figma antes de llegar al prototipo de alta fidelidad.</p>
+      </div>
+    </div>
+    <div class="mb-16 bg-[#e2e3e1] aspect-[16/9] flex items-center justify-center reveal overflow-hidden">
+      <img src="img/wish-stone/site-map.png" alt="Site map" class="w-full h-full object-contain"
+           onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Site Map — Añade tu imagen',className:'text-[10px] uppercase tracking-widest text-[#777]'}))"/>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3"><span class="section-num">04</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">La solución</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-4">
+        <p class="text-lg font-body leading-relaxed text-black/80">E-commerce de producto único organizado en cuatro secciones:</p>
+        <ul class="space-y-3">
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Home</strong> — Hero de impacto + bloques narrativos. La historia del objeto antes que el objeto.</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Product</strong> — Galería con protagonismo fotográfico. Sin distracciones, sin ruido.</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Checkout</strong> — Tres pasos con identidad visual coherente con el resto de la tienda.</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Contact</strong> — Mínimo y consecuente.</p></li>
+        </ul>
+      </div>
+    </div>
+    <div class="w-full aspect-[21/9] bg-[#111] overflow-hidden mb-8 reveal">
+      <img src="img/wish-stone/mockups.png" alt="Wish Stone mockups" class="w-full h-full object-cover"
+           onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center text-[#444] text-[10px] uppercase tracking-widest\'>Mockups — Añade tus imágenes aquí</div>'"/>
+    </div>
+    <div class="learning-box reveal">
+      <span class="section-num text-[#0D00FF]">05</span>
+      <h2 class="text-3xl md:text-4xl font-headline font-bold uppercase tracking-tight text-white mb-8">Resultado &amp; Aprendizaje</h2>
+      <p class="text-lg font-body leading-relaxed text-white/70 mb-6">El aprendizaje central: mantener una identidad editorial en un flujo de compra es uno de los retos más exigentes del diseño de producto. Las pantallas funcionales tienen requerimientos de usabilidad muy concretos que pueden entrar en tensión con las decisiones estéticas.</p>
+      <p class="text-lg font-body leading-relaxed text-white/70">Si lo retomara, haría al menos un test de usabilidad en el flujo de checkout con usuarios del perfil objetivo. Es la parte donde la confianza del usuario se juega en segundos.</p>
+    </div>
+  </div>
+  <div class="bg-[#f4f4f2] border-t border-black/10 px-8 py-16">
+    <div class="max-w-7xl mx-auto flex justify-between items-center proj-nav">
+      <a href="index.html#work" class="font-headline text-xs uppercase tracking-widest text-[#777]">← Todos los proyectos</a>
+      <a href="#" onclick="showProject('raices')" class="font-headline text-lg font-bold uppercase tracking-tight hover:text-[#0D00FF]">Siguiente: Raíces Vivas →</a>
+    </div>
+  </div>
+</main>
+</article>
+
+<!-- ── PROJECT: RAÍCES VIVAS ─────────────────────────────────── -->
+<article id="proj-raices" class="proj-article" style="display:none">
+<main>
+  <section class="pt-40 pb-0 px-8">
+    <div class="max-w-7xl mx-auto">
+      <span class="font-label text-[10px] uppercase tracking-[0.4em] text-[#0D00FF] font-bold mb-4 block">Case Study 03</span>
+      <h1 class="text-[8vw] md:text-[10vw] font-headline font-bold leading-[0.88] tracking-tighter uppercase mb-8">RAÍCES VIVAS</h1>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
+        <div class="md:col-span-5"><p class="text-xl md:text-2xl font-light leading-tight text-black/80">Web móvil informativa para inspirar a personas de municipios rurales a crear comunidad y recuperar espacios a través del voluntariado.</p></div>
+        <div class="md:col-span-6 md:col-start-7 grid grid-cols-2 gap-6">
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Rol</span><span class="font-headline text-sm font-bold uppercase">Lead UX/UI Designer</span></div>
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Año</span><span class="font-headline text-sm font-bold uppercase">2025/2026</span></div>
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Herramientas</span><span class="font-headline text-sm font-bold uppercase">Figma</span></div>
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Tipo</span><span class="font-headline text-sm font-bold uppercase">Web Móvil · Social</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="w-full aspect-[21/9] bg-[#1a1a1a] overflow-hidden group">
+    <img src="img/raices-vivas/mockup-raices-vivas.png" alt="Raíces Vivas" class="cover-img w-full h-full object-cover opacity-90"
+         onerror="this.style.display='none';"/>
+  </div>
+  <div class="px-8 max-w-7xl mx-auto py-24">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24 reveal">
+      <div class="md:col-span-3"><span class="section-num">01</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">El problema</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80">La España rural se enfrenta a un problema silencioso: la degradación de espacios, la pérdida de cohesión social y el abandono de tradiciones. Raíces Vivas nació como respuesta: una web móvil para inspirar a personas de municipios a crear comunidad y resolver problemas locales a través del voluntariado.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80">El proyecto se inspiró en A Huebra, una iniciativa de voluntariado ambiental nominada a los Premios Nueva Bauhaus Europea 2025 que lleva 12 años activa y ha movilizado a más de 16.000 voluntarios.</p>
+        <div class="insight-block"><p>"Una web que sonara a institución perdería a ese usuario en los primeros cinco segundos."</p></div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3"><span class="section-num">02</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">La investigación</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80">Analicé tres webs de referencia: ONCE, Worldpackers y Casa de la Amistad. A partir de ahí construí un user persona con un perfil muy definido: una persona que actúa cuando ve un problema local concreto, que se moviliza a través de testimonios reales, y que usa el móvil para informarse pero vive la experiencia en lo presencial.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80">Sus frustraciones: rechazo al contenido técnico o distante, desconfianza ante discursos politizados, y necesidad de ver resultados tangibles antes de comprometerse. Si algo sonaba a burocracia o a postureo, fuera.</p>
+      </div>
+    </div>
+    <div class="mb-16 bg-[#e2e3e1] aspect-[16/9] flex items-center justify-center reveal overflow-hidden">
+      <img src="img/raices-vivas/user-persona-raices-vivas.png" alt="User Persona" class="w-full h-full object-contain"
+           onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'User Persona — Añade tu imagen',className:'text-[10px] uppercase tracking-widest text-[#777]'}))"/>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3"><span class="section-num">03</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">El proceso</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80">Fue mi primer proyecto real en Figma. Empecé con 4 pantallas separadas y a medida que avanzaba entendí que la estructura de pantallas múltiples fragmentaba una narrativa que necesitaba fluir. La decisión de simplificar a una sola pantalla con scroll fue la solución correcta para un usuario que llega desde redes sociales y necesita el mensaje completo sin fricciones de navegación.</p>
+      </div>
+    </div>
+    <div class="mb-16 bg-[#e2e3e1] aspect-[16/9] flex items-center justify-center reveal overflow-hidden">
+      <img src="img/raices-vivas/mockup-antiguo.png" alt="Versión anterior" class="w-full h-full object-cover"
+           onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Versión anterior — Añade tu imagen',className:'text-[10px] uppercase tracking-widest text-[#777]'}))"/>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3"><span class="section-num">04</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">La solución</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-4">
+        <p class="text-lg font-body leading-relaxed text-black/80">Web móvil de una sola pantalla estructurada en bloques narrativos con progresión emocional clara: primero entender, luego identificarse, luego actuar.</p>
+        <ul class="space-y-3">
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Hero</strong> con llamada a la acción — directo, sin rodeos</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Sobre el proyecto</strong> — propósito con lenguaje cercano</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Beneficios</strong> — qué gana el usuario, no solo la comunidad</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Pasa a la acción</strong> — formulario de contacto como cierre</p></li>
+        </ul>
+      </div>
+    </div>
+    <div class="w-full aspect-[21/9] bg-[#111] overflow-hidden mb-8 reveal">
+      <img src="img/raices-vivas/mockup2-raices-vivas.png" alt="Raíces Vivas mockups" class="w-full h-full object-cover"
+           onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center text-[#444] text-[10px] uppercase tracking-widest\'>Mockups — Añade tus imágenes aquí</div>'"/>
+    </div>
+    <div class="learning-box reveal">
+      <span class="section-num text-[#0D00FF]">05</span>
+      <h2 class="text-3xl md:text-4xl font-headline font-bold uppercase tracking-tight text-white mb-8">Resultado &amp; Aprendizaje</h2>
+      <p class="text-lg font-body leading-relaxed text-white/70 mb-6">Diseñar para un usuario con valores muy definidos es más exigente que diseñar para un usuario genérico. Cada microdecisión — el tono del copy, la jerarquía visual, la forma de presentar información — tenía que pasar por el filtro de alguien que detecta el postureo al instante.</p>
+      <p class="text-lg font-body leading-relaxed text-white/70">El aprendizaje más honesto: lo difícil que resulta acercar los ODS a un usuario cuya motivación es el orgullo por su tierra. Si lo retomara, traduciría los objetivos globales a consecuencias locales tangibles.</p>
+    </div>
+  </div>
+  <div class="bg-[#f4f4f2] border-t border-black/10 px-8 py-16">
+    <div class="max-w-7xl mx-auto flex justify-between items-center proj-nav">
+      <a href="index.html#work" class="font-headline text-xs uppercase tracking-widest text-[#777]">← Todos los proyectos</a>
+      <a href="puleva.html" class="font-headline text-lg font-bold uppercase tracking-tight hover:text-[#0D00FF]">Siguiente: Puleva →</a>
+    </div>
+  </div>
+</main>
+</article>
+
+<!-- ── PROJECT: PULEVA ───────────────────────────────────────── -->
+<article id="proj-puleva" class="proj-article" style="display:none">
+<main>
+  <section class="pt-40 pb-0 px-8">
+    <div class="max-w-7xl mx-auto">
+      <span class="font-label text-[10px] uppercase tracking-[0.4em] text-[#0D00FF] font-bold mb-4 block">Case Study 04</span>
+      <h1 class="text-[10vw] md:text-[12vw] font-headline font-bold leading-[0.88] tracking-tighter uppercase mb-8">PULEVA WEB</h1>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
+        <div class="md:col-span-5"><p class="text-xl md:text-2xl font-light leading-tight text-black/80">Rediseño de tres secciones clave de la web de Puleva para alinear la experiencia digital con el posicionamiento real de la marca como experta en nutrición.</p></div>
+        <div class="md:col-span-6 md:col-start-7 grid grid-cols-2 gap-6">
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Rol</span><span class="font-headline text-sm font-bold uppercase">UX/UI Designer</span></div>
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Año</span><span class="font-headline text-sm font-bold uppercase">2026</span></div>
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Herramientas</span><span class="font-headline text-sm font-bold uppercase">Figma, WordPress, Divi</span></div>
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Tipo</span><span class="font-headline text-sm font-bold uppercase">Web Redesign</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="w-full aspect-[21/9] bg-[#1a1a1a] overflow-hidden flex items-center justify-content-center relative group">
+    <img src="img/puleva/mockup.png" alt="Puleva" class="cover-img w-full h-full object-contain opacity-90"
+         onerror="this.style.display='none';"/>
+  </div>
+  <div class="px-8 max-w-7xl mx-auto py-24">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24 reveal">
+      <div class="md:col-span-3"><span class="section-num">01</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">El problema</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80">Puleva es una marca con un posicionamiento claro como experta en nutrición, pero su presencia digital no estaba a la altura de ese posicionamiento. La web original presentaba una comunicación densa, una estética poco cuidada y una arquitectura de información que no ayudaba al usuario a tomar decisiones rápidas.</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3"><span class="section-num">02</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">La investigación</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80">Análisis de competencia directo: Central Lechera Asturiana y Leche Pascual. A ese análisis se sumó un DAFO y un estudio del público objetivo, del que emergió el insight más importante: el usuario no busca productos lácteos, busca soluciones concretas para su salud y bienestar.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80">Ese reencuadre cambió la lógica de toda la arquitectura de información: en lugar de organizar por producto, organizar por beneficio.</p>
+      </div>
+    </div>
+    <div class="mb-16 bg-[#e2e3e1] aspect-[16/9] flex items-center justify-center reveal overflow-hidden">
+      <img src="img/puleva/user-persona-puleva.png" alt="User Persona Puleva" class="w-full h-full object-contain"
+           onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'User Persona — Añade tu imagen',className:'text-[10px] uppercase tracking-widest text-[#777]'}))"/>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3"><span class="section-num">03</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">El proceso</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-4">
+        <p class="text-lg font-body leading-relaxed text-black/80">Las decisiones se concentraron en tres ejes:</p>
+        <ul class="space-y-3">
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Arquitectura de información</strong> — reorganización por beneficios del usuario, no por categorías de producto.</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Reducción de densidad</strong> — menos texto, más jerarquía visual. Priorizar el escaneado rápido.</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Coherencia visual</strong> — alinear la estética con el posicionamiento: limpia, experta, orientada a la salud.</p></li>
+        </ul>
+        <p class="text-lg font-body leading-relaxed text-black/80 pt-2">El proceso pasó por wireframes en Figma. La implementación fue en WordPress con Divi.</p>
+      </div>
+    </div>
+    <div class="mb-16 bg-[#e2e3e1] aspect-[16/9] flex items-center justify-center reveal overflow-hidden">
+      <img src="img/puleva/wireframes.png" alt="Wireframes Puleva" class="w-full h-full object-contain"
+           onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Wireframes — Añade tu imagen',className:'text-[10px] uppercase tracking-widest text-[#777]'}))"/>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3"><span class="section-num">04</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">La solución</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-4">
+        <ul class="space-y-3">
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Home</strong> — hero limpio orientado a beneficios, jerarquía visual que guía hacia necesidades concretas.</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Productos</strong> — reorganización por beneficio funcional, recursos visuales que facilitan la comprensión.</p></li>
+          <li class="flex gap-4 items-start"><span class="text-[#0D00FF] font-headline font-bold text-sm mt-0.5 shrink-0">→</span><p class="text-base font-body text-black/80"><strong class="font-headline uppercase text-sm">Noticias</strong> — estructura editorial más clara, jerarquía tipográfica para escanear sin fricción.</p></li>
+        </ul>
+      </div>
+    </div>
+    <div class="w-full aspect-[21/9] bg-[#111] overflow-hidden mb-8 reveal">
+      <img src="img/puleva/rediseno.png" alt="Puleva before/after" class="w-full h-full object-cover"
+           onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center text-[#444] text-[10px] uppercase tracking-widest\'>Comparativa antes/después — Añade tus imágenes aquí</div>'"/>
+    </div>
+    <div class="learning-box reveal">
+      <span class="section-num text-[#0D00FF]">05</span>
+      <h2 class="text-3xl md:text-4xl font-headline font-bold uppercase tracking-tight text-white mb-8">Resultado &amp; Aprendizaje</h2>
+      <p class="text-lg font-body leading-relaxed text-white/70">Un buen rediseño no empieza en Figma — empieza en entender por qué algo no funciona. El análisis previo fue lo que transformó una intuición estética en decisiones de diseño justificadas. Puleva es una marca grande con un posicionamiento claro en nutrición. Esa brecha entre lo que la marca representa y lo que su web ofrecía resultaba especialmente llamativa precisamente por eso.</p>
+    </div>
+  </div>
+  <div class="bg-[#f4f4f2] border-t border-black/10 px-8 py-16">
+    <div class="max-w-7xl mx-auto flex justify-between items-center proj-nav">
+      <a href="index.html#work" class="font-headline text-xs uppercase tracking-widest text-[#777]">← Todos los proyectos</a>
+      <a href="sello.html" class="font-headline text-lg font-bold uppercase tracking-tight hover:text-[#0D00FF]">Siguiente: Indie Record Label →</a>
+    </div>
+  </div>
+</main>
+</article>
+
+<!-- ── PROJECT: SELLO DISCOGRÁFICO ───────────────────────────── -->
+<article id="proj-sello" class="proj-article" style="display:none">
+<main>
+  <section class="pt-40 pb-0 px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-center gap-4 mb-4">
+        <span class="font-label text-[10px] uppercase tracking-[0.4em] text-[#0D00FF] font-bold">Case Study 05</span>
+        <span class="bg-[#f5d000] text-black font-headline text-[9px] font-bold uppercase tracking-widest px-3 py-1">Work in Progress</span>
+      </div>
+      <h1 class="text-[6vw] md:text-[8vw] font-headline font-bold leading-[0.88] tracking-tighter uppercase mb-8">SELLO DISCOGRÁFICO<br/>INDIE</h1>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
+        <div class="md:col-span-5"><p class="text-xl md:text-2xl font-light leading-tight text-black/80">Diseño de la web de un sello discográfico indie ficticio. Un hub digital que centralice artistas, lanzamientos, conciertos y merch con identidad editorial coherente.</p></div>
+        <div class="md:col-span-6 md:col-start-7 grid grid-cols-2 gap-6">
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Rol</span><span class="font-headline text-sm font-bold uppercase">Lead UX/UI Designer</span></div>
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Año</span><span class="font-headline text-sm font-bold uppercase">2025/2026</span></div>
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Herramientas</span><span class="font-headline text-sm font-bold uppercase">Figma, SurveyMars</span></div>
+          <div><span class="font-label text-[10px] uppercase tracking-widest text-[#777] block mb-1">Tipo</span><span class="font-headline text-sm font-bold uppercase">Web · Música · TFP Ciclo</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="w-full aspect-[21/9] bg-[#0a0a0a] overflow-hidden relative flex items-center">
+    <img src="img/sello-cover.jpg" alt="Indie Record Label" class="w-full h-full object-cover opacity-90"
+         onerror="this.style.display='none'"/>
+    <div class="absolute inset-0 flex items-center justify-start px-16 md:px-32">
+      <div>
+        <p class="text-[#f5d000] font-headline text-xs uppercase tracking-[0.3em] mb-4">Work in Progress</p>
+        <h2 class="text-white font-headline font-bold text-5xl md:text-8xl leading-none tracking-tighter uppercase">INDIE<br/>RECORD<br/>LABEL</h2>
+      </div>
+    </div>
+  </div>
+  <div class="px-8 max-w-7xl mx-auto py-24">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24 reveal">
+      <div class="md:col-span-3"><span class="section-num">01</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">El problema</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80">Los sellos discográficos independientes existen en un ecosistema digital fragmentado: sus artistas están en Spotify, sus noticias en Instagram, sus conciertos en otra plataforma, su merchandising en otra. No hay un espacio propio que centralice todo y que comunique la identidad del sello con coherencia y criterio.</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3"><span class="section-num">02</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">La investigación</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80">Este es el proyecto con la base de investigación más sólida de mi portfolio. Combiné métodos cuantitativos y cualitativos: encuesta online con 26 respuestas (SurveyMars), user personas construidos a partir de los datos, y un user journey map completo.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80">Hallazgos clave: el móvil es el dispositivo principal de acceso, los artistas y lanzamientos son el contenido prioritario, y los factores que más generan confianza son el contenido actualizado, el diseño atractivo y la coherencia visual. Un entorno descuidado afecta directamente a la credibilidad de la marca.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80">Referentes visuales: Rusia-IDK y Oso Polita por su identidad contemporánea; Snap! Clap! Club y Morr Music por su capacidad de construir universos de marca coherentes.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 reveal">
+      <div class="md:col-span-3"><span class="section-num">03–04</span><h2 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tight leading-none">Proceso &amp; Solución prevista</h2></div>
+      <div class="md:col-span-8 md:col-start-5 space-y-6">
+        <p class="text-lg font-body leading-relaxed text-black/80">La propuesta apunta hacia una web tipográficamente sólida, con retícula visible, contundencia visual y dimensión editorial. Mobile-first porque los datos lo dicen.</p>
+        <p class="text-lg font-body leading-relaxed text-black/80">Prioridad absoluta a artistas y lanzamientos, integración clara con Instagram y Spotify, navegación sin fricciones. La coherencia visual como eje de credibilidad.</p>
+      </div>
+    </div>
+    <div class="learning-box reveal">
+      <span class="section-num text-[#f5d000]" style="color:#f5d000">En proceso</span>
+      <h2 class="text-3xl md:text-4xl font-headline font-bold uppercase tracking-tight text-white mb-8">Aprendizaje hasta ahora</h2>
+      <p class="text-lg font-body leading-relaxed text-white/70 mb-6">Este proyecto me está enseñando algo que los anteriores solo rozaron: que la investigación bien hecha toma decisiones por ti. La arquitectura de información es la consecuencia directa de saber que tu usuario llega desde Spotify, tiene entre 18 y 24 años, accede desde el móvil y lo primero que busca es al artista, no al sello.</p>
+      <p class="text-lg font-body leading-relaxed text-white/70">Es también el proyecto donde más claramente veo la diferencia entre diseñar con criterio y diseñar con gusto.</p>
+    </div>
+  </div>
+  <div class="bg-[#f4f4f2] border-t border-black/10 px-8 py-16">
+    <div class="max-w-7xl mx-auto flex justify-between items-center proj-nav">
+      <a href="index.html#work" class="font-headline text-xs uppercase tracking-widest text-[#777]">← Todos los proyectos</a>
+      <a href="pausana.html" class="font-headline text-lg font-bold uppercase tracking-tight hover:text-[#0D00FF]">Volver al primero: Pausana →</a>
+    </div>
+  </div>
+</main>
+</article>
+
+<!-- FOOTER -->
+<footer class="bg-[#f4f4f2] border-t border-black/10">
+  <div class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-10 gap-6">
+    <a href="index.html" class="text-base font-black text-black font-headline uppercase">Cristina Miralles</a>
+    <p class="font-label text-[10px] tracking-[0.1em] uppercase text-[#777]">© 2026 Cristina Miralles. All rights reserved.</p>
+    <div class="flex gap-8">
+      <a class="font-label text-[10px] tracking-[0.1em] uppercase text-[#777] hover:text-[#0D00FF] transition-colors underline underline-offset-4" href="https://www.linkedin.com/in/cristina-miralles/" target="_blank">LinkedIn</a>
+      
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── CURSOR ─────────────────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
+
+// ── SHOW PROJECT based on URL/hash ─────────────────────────────
+function showProject(name) {
+  document.querySelectorAll('.proj-article').forEach(a => a.style.display = 'none');
+  const el = document.getElementById('proj-' + name);
+  if (el) { el.style.display = 'block'; window.scrollTo(0, 0); }
+}
+
+// Determine which project to show from filename or hash
+const path = window.location.pathname;
+const hash = window.location.hash.replace('#','');
+if (path.includes('wish-stone') || hash === 'wishstone') showProject('wishstone');
+else if (path.includes('raices') || hash === 'raices') showProject('raices');
+else if (path.includes('puleva') || hash === 'puleva') showProject('puleva');
+else if (path.includes('sello') || hash === 'sello') showProject('sello');
+else showProject('pausana'); // default
+
+// ── SCROLL REVEAL ──────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── LANG TOGGLE ────────────────────────────────────────────────
+let currentLang = 'es';
+function toggleLang() {
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  document.getElementById('langBtn').textContent = currentLang === 'es' ? 'EN' : 'ES';
+  document.querySelectorAll('[data-es]').forEach(el => {
+    const val = el.dataset[currentLang];
+    if (val) el.innerHTML = val;
+  });
+  document.querySelectorAll('nav a[data-es]').forEach(a => {
+    a.textContent = a.dataset[currentLang];
+  });
+  document.documentElement.lang = currentLang;
+}
+</script>
+</body>
+</html>

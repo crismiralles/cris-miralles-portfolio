@@ -1,581 +1,385 @@
 <!DOCTYPE html>
-<html lang="es" data-lang="es">
+<html class="light" lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cristina Miralles — UX/UI Designer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Epilogue:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --bg:        #ffffff;
-      --bg2:       #f5f5f3;
-      --bg3:       #ebebea;
-      --surface:   #f0f0ee;
-      --border:    rgba(0,0,0,0.1);
-      --border-hi: rgba(0,0,0,0.2);
-      --ink:       #111110;
-      --ink-60:    rgba(17,17,16,0.55);
-      --ink-30:    rgba(17,17,16,0.30);
-      --accent:    #4287f5;
-      --accent-lt: rgba(66,135,245,0.1);
-      --accent-mid:rgba(66,135,245,0.25);
-      --serif:     'Instrument Serif', Georgia, serif;
-      --sans:      'Epilogue', system-ui, sans-serif;
-      --max-w:     1080px;
-      --ease:      cubic-bezier(0.0,0.0,0.2,1);
-    }
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cristina Miralles — UX/UI Designer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+* { cursor: none !important; }
+body { font-family: 'Instrument Sans', sans-serif; scroll-behavior: smooth; }
+.font-headline { font-family: 'Space Grotesk', sans-serif; }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-    a { color: inherit; text-decoration: none; }
+/* Hero typography: reduce size only on desktop */
+#hero-name,
+#hero-role {
+  font-size: clamp(2.6rem, 8.5vw, 8.5rem);
+  line-height: .88;
+}
+@media (min-width: 768px) {
+  #hero-name,
+  #hero-role {
+    font-size: clamp(2.4rem, 7.0vw, 7.2rem);
+    line-height: .86;
+  }
+}
 
-    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+#cursor {
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+  font-size: 22px; color: #f5d000; font-weight: 900;
+  transform: translate(-50%, -50%);
+  transition: left .06s ease, top .06s ease, font-size .2s ease;
+  line-height: 1; user-select: none;
+}
+#cursor.hover { font-size: 34px; }
 
-    .tag { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; border-radius: 100px; padding: 4px 12px; border: 1px solid var(--border); color: var(--ink-60); background: var(--surface); }
-    .tag.blue { border-color: var(--accent); color: var(--accent); background: var(--accent-lt); }
-    .tag.muted { border-color: var(--border); color: var(--ink-30); background: transparent; }
+/* B&W → colour on hover */
+.proj-img {
+  filter: grayscale(100%);
+  transition: filter .65s ease, transform .7s cubic-bezier(.16,1,.3,1);
+}
+.group:hover .proj-img { filter: grayscale(0%); transform: scale(1.04); }
 
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s var(--ease), transform .65s var(--ease); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .d1 { transition-delay: .08s; } .d2 { transition-delay: .16s; } .d3 { transition-delay: .24s; } .d4 { transition-delay: .32s; }
-    @media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; transition:none; } }
+.proj-card { transition: transform .4s cubic-bezier(.16,1,.3,1); }
 
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 64px; background: rgba(255,255,255,.9); backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color .3s; }
-    nav.scrolled { border-color: var(--border); }
-    nav .container { height: 100%; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: var(--serif); font-size: 18px; letter-spacing: -.01em; }
-    .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a { font-size: 14px; color: var(--ink-60); transition: color .2s; }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-right { display: flex; align-items: center; gap: 12px; }
-    .lang-btn { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; border: 1.5px solid var(--border); color: var(--ink-60); background: transparent; cursor: pointer; transition: border-color .2s, color .2s; }
-    .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .nav-cta { font-size: 13px; font-weight: 500; padding: 8px 20px; border-radius: 100px; background: var(--ink); color: var(--bg); transition: opacity .2s, transform .15s; }
-    .nav-cta:hover { opacity: .85; transform: translateY(-1px); }
+.typo-cover {
+  display: flex; align-items: center; justify-content: center;
+  background: #1a1a1a; color: #f9f9f7;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700; text-transform: uppercase;
+  letter-spacing: -.03em; line-height: .9; padding: 32px;
+  transition: background .6s ease;
+}
+.group:hover .typo-cover { background: #0D00FF; }
 
-    /* HERO */
-    .hero { padding-top: calc(64px + 96px); padding-bottom: 96px; position: relative; overflow: hidden; }
-    .hero-glow { position: absolute; top: -150px; right: -100px; width: 550px; height: 550px; border-radius: 50%; background: radial-gradient(circle, rgba(66,135,245,.07) 0%, transparent 65%); pointer-events: none; }
-    .hero > .container { position: relative; z-index: 1; }
-    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
-    .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
-    .eyebrow-line { width: 28px; height: 1.5px; background: var(--accent); }
-    .eyebrow span { font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
-    h1 { font-family: var(--serif); font-size: clamp(46px, 6.5vw, 80px); font-weight: 400; line-height: 1.05; letter-spacing: -.01em; margin-bottom: 24px; }
-    h1 em { font-style: italic; color: var(--accent); }
-    .hero-body { font-size: 17px; font-weight: 300; line-height: 1.7; color: var(--ink-60); max-width: 420px; margin-bottom: 36px; }
-    .hero-actions { display: flex; gap: 16px; align-items: center; }
-    .btn-p { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: var(--bg); font-size: 14px; font-weight: 500; padding: 14px 28px; border-radius: 100px; transition: opacity .2s, transform .15s; }
-    .btn-p:hover { opacity: .85; transform: translateY(-1px); }
-    .btn-g { font-size: 14px; font-weight: 500; color: var(--ink-60); display: inline-flex; align-items: center; gap: 6px; transition: color .2s; }
-    .btn-g:hover { color: var(--ink); }
-    .btn-g .arr { transition: transform .2s; }
-    .btn-g:hover .arr { transform: translateX(4px); }
-    .hero-right { display: flex; flex-direction: column; gap: 16px; align-items: flex-end; }
-    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px 28px; width: 100%; max-width: 300px; }
-    .stat .n { font-family: var(--serif); font-size: 52px; font-weight: 400; line-height: 1; letter-spacing: -.02em; color: var(--accent); margin-bottom: 4px; }
-    .stat .l { font-size: 13px; color: var(--ink-60); }
-    .avail { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-60); }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; box-shadow: 0 0 0 3px rgba(76,175,80,.2); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 3px rgba(76,175,80,.2); } 50% { box-shadow: 0 0 0 6px rgba(76,175,80,.06); } }
+.wip-badge {
+  position: absolute; top: 16px; right: 16px;
+  background: #f5d000; color: #000;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase; padding: 4px 10px;
+}
 
-    /* ABOUT */
-    .section-about { padding: 96px 0; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-    .sec-num { font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-30); }
-    .sec-title { font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); font-weight: 400; line-height: 1.1; letter-spacing: -.01em; margin-top: 12px; }
-    .sec-title em { font-style: italic; color: var(--accent); }
-    .ab { font-size: 16px; font-weight: 300; line-height: 1.75; color: var(--ink-60); margin-bottom: 18px; }
-    .ab strong { color: var(--ink); font-weight: 500; }
-    .sp-label { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-30); margin-bottom: 16px; margin-top: 40px; }
-    .sp-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .sp-list li { display: flex; gap: 12px; font-size: 14px; font-weight: 300; color: var(--ink-60); line-height: 1.55; }
-    .sp-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
-    .ai-box { margin-top: 32px; background: var(--accent-lt); border: 1px solid var(--accent-mid); border-radius: 12px; padding: 20px 24px; }
-    .ai-box h4 { font-size: 13px; font-weight: 500; color: var(--accent); margin-bottom: 8px; }
-    .ai-box p { font-size: 13px; font-weight: 300; color: var(--ink-60); line-height: 1.65; }
-    .tools-g { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 40px; }
-    .tool { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; transition: border-color .2s; }
-    .tool:hover { border-color: var(--accent); }
-    .tool-n { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
-    .tool-d { font-size: 12px; color: var(--ink-30); }
+/* Hero lines slide up on load */
+.hline { overflow: hidden; display: block; }
+.hline > span {
+  display: block; transform: translateY(108%);
+  transition: transform .9s cubic-bezier(.16,1,.3,1);
+}
+.hline > span.up { transform: translateY(0); }
 
-    /* WORK */
-    .section-work { padding: 96px 0; }
-    .sec-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 48px; }
-    .work-note { font-size: 14px; color: var(--ink-60); max-width: 220px; text-align: right; font-weight: 300; font-style: italic; }
-    .case-list { display: flex; flex-direction: column; }
-    .case { display: grid; grid-template-columns: 1fr 1.15fr; gap: 64px; align-items: center; padding: 64px 0; border-top: 1px solid var(--border); }
-    .case:last-child { border-bottom: 1px solid var(--border); }
-    .case:hover .cs-vis { transform: scale(1.02); }
-    .cs-top { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-    .cs-idx { font-family: var(--serif); font-size: 14px; font-style: italic; color: var(--ink-30); }
-    .cs-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-    .cs-title { font-family: var(--serif); font-size: clamp(22px, 2.8vw, 34px); font-weight: 400; line-height: 1.15; letter-spacing: -.01em; margin-bottom: 16px; }
-    .cs-desc { font-size: 15px; font-weight: 300; color: var(--ink-60); line-height: 1.7; max-width: 380px; margin-bottom: 20px; }
-    .cs-insight { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 24px; }
-    .cs-ii { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
-    .cs-it { font-size: 13px; font-weight: 300; color: var(--ink-60); line-height: 1.6; }
-    .cs-it strong { color: var(--ink); font-weight: 500; }
-    .cs-link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--accent); }
-    .cs-link .arr { transition: transform .2s; }
-    .cs-link:hover .arr { transform: translateX(5px); }
-    .cs-wip { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-30); background: var(--surface); border: 1px solid var(--border); border-radius: 100px; padding: 6px 14px; }
-    .cs-vis { border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; transition: transform .4s var(--ease); }
-    .cs-vi { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-    .cs-vi::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,.04) 0%, transparent 55%); }
-    .bg1 { background: linear-gradient(135deg, #0f1b35 0%, #112040 50%, #0a1828 100%); }
-    .bg2 { background: linear-gradient(135deg, #1a1018 0%, #201428 60%, #160f1e 100%); }
-    .bg3 { background: linear-gradient(135deg, #081a0e 0%, #0b2012 50%, #071509 100%); }
-    .bg4 { background: linear-gradient(135deg, #10101a 0%, #14101e 50%, #1a0f18 100%); }
-    .bg5 { background: linear-gradient(135deg, #0a1525 0%, #0d1a30 50%, #081020 100%); }
-    .phone { width: 36%; aspect-ratio: 9/19; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 24px; padding: 14px 10px; display: flex; flex-direction: column; gap: 7px; position: relative; z-index: 1; }
-    .pnotch { width: 38%; height: 5px; background: rgba(255,255,255,.15); border-radius: 3px; margin: 0 auto 6px; }
-    .pimg { width: 100%; aspect-ratio: 1; border-radius: 10px; background: rgba(255,255,255,.1); }
-    .pb { height: 6px; border-radius: 3px; background: rgba(255,255,255,.12); }
-    .pb.s { width: 55%; } .pb.m { width: 80%; } .pb.f { width: 100%; }
-    .prow { display: flex; gap: 5px; }
-    .ppill { height: 20px; border-radius: 10px; background: rgba(255,255,255,.1); flex: 1; }
-    .pbtn { height: 28px; border-radius: 8px; background: rgba(66,135,245,.5); width: 100%; margin-top: 4px; }
-    .desktop { width: 76%; aspect-ratio: 16/10; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 7px; position: relative; z-index: 1; }
-    .dnav { display: flex; gap: 5px; margin-bottom: 3px; }
-    .ddot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.2); }
-    .db { height: 5px; border-radius: 3px; background: rgba(255,255,255,.12); }
-    .dimg { flex: 1; border-radius: 6px; background: rgba(255,255,255,.08); min-height: 36px; }
-    .drow { display: flex; gap: 5px; }
-    .dcol { flex: 1; display: flex; flex-direction: column; gap: 5px; }
-
-    /* PROCESS */
-    .section-process { padding: 96px 0; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .proc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
-    .proc { padding: 28px 22px; background: var(--bg); border-radius: 16px; border: 1px solid var(--border); transition: border-color .2s, transform .2s; }
-    .proc:hover { border-color: var(--accent); transform: translateY(-4px); }
-    .proc-n { font-family: var(--serif); font-size: 40px; font-weight: 400; color: var(--border-hi, #ddd); line-height: 1; margin-bottom: 16px; }
-    .proc-t { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
-    .proc-b { font-size: 13px; font-weight: 300; color: var(--ink-60); line-height: 1.65; }
-
-    /* SKILLS */
-    .section-skills { padding: 80px 0; }
-    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
-    .skill { padding: 28px 24px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg); transition: border-color .2s, transform .2s; }
-    .skill:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .skill-ico { font-size: 26px; margin-bottom: 16px; }
-    .skill-name { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
-    .skill-desc { font-size: 13px; font-weight: 300; color: var(--ink-60); line-height: 1.65; }
-    .skill-badge { display: inline-block; margin-top: 14px; font-size: 10px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); background: var(--accent-lt); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 4px 11px; }
-
-    /* DIFF */
-    .diff-wrap { padding: 64px 0; }
-    .diff-inner { background: var(--accent); border-radius: 20px; padding: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden; }
-    .diff-inner::before { content: ''; position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; background: rgba(255,255,255,.08); pointer-events: none; }
-    .diff-lbl { font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 16px; }
-    .diff-title { font-family: var(--serif); font-size: clamp(28px, 3.5vw, 46px); font-weight: 400; line-height: 1.1; letter-spacing: -.01em; color: #fff; }
-    .diff-facts { display: flex; flex-direction: column; gap: 24px; position: relative; z-index: 1; }
-    .diff-fact { display: flex; gap: 16px; align-items: flex-start; }
-    .diff-ico { width: 40px; height: 40px; flex-shrink: 0; background: rgba(255,255,255,.18); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-    .diff-txt strong { display: block; font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 2px; }
-    .diff-txt span { font-size: 13px; font-weight: 300; color: rgba(255,255,255,.7); }
-
-    /* CONTACT */
-    .section-contact { padding: 128px 0 96px; text-align: center; }
-    .c-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-30); margin-bottom: 24px; }
-    .c-title { font-family: var(--serif); font-size: clamp(40px, 7vw, 80px); font-weight: 400; line-height: 1.05; letter-spacing: -.01em; margin-bottom: 32px; }
-    .c-title em { font-style: italic; color: var(--accent); }
-    .c-body { font-size: 17px; font-weight: 300; color: var(--ink-60); max-width: 480px; margin: 0 auto 48px; line-height: 1.7; }
-    .c-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .link-u { font-size: 14px; font-weight: 500; color: var(--ink-60); display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border); padding-bottom: 3px; transition: color .2s, border-color .2s; }
-    .link-u:hover { color: var(--accent); border-color: var(--accent); }
-
-    /* FOOTER */
-    footer { border-top: 1px solid var(--border); padding: 32px 0; }
-    .foot { display: flex; align-items: center; justify-content: space-between; }
-    .foot-c { font-size: 12px; color: var(--ink-30); }
-    .foot-l { display: flex; gap: 24px; list-style: none; }
-    .foot-l a { font-size: 13px; color: var(--ink-60); transition: color .2s; }
-    .foot-l a:hover { color: var(--accent); }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .container { padding: 0 20px; }
-      .hero-grid, .about-grid, .case, .diff-inner, .skills-grid { grid-template-columns: 1fr; }
-      .hero-right { align-items: flex-start; }
-      .stat { max-width: 100%; }
-      .proc-grid { grid-template-columns: 1fr 1fr; }
-      .nav-links { display: none; }
-      .cs-vis { display: none; }
-      .sec-head { flex-direction: column; gap: 8px; }
-      .work-note { text-align: left; }
-      .foot { flex-direction: column; gap: 16px; text-align: center; }
-      .diff-inner { padding: 40px 28px; }
-    }
-    @media (max-width: 480px) {
-      .proc-grid, .tools-g { grid-template-columns: 1fr; }
-    }
-  </style>
+/* Staggered scroll reveal */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+</style>
+<script id="tailwind-config">
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        "primary-fixed": "#0D00FF",
+        "surface-container-low": "#f4f4f2",
+        "surface-container-highest": "#e2e3e1",
+        "outline": "#777777",
+        "secondary": "#5f5e5e",
+        "surface": "#f9f9f7",
+        "primary": "#000000",
+      },
+      fontFamily: { headline: ["Space Grotesk"], body: ["Instrument Sans"], label: ["Instrument Sans"] },
+      borderRadius: { DEFAULT: "0px", lg: "0px", xl: "0px", full: "9999px" },
+    },
+  },
+}
+</script>
 </head>
-<body>
+<body class="bg-[#f9f9f7] text-black selection:bg-[#0D00FF] selection:text-white overflow-x-hidden">
+
+<div id="cursor">✳</div>
 
 <!-- NAV -->
-<nav id="nav">
-  <div class="container">
-    <a href="#" class="nav-logo">Cristina Miralles<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="#work" data-es="Proyectos" data-en="Work">Proyectos</a></li>
-      <li><a href="#about" data-es="Sobre mí" data-en="About">Sobre mí</a></li>
-      <li><a href="#process" data-es="Procesos" data-en="Processes">Procesos</a></li>
-      <li><a href="#skills" data-es="Skills" data-en="Skills">Skills</a></li>
-    </ul>
-    <div class="nav-right">
-      <button class="lang-btn" id="langBtn">EN</button>
-      <a href="#contact" class="nav-cta" data-es="Hablemos" data-en="Let's talk">Hablemos</a>
+<nav class="bg-[#f9f9f7] fixed top-0 w-full z-50 border-b border-black/10">
+  <div class="flex justify-between items-center w-full px-8 py-5 max-w-full mx-auto">
+    <a class="text-base font-bold tracking-tighter text-black font-headline uppercase" href="index.html">Cristina Miralles</a>
+    <div class="hidden md:flex items-center space-x-10">
+      <a class="font-headline uppercase tracking-widest text-xs text-[#0D00FF] border-b-2 border-[#0D00FF] pb-0.5" href="#work" data-es="Proyectos" data-en="Work">Proyectos</a>
+      <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="about.html" data-es="Sobre mí" data-en="About me">Sobre mí</a>
+      <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
     </div>
+    <button onclick="toggleLang()" id="langBtn" class="bg-black text-[#f9f9f7] px-6 py-2.5 text-xs font-headline uppercase tracking-widest active:scale-95 transition-transform hover:bg-[#0D00FF]">EN</button>
   </div>
 </nav>
 
+<main>
+
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="container">
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow reveal">
-          <div class="eyebrow-line"></div>
-          <span data-es="UX/UI Designer · Junior" data-en="UX/UI Designer · Junior">UX/UI Designer · Junior</span>
-        </div>
-        <h1 class="reveal d1">
-          <span data-es="Diseño que" data-en="Design that">Diseño que</span><br/>
-          <em data-es="habla claro" data-en="speaks clear">habla claro</em><br/>
-          <span data-es="y resuelve" data-en="and solves">y resuelve</span>
-        </h1>
-        <p class="hero-body reveal d2" data-es="Vengo de la traducción. Sé que cada palabra y cada pixel cambia lo que la gente entiende, siente y hace. Diseño experiencias con sentido para las personas que las usan." data-en="I come from translation. I know that every word — and every pixel — changes what people understand, feel and do. I design experiences that make sense for the people who use them.">Vengo de la traducción. Sé que cada palabra — y cada píxel — cambia lo que la gente entiende, siente y hace. Diseño experiencias con sentido para las personas que las usan.</p>
-        <div class="hero-actions reveal d3">
-          <a href="#work" class="btn-p">
-            <span data-es="Ver proyectos" data-en="See work">Ver proyectos</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="#about" class="btn-g">
-            <span data-es="Conocerme" data-en="About me">Conocerme</span>
-            <span class="arr">→</span>
-          </a>
-        </div>
-      </div>
-      <div class="hero-right reveal d2">
-        <div class="avail"><div class="dot"></div> <span data-es="Disponible para nuevas oportunidades" data-en="Open to new opportunities">Disponible para nuevas oportunidades</span></div>
-        <div class="stat">
-          <div class="n">5</div>
-          <div class="l" data-es="Proyectos documentados con proceso completo" data-en="Projects documented with full process">Proyectos documentados con proceso completo</div>
-        </div>
+<section class="min-h-screen flex flex-col justify-end px-8 pb-20 pt-40">
+  <div class="max-w-7xl mx-auto w-full">
+
+    <!-- Hi :) -->
+    <div class="hline mb-1">
+      <span id="hero-hi" class="font-headline font-bold tracking-tighter" style="font-size:clamp(2.2rem,4.5vw,3.5rem);color:#f5d000">Hola :)</span>
+    </div>
+
+    <!-- I'm Cristina Miralles -->
+    <div class="hline">
+      <span id="hero-name" class="font-headline font-bold uppercase tracking-tighter text-black block">Soy Cristina Miralles</span>
+    </div>
+
+    <!-- UX/UI Junior Designer -->
+    <div class="hline mb-12">
+      <span id="hero-role" class="font-headline font-bold uppercase tracking-tighter text-black block">Diseñadora UX/UI Junior</span>
+    </div>
+
+    <!-- Tagline right-aligned -->
+    <div class="grid grid-cols-1 md:grid-cols-12">
+      <div class="md:col-start-7 md:col-span-6 reveal">
+        <p id="hero-sub" class="text-xl md:text-2xl font-light leading-snug text-black/70">
+          Diseño experiencias que se adaptan al idioma de cada usuario
+        </p>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="section-about" id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="reveal">
-        <p class="sec-num" data-es="00 — Sobre mí" data-en="00 — About me">00 — Sobre mí</p>
-        <h2 class="sec-title" style="margin: 16px 0 28px;">
-          <span data-es="Más que una diseñadora," data-en="More than a designer,">Más que una diseñadora,</span><br/>
-          <em data-es="una traductora" data-en="a translator">una traductora</em><br/>
-          <span data-es="de necesidades." data-en="of needs.">de necesidades.</span>
-        </h2>
-        <p class="ab" data-es="Antes de descubrir el diseño, traducía palabras entre idiomas. Hoy <strong>traduzco problemas en interfaces</strong>: escucho a los usuarios, descifro qué necesitan de verdad y lo convierto en algo que funciona." data-en="Before discovering design, I translated words between languages. Today I <strong>translate problems into interfaces</strong>: I listen to users, figure out what they truly need and turn it into something that works.">Antes de descubrir el diseño, traducía palabras entre idiomas. Hoy <strong>traduzco problemas en interfaces</strong>: escucho a los usuarios, descifro qué necesitan de verdad y lo convierto en algo que funciona.</p>
-        <p class="ab" data-es="Mi background en traducción me da algo que pocos diseñadores tienen: <strong>obsesión por la precisión del lenguaje</strong>. Un botón mal etiquetado, un error ambiguo o un CTA confuso no es un detalle visual es una barrera." data-en="My translation background gives me something few designers have: <strong>obsession with language precision</strong>. A mislabelled button, an ambiguous error or a confusing CTA is not a visual detail — it's a barrier.">Mi background en traducción me da algo que pocos diseñadores tienen: <strong>obsesión por la precisión del lenguaje</strong>. Un botón mal etiquetado, un error ambiguo o un CTA confuso no es un detalle visual es una barrera.</p>
-        <p class="ab" data-es="Soy <strong>curiosa, analítica y muy organizada</strong>. No diseño por intuición sola: pregunto, investigo, estructuro, y luego diseño." data-en="I am <strong>curious, analytical and highly organised</strong>. I don't design on intuition alone — I ask, research, structure, and then design.">Soy <strong>curiosa, analítica y muy organizada</strong>. No diseño por intuición sola: pregunto, investigo, estructuro, y luego diseño.</p>
-      </div>
-      <div class="reveal d2">
-        <p class="sp-label" data-es="Lo que me hace diferente" data-en="What makes me different">Lo que me hace diferente</p>
-        <ul class="sp-list">
-          <li data-es="Formación en traducción → microcopia precisa centrada en el usuario" data-en="Translation background → precise, user-centred microcopy">Formación en traducción → microcopia precisa centrada en el usuario</li>
-          <li data-es="Pensamiento analítico que convierte research en decisiones claras" data-en="Analytical thinking that turns research into clear decisions">Pensamiento analítico que convierte research en decisiones claras</li>
-          <li data-es="Empatía real: diseño para personas, no para pantallas" data-en="Genuine empathy: I design for people, not screens">Empatía real: diseño para personas, no para pantallas</li>
-          
-          
-        </ul>
-        <div class="ai-box">
-          <h4 data-es="⚡ Trabajo con IA de forma integrada" data-en="⚡ I work with AI in an integrated way">⚡ Trabajo con IA de forma integrada</h4>
-          <p data-es="Uso Claude, ChatGPT y Gemini como parte activa de mi proceso: para sintetizar research, explorar conceptos, generar moodboards y validar microcopia. La IA no reemplaza el criterio de diseño — lo acelera." data-en="I use Claude, ChatGPT and Gemini as active parts of my process: to synthesise research, explore concepts, generate moodboards and validate microcopy. AI doesn't replace design judgment — it accelerates it.">Uso Claude, ChatGPT y Gemini como parte activa de mi proceso: para sintetizar research, explorar conceptos, generar moodboards y validar microcopia. La IA no reemplaza el criterio de diseño.</p>
-        </div>
-        <div class="tools-g">
-          <div class="tool"><div class="tool-n">Figma</div><div class="tool-d" data-es="Componentes, variables, prototipos" data-en="Components, variables, prototypes">Componentes, variables, prototipos</div></div>
-          <div class="tool"><div class="tool-n">Research</div><div class="tool-d" data-es="Entrevistas, flows, affinity maps" data-en="Interviews, flows, affinity maps">Entrevistas, flows, affinity maps</div></div>
-          <div class="tool"><div class="tool-n">Design Systems</div><div class="tool-d" data-es="Tokens, auto-layout, documentación" data-en="Tokens, auto-layout, documentation">Tokens, auto-layout, documentación</div></div>
-          <div class="tool"><div class="tool-n">Usability</div><div class="tool-d" data-es="Tests, iteración, heurísticas Nielsen" data-en="Tests, iteration, Nielsen heuristics">Tests, iteración, heurísticas Nielsen</div></div>
-        </div>
-      </div>
+<!-- SELECTED WORK -->
+<section class="py-32 bg-[#f4f4f2]" id="work">
+  <div class="px-8 max-w-7xl mx-auto">
+
+    <div class="flex justify-between items-end mb-20 reveal">
+      <h2 id="work-title" class="text-5xl md:text-7xl font-headline font-bold uppercase tracking-tighter">Selected<br/>Work</h2>
+      <span class="font-label text-xs uppercase tracking-widest text-[#777]">01 — 05</span>
     </div>
-  </div>
-</section>
 
-<!-- WORK -->
-<section class="section-work" id="work">
-  <div class="container">
-    <div class="sec-head reveal">
-      <div>
-        <p class="sec-num" data-es="01 — Proyectos" data-en="01 — Work">01 — Proyectos</p>
-        <h2 class="sec-title" data-es="Casos de estudio" data-en="Case studies">Casos de estudio</h2>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-y-28 gap-x-10">
+
+      <!-- 01 PAUSANA -->
+      <div class="md:col-span-7 group proj-card reveal" onclick="location.href='pausana.html'" style="cursor:none">
+        <div class="aspect-[4/5] bg-[#1a1a1a] overflow-hidden relative mb-5">
+          <img class="proj-img w-full h-full object-cover" src="img/pausana/pausana-mockups.png" alt="Pausana"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="typo-cover w-full h-full text-6xl md:text-8xl" style="display:none">PAUSANA</div>
+        </div>
+        <div class="flex justify-between items-start">
+          <div>
+            <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-2 block" data-es="UX/UI · App · Salud" data-en="UX/UI · App · Health">UX/UI · App · Salud</span>
+            <h3 class="text-3xl font-headline font-bold uppercase tracking-tight">PAUSANA</h3>
+          </div>
+          <span class="text-[#777] text-xs font-label mt-1">2025/2026</span>
+        </div>
       </div>
 
-    </div>
-    <div class="case-list">
-
-      <article class="case reveal">
-        <div>
-          <div class="cs-top"><span class="cs-idx">01</span><div class="cs-tags"><span class="tag blue" data-es="App móvil" data-en="Mobile app">App móvil</span><span class="tag">UX Research</span><span class="tag">Wellness</span></div></div>
-          <h3 class="cs-title" data-es="Pausana — App de yoga para mujeres que no tienen tiempo" data-en="FlowMoment — Yoga app for women who have no time">Pausana — App de yoga para mujeres que no tienen tiempo</h3>
-          <p class="cs-desc" data-es="Las apps de yoga existentes están pensadas para practicantes con tiempo y motivación constante. ¿Qué pasa con las mujeres de 30-50 años que quieren practicar entre reuniones y responsabilidades?" data-en="Existing yoga apps are built for practitioners with consistent time and motivation. What about women aged 30-50 who want to practise between meetings and responsibilities?">Las apps de yoga existentes están pensadas para practicantes con tiempo y motivación constante. ¿Qué pasa con las mujeres de 30-50 años que quieren practicar entre reuniones y responsabilidades?</p>
-          <div class="cs-insight"><span class="cs-ii">💡</span><p class="cs-it" data-es="El <strong> hallazgo clave del research</strong>: la falta de tiempo era su principal barrera, valoran las rutinas guiadas y pagarían una suscripción. El <strong>card sorting</strong> reveló que con demasiadas opciones las usuarias se perdían lo que llevó a simplificar la arquitectura." data-en="Key research finding: a lack of time was their main barrier; they value guided routines and would be willing to pay for a subscription. Card sorting revealed that users became overwhelmed when faced with too many options, which led to a simplification of the site architecture.">El hallazgo clave del research: la falta de tiempo era su principal barrera, valoran las rutinas guiadas y pagarían una suscripción. El card sorting reveló que con demasiadas opciones las usuarias se perdían lo que llevó a simplificar la arquitectura.</p></div>
-          <a href="case-pausana.html" class="cs-link"><span data-es="Ver caso completo" data-en="View full case">Ver caso completo</span> <svg class="arr" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <!-- 02 WISH STONE -->
+      <div class="md:col-span-4 md:col-start-9 md:mt-44 group proj-card reveal" onclick="location.href='wish-stone.html'" style="cursor:none;transition-delay:.1s">
+        <div class="aspect-[3/4] bg-[#1a1a1a] overflow-hidden relative mb-5">
+          <img class="proj-img w-full h-full object-contain" src="img/wish-stone/product-wish-stone.png" alt="Wish Stone"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="typo-cover w-full h-full text-4xl md:text-5xl" style="display:none">WISH<br/>STONE</div>
         </div>
-        <div class="cs-vis">
-          <div class="cs-vi bg1">
-            <div class="phone" style="width:42%;padding:0;overflow:hidden;border-radius:24px;">
-              <img 
-                src="primera-pantalla-pausana.png" 
-                alt="Pausana app — pantalla de sesión de yoga"
-                style="width:100%;height:100%;object-fit:cover;display:block;border-radius:24px;"
-              />
-            </div>
+        <div class="flex justify-between items-start">
+          <div>
+            <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-2 block" data-es="UX/UI · E-Commerce" data-en="UX/UI · E-Commerce">UX/UI · E-Commerce</span>
+            <h3 class="text-2xl font-headline font-bold uppercase tracking-tight">WISH STONE</h3>
           </div>
+          <span class="text-[#777] text-xs font-label mt-1">2026</span>
         </div>
-      </article>
+      </div>
 
-      <article class="case reveal">
-        <div>
-          <div class="cs-top"><span class="cs-idx">02</span><div class="cs-tags"><span class="tag blue" data-es="Web desktop" data-en="Desktop web">Web desktop</span><span class="tag">Storytelling</span><span class="tag">E-commerce</span></div></div>
-          <h3 class="cs-title" data-es="Wish Stone — Cuando el producto es la historia que lo rodea" data-en="Wish Stone — When the product is the story around it">Wish Stone — Cuando el producto es la historia que lo rodea</h3>
-          <p class="cs-desc" data-es="Una piedra no se vende con ficha técnica. Se vende con narrativa, emoción y ritual. El reto: crear una experiencia web que convirtiera un objeto simple en un objeto con significado." data-en="A stone isn't sold with specs. It's sold with narrative, emotion and ritual. The challenge: create a web experience that turned a simple object into a meaningful one.">Una piedra no se vende con ficha técnica. Se vende con narrativa, emoción y ritual. El reto: crear una experiencia web que convirtiera un objeto simple en un objeto con significado.</p>
-          <div class="cs-insight"><span class="cs-ii">✍️</span><p class="cs-it" data-es="Mi background en traducción fue clave: <strong>cada palabra de la web fue diseñada como parte del producto</strong>. La microcopia, el tono y el scroll narran la historia antes de que el usuario llegue al botón de compra." data-en="My translation background was key: <strong>every word on the website was designed as part of the product</strong>. The microcopy, tone and scroll narrate the story before the user reaches the buy button.">Mi background en traducción fue clave: <strong>cada palabra de la web fue diseñada como parte del producto</strong>. La microcopia, el tono y el scroll narran la historia antes de que el usuario llegue al botón de compra.</p></div>
-          <a href="coming-soon.html" class="cs-link"><span data-es="Ver caso completo" data-en="View full case">Ver caso completo</span> <svg class="arr" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <!-- 03 RAÍCES VIVAS -->
+      <div class="md:col-span-5 md:-mt-28 group proj-card reveal" onclick="location.href='raices-vivas.html'" style="cursor:none;transition-delay:.08s">
+        <div class="aspect-square bg-[#1a1a1a] overflow-hidden relative mb-5">
+          <img class="proj-img w-full h-full object-cover" src="img/raices-vivas/mockup-raices-vivas.png" alt="Raíces Vivas"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="typo-cover w-full h-full text-4xl md:text-5xl" style="display:none">RAÍCES<br/>VIVAS</div>
         </div>
-        <div class="cs-vis">
-          <div class="cs-vi bg2">
-            <img 
-              src="home-wish-stone.png" 
-              alt="Wish Stone — home"
-              style="width:85%;height:85%;object-fit:cover;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,0.4);"
-            />
+        <div class="flex justify-between items-start">
+          <div>
+            <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-2 block" data-es="UX/UI · Web Móvil · Social" data-en="UX/UI · Mobile Web · Social">UX/UI · Web Móvil · Social</span>
+            <h3 class="text-3xl font-headline font-bold uppercase tracking-tight">RAÍCES VIVAS</h3>
           </div>
+          <span class="text-[#777] text-xs font-label mt-1">2025/2026</span>
         </div>
-        </div>
-      </article>
+      </div>
 
-      <article class="case reveal">
-        <div>
-          <div class="cs-top"><span class="cs-idx">03</span><div class="cs-tags"><span class="tag blue" data-es="Web móvil" data-en="Mobile web">Web móvil</span><span class="tag">ODS</span><span class="tag" data-es="Tercer sector" data-en="Third sector">Tercer sector</span></div></div>
-          <h3 class="cs-title" data-es="Raíces Vivas — Presencia digital para una ONG de impacto rural" data-en="Raíces Vivas — Digital presence for a rural impact NGO">Raíces Vivas — Presencia digital para una ONG de impacto rural</h3>
-          <p class="cs-desc" data-es="Una organización que trabaja en pueblos pequeños necesitaba una web que comunicara sus proyectos alineados con los ODS sin perder cercanía ni autenticidad frente a sus dos audiencias: comunidades locales y donantes." data-en="An organisation working in small villages needed a website that communicated their SDG-aligned projects — without losing warmth or authenticity for their two audiences: local communities and donors.">Una organización que trabaja en pueblos pequeños necesitaba una web que comunicara sus proyectos alineados con los ODS sin perder cercanía ni autenticidad frente a sus dos audiencias: comunidades locales y donantes.</p>
-          <div class="cs-insight"><span class="cs-ii">🌿</span><p class="cs-it" data-es="El mayor reto: <strong>hacer accesible lo complejo</strong>. Traducir los ODS en lenguaje cercano, y que las personas de los pueblos, no solo los donantes, se sintieran representadas en la web." data-en="The biggest challenge: <strong>making the complex accessible</strong>. Translating the SDGs into approachable language, so that village residents — not just donors — felt represented on the site.">El mayor reto: <strong>hacer accesible lo complejo</strong>. Traducir los ODS en lenguaje cercano, y que las personas de los pueblos, no solo los donantes, se sintieran representadas en la web.</p></div>
-          <a href="coming-soon.html" class="cs-link"><span data-es="Ver caso completo" data-en="View full case">Ver caso completo</span> <svg class="arr" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <!-- 04 PULEVA -->
+      <div class="md:col-span-6 md:col-start-7 group proj-card reveal" onclick="location.href='puleva.html'" style="cursor:none;transition-delay:.15s">
+        <div class="aspect-[16/9] bg-[#1a1a1a] overflow-hidden relative mb-5">
+          <img class="proj-img w-full h-full object-cover" src="img/puleva/mockup.png" alt="Puleva"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="typo-cover w-full h-full text-5xl md:text-7xl" style="display:none">PULEVA</div>
         </div>
-        <div class="cs-vis">
-          <div class="cs-vi bg3">
-            <div class="phone" style="width:42%;padding:0;overflow:hidden;border-radius:24px;">
-              <img 
-                src="ods-primera-pantalla.png" 
-                alt="Raíces Vivas — pantalla principal"
-                style="width:100%;height:100%;object-fit:cover;display:block;border-radius:24px;"
-              />
-            </div>
+        <div class="flex justify-between items-start">
+          <div>
+            <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-2 block" data-es="UX/UI · Rediseño Web" data-en="UX/UI · Web Redesign">UX/UI · Rediseño Web</span>
+            <h3 class="text-3xl font-headline font-bold uppercase tracking-tight">PULEVA WEB</h3>
           </div>
+          <span class="text-[#777] text-xs font-label mt-1">2026</span>
         </div>
-      </article>
+      </div>
 
-      <article class="case reveal">
-        <div>
-          <div class="cs-top"><span class="cs-idx">04</span><div class="cs-tags"><span class="tag blue">Web</span><span class="tag">Indie</span><span class="tag muted" data-es="En proceso" data-en="In progress">En proceso</span></div></div>
-          <h3 class="cs-title" data-es="Sello discográfico indie — La web como medio, no como escaparate" data-en="Indie record label — The website as medium, not showcase">Sello discográfico indie — La web como medio, no como escaparate</h3>
-          <p class="cs-desc" data-es="Un sello de música indie que no quiere depender de Instagram. El reto: diseñar una web que haga lo que hace una red social (noticias, lanzamientos, comunidad) con la identidad y el control editorial propios del sello." data-en="An indie music label that doesn't want to depend on Instagram. The challenge: design a website that does what a social network does — news, releases, community — with the label's own identity and editorial control.">Un sello de música indie que no quiere depender de Instagram. El reto: diseñar una web que haga lo que hace una red social (noticias, lanzamientos, comunidad) con la identidad y el control editorial propios del sello.</p>
-          <div class="cs-insight"><span class="cs-ii">🎵</span><p class="cs-it" data-es="Actualmente en fase de investigación. <strong>Pregunta de diseño central:</strong> ¿Cómo diseñar una web que los fans visiten de forma recurrente, sin que sea una copia de las plataformas que ya usan?" data-en="Currently in the research phase. <strong>Central design question:</strong> How do you design a website that fans visit regularly, without it being a copy of the platforms they already use?">Actualmente en fase de investigación. <strong>Pregunta de diseño central:</strong> ¿Cómo diseñar una web que los fans visiten de forma recurrente, sin que sea una copia de las plataformas que ya usan?</p></div>
-          <span class="cs-wip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> <span data-es="En investigación — próximamente" data-en="In research — coming soon">En investigación — próximamente</span></span>
-          <div style="margin-top:16px;">
-            <a href="coming-soon.html" class="cs-link"><span data-es="Ver proceso de research" data-en="View research process">Ver proceso de research</span> <svg class="arr" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+ <!-- 05 SELLO DISCOGRÁFICO — always typo, WIP -->
+      <div class="md:col-span-5 md:col-start-4 group proj-card reveal" onclick="location.href='sello.html'" style="cursor:none;transition-delay:.2s">
+        <div class="aspect-[4/3] overflow-hidden relative mb-5">
+          <div class="typo-cover w-full h-full text-5xl" style="min-height:200px" id="proj5-cover">SELLO<br/>DISCOGRÁFICO<br/>INDIE</div>
+          <div class="wip-badge" id="proj5-badge">Work In Progress</div>
+        </div>
+        <div class="flex justify-between items-start">
+          <div>
+            <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-2 block" data-es="UX/UI · Web · Música · En progreso" data-en="UX/UI · Web · Music · WIP">UX/UI · Web · Música · En progreso</span>
+            <h3 class="text-3xl font-headline font-bold uppercase tracking-tight" id="proj5-title">SELLO DISCOGRÁFICO INDIE</h3>
           </div>
+          <span class="text-[#777] text-xs font-label mt-1">2025/2026</span>
         </div>
-        <div class="cs-vis"><div class="cs-vi bg4"><div class="desktop"><div class="dnav"><div class="ddot"></div><div class="ddot"></div><div class="ddot"></div></div><div class="dimg" style="background:rgba(66,135,245,.1);border:1px solid rgba(66,135,245,.2)"></div><div class="drow" style="margin-top:7px;"><div class="dcol"><div class="db" style="background:rgba(66,135,245,.4)"></div><div class="db" style="width:60%"></div></div><div class="dcol"><div class="db"></div><div class="db" style="width:75%"></div></div><div class="dcol"><div class="db"></div><div class="db" style="width:50%"></div></div></div></div></div></div>
-      </article>
-
-      <article class="case reveal">
-        <div>
-          <div class="cs-top"><span class="cs-idx">05</span><div class="cs-tags"><span class="tag blue" data-es="Rediseño" data-en="Redesign">Rediseño</span><span class="tag">Research</span><span class="tag">Wordpress</span></div></div>
-          <h3 class="cs-title" data-es="Puleva — Cuando una marca consolidada pierde a su audiencia en la web" data-en="Puleva — When an established brand loses its audience online">Puleva — Cuando una marca consolidada pierde a su audiencia en la web</h3>
-          <p class="cs-desc" data-es="La web de Puleva no reflejaba ni a sus usuarios ni a sus valores de marca. Investigué su público objetivo, analicé a sus competidores directos e indirectos, e identifiqué los fallos de experiencia que la alejaban de su audiencia." data-en="Puleva's website reflected neither its users nor its brand values. I researched their target audience, analysed direct and indirect competitors, and identified the experience failures distancing them from their audience.">La web de Puleva no reflejaba ni a sus usuarios ni a sus valores de marca. Investigué su público objetivo, analicé a sus competidores directos e indirectos, e identifiqué los fallos de experiencia que la alejaban de su audiencia.</p>
-          <div class="cs-insight"><span class="cs-ii">🔍</span><p class="cs-it" data-es="Lo más valioso de este proyecto no es el resultado visual — <strong>es el proceso de research</strong>: entender por qué una marca consolidada puede tener una web que no conecta con las personas a las que quiere hablar." data-en="The most valuable part of this project is not the visual output — <strong>it's the research process</strong>: understanding why an established brand can have a website that doesn't connect with the people it wants to reach.">Lo más valioso de este proyecto no es el resultado visual — <strong>es el proceso de research</strong>: entender por qué una marca consolidada puede tener una web que no conecta con las personas a las que quiere hablar.</p></div>
-          <a href="coming-soon.html" class="cs-link"><span data-es="Ver proceso de research" data-en="View research process">Ver proceso de research</span> <svg class="arr" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
-        <div class="cs-vis">
-          <div class="cs-vi bg5">
-            <img 
-              src="puleva.png" 
-              alt="Puleva — rediseño web"
-              style="width:85%;height:85%;object-fit:cover;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,0.4);"
-            />
-          </div>
-        </div>
-        </div>
-      </article>
+      </div>
 
     </div>
   </div>
 </section>
 
-<!-- DIFF -->
-<div class="diff-wrap">
-  <div class="container">
-    <div class="diff-inner reveal">
-      <div>
-        <p class="diff-lbl" data-es="Por qué importa el background" data-en="Why the background matters">Por qué importa el background</p>
-        <h2 class="diff-title">
-          <span data-es="La traducción" data-en="Translation">La traducción</span><br/>
-          <span data-es="enseña a" data-en="teaches you to">enseña a</span><br/>
-          <span data-es="escuchar primero." data-en="listen first.">escuchar primero.</span>
-        </h2>
-      </div>
-      <div class="diff-facts">
-        <div class="diff-fact"><div class="diff-ico">🔍</div><div class="diff-txt"><strong data-es="Precisión del lenguaje en la interfaz" data-en="Language precision in the interface">Precisión del lenguaje en la interfaz</strong><span data-es="Cada etiqueta, error y CTA escrito para ser entendido, no solo leído." data-en="Every label, error and CTA written to be understood, not just read.">Cada etiqueta, error y CTA escrito para ser entendido, no solo leído.</span></div></div>
-        <div class="diff-fact"><div class="diff-ico">🧠</div><div class="diff-txt"><strong data-es="Análisis antes que soluciones" data-en="Analysis before solutions">Análisis antes que soluciones</strong><span data-es="Antes de abrir Figma, entiendo el problema. Siempre." data-en="Before opening Figma, I understand the problem. Always.">Antes de abrir Figma, entiendo el problema. Siempre.</span></div></div>
-        <div class="diff-fact"><div class="diff-ico">🌍</div><div class="diff-txt"><strong data-es="Sensibilidad cultural y de contexto" data-en="Cultural and contextual sensitivity">Sensibilidad cultural y de contexto</strong><span data-es="Diseño pensando en personas reales con contextos distintos." data-en="I design thinking of real people with different contexts.">Diseño pensando en personas reales con contextos distintos.</span></div></div>
-      </div>
+<!-- TAKE A LOOK AS WELL TO -->
+<section class="py-32 px-8 bg-[#f9f9f7]">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal mb-16">
+      <h2 id="also-title" class="text-4xl md:text-6xl font-headline font-bold uppercase tracking-tighter">Echa un vistazo<br/>también a...</h2>
     </div>
-  </div>
-</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
 
-<!-- PROCESS -->
-<section class="section-process" id="process">
-  <div class="container">
-    <div class="sec-head reveal">
-      <div>
-        <p class="sec-num" data-es="02 — Proceso" data-en="02 — Process">02 — Proceso</p>
-        <h2 class="sec-title" data-es="Cómo trabajo" data-en="How I work">Cómo trabajo</h2>
-      </div>
-    </div>
-    <div class="proc-grid">
-      <div class="proc reveal d1"><div class="proc-n">01</div><div class="proc-t" data-es="Entender" data-en="Understand">Entender</div><p class="proc-b" data-es="Antes de diseñar, escucho. Entrevistas, research secundario, análisis de datos. El problema real rara vez es el problema aparente." data-en="Before designing, I listen. Interviews, secondary research, data analysis. The real problem is rarely the apparent one.">Antes de diseñar, escucho. Entrevistas, research secundario, análisis de datos. El problema real rara vez es el problema aparente.</p></div>
-      <div class="proc reveal d2"><div class="proc-n">02</div><div class="proc-t" data-es="Definir" data-en="Define">Definir</div><p class="proc-b" data-es="Sintetizo hallazgos en insights accionables. User journeys, How Might We, hipótesis. Sin esto, el diseño es intuición disfrazada." data-en="I synthesise findings into actionable insights. User journeys, How Might We, hypotheses. Without this, design is just disguised intuition.">Sintetizo hallazgos en insights accionables. User journeys, How Might We, hipótesis. Sin esto, el diseño es intuición disfrazada.</p></div>
-      <div class="proc reveal d3"><div class="proc-n">03</div><div class="proc-t" data-es="Diseñar" data-en="Design">Diseñar</div><p class="proc-b" data-es="De wireframes de baja fidelidad a prototipos interactivos en Figma. Itero rápido y documento cada decisión y su porqué." data-en="From low-fidelity wireframes to interactive Figma prototypes. I iterate fast and document every decision and its rationale.">De wireframes de baja fidelidad a prototipos interactivos en Figma. Itero rápido y documento cada decisión y su porqué.</p></div>
-      <div class="proc reveal d4"><div class="proc-n">04</div><div class="proc-t" data-es="Validar" data-en="Validate">Validar</div><p class="proc-b" data-es="Tests de usabilidad, análisis de feedback, iteración. El diseño nunca está terminado, está en su mejor versión conocida hasta ahora." data-en="Usability tests, feedback analysis, iteration. Design is never finished — it's in its best known version so far.">Tests de usabilidad, análisis de feedback, iteración. El diseño nunca está terminado, está en su mejor versión conocida hasta ahora.</p></div>
+      <!-- Graphic Design -->
+      <a href="graphic-design.html" class="group block proj-card reveal">
+        <div class="aspect-[16/9] bg-[#e2e3e1] overflow-hidden relative mb-5">
+          <img class="proj-img w-full h-full object-cover" src="img/graphic-thumb.jpg" alt="Graphic Design"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="typo-cover w-full h-full text-4xl" style="display:none">GRAPHIC<br/>DESIGN</div>
+        </div>
+        <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Graphic Design · Packaging · Branding</span>
+        <h3 class="text-2xl font-headline font-bold uppercase tracking-tight" id="gd-title">Proyectos de diseño gráfico</h3>
+      </a>
+
+      <!-- Motion Graphics -->
+      <a href="graphic-design.html#motion" class="group block proj-card reveal" style="transition-delay:.1s">
+        <div class="aspect-[16/9] overflow-hidden relative mb-5">
+          <div class="typo-cover w-full h-full text-4xl group-hover:bg-[#0D00FF]" style="background:#111;min-height:220px">MOTION<br/>GRAPHICS</div>
+        </div>
+        <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Motion · After Effects</span>
+        <h3 class="text-2xl font-headline font-bold uppercase tracking-tight" id="mg-title">Proyectos de motion graphics</h3>
+      </a>
+
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
-<section class="section-skills" id="skills">
-  <div class="container">
-    <div class="sec-head reveal">
-      <div>
-        <p class="sec-num" data-es="03 — También puedo" data-en="03 — Also">03 — También puedo</p>
-        <h2 class="sec-title" data-es="Más allá de UX/UI" data-en="Beyond UX/UI">Más allá de UX/UI</h2>
-      </div>
-      <p class="work-note" data-es="Skills que amplían lo que puedo aportar a un equipo." data-en="Skills that expand what I can bring to a team.">Skills que amplían lo que puedo aportar a un equipo.</p>
-    </div>
-    <div class="skills-grid">
-      <div class="skill reveal d1"><div class="skill-ico">🎬</div><div class="skill-name">Motion Design</div><p class="skill-desc" data-es="After Effects para animaciones de interfaz, micro-interacciones y piezas de comunicación. El movimiento como extensión del diseño, no como decoración." data-en="After Effects for interface animations, micro-interactions and communication pieces. Motion as an extension of design, not decoration.">After Effects para animaciones de interfaz, micro-interacciones y piezas de comunicación. El movimiento como extensión del diseño, no como decoración.</p><span class="skill-badge">After Effects</span></div>
-      <div class="skill reveal d2"><div class="skill-ico">✏️</div><div class="skill-name" data-es="Diseño Gráfico" data-en="Graphic Design">Diseño Gráfico</div><p class="skill-desc" data-es="Identidad visual, logotipos y piezas gráficas. Entiendo los fundamentos del diseño de comunicación, lo que enriquece mis decisiones visuales en UX." data-en="Visual identity, logos and graphic pieces. I understand the foundations of communication design, which enriches my visual decisions in UX.">Identidad visual, logotipos y piezas gráficas. Entiendo los fundamentos del diseño de comunicación, lo que enriquece mis decisiones visuales en UX.</p><span class="skill-badge" data-es="Identidad & Branding" data-en="Identity & Branding">Identidad & Branding</span></div>
-      <div class="skill reveal d3"><div class="skill-ico">🤖</div><div class="skill-name" data-es="IA integrada" data-en="Integrated AI">IA integrada</div><p class="skill-desc" data-es="Uso Claude, ChatGPT y Gemini de forma activa en mi proceso de diseño. La IA no reemplaza el criterio, lo acelera." data-en="I actively use Claude, ChatGPT and Gemini in my design process. AI doesn't replace judgment — it accelerates it.">Uso Claude, ChatGPT y Gemini de forma activa en mi proceso de diseño. La IA no reemplaza el criterio, lo acelera.</p><span class="skill-badge">Claude · ChatGPT · Gemini</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="section-contact" id="contact">
-  <div class="container">
-    <p class="c-eyebrow reveal" data-es="04 — Contacto" data-en="04 — Contact">04 — Contacto</p>
-    <h2 class="c-title reveal d1">
-      <span data-es="Hablemos" data-en="Let's work">Hablemos</span><br/>
-      <em data-es="en serio." data-en="together.">en serio.</em>
+<!-- LET'S DESIGN TOGETHER :) -->
+<section class="pt-32 pb-48 px-8 bg-[#f4f4f2]" id="contact">
+  <div class="max-w-7xl mx-auto text-center reveal">
+    <h2 id="contact-title" class="font-headline font-bold uppercase tracking-tighter mb-24 leading-none" style="font-size:clamp(3rem,10vw,9rem)">
+      Diseñemos<br/>juntos<span style="color:#f5d000"> :)</span>
     </h2>
-    <p class="c-body reveal d2"
-      data-es="Busco mi primer rol en un equipo donde el diseño importe de verdad. Si tu empresa cree que las buenas preguntas preceden a las buenas soluciones, quiero conocerte."
-      data-en="I'm looking for my first role in a team where design truly matters. If your company believes that good questions precede good solutions, I'd love to meet you.">
-      Busco mi primer rol en un equipo donde el diseño importe de verdad. Si tu empresa cree que las buenas preguntas preceden a las buenas soluciones, quiero conocerte.
-    </p>
-    <div class="c-actions reveal d3">
-      <a href="mailto:cmcristinamc@gmail.com" class="btn-p">
-        <span data-es="Enviar un email" data-en="Send an email">Enviar un email</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4l6 5 6-5M2 4h12v8H2V4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-32">
+      <a class="group flex flex-col items-center" href="mailto:cmcristinamc@gmail.com">
+        <span class="font-label text-[10px] uppercase tracking-[0.3em] mb-2 text-[#777]">Email</span>
+        <span class="text-2xl md:text-3xl font-headline font-bold uppercase border-b border-transparent group-hover:border-[#0D00FF] transition-all group-hover:text-[#0D00FF]">cmcristinamc@gmail.com</span>
       </a>
-      <a href="https://www.linkedin.com/in/cristina-miralles/" class="link-u"
-        data-es="Ver LinkedIn →"
-        data-en="View LinkedIn →">
-        Ver LinkedIn →
+      <a class="group flex flex-col items-center" href="https://www.linkedin.com/in/cristina-miralles/" target="_blank">
+        <span class="font-label text-[10px] uppercase tracking-[0.3em] mb-2 text-[#777]">Social</span>
+        <span class="text-2xl md:text-3xl font-headline font-bold uppercase border-b border-transparent group-hover:border-[#0D00FF] transition-all group-hover:text-[#0D00FF]">LinkedIn</span>
       </a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="foot">
-      <p class="foot-c"
-        data-es="© 2026 Cristina Miralles · Diseñado y codificado a mano"
-        data-en="© 2026 Cristina Miralles · Designed and hand-coded">
-        © 2026 Cristina Miralles · Diseñado y codificado a mano
-      </p>
-      <ul class="foot-l">
-        <li><a href="https://www.linkedin.com/in/cristina-miralles/">LinkedIn</a></li>
-<li>
-  <a 
-    href="https://www.figma.com/proto/NoFniGC6BhSutEvksX2G5a/Cristina-Miralles-CV?page-id=135%3A18&node-id=199-10&viewport=-774%2C583%2C0.67&t=VWh6VRcuq1ONVCcf-1&scaling=scale-down&content-scaling=fixed" 
-    class="cv-link" 
-    data-es="https://www.figma.com/proto/NoFniGC6BhSutEvksX2G5a/Cristina-Miralles-CV?page-id=135%3A18&node-id=199-10&viewport=-774%2C583%2C0.67&t=VWh6VRcuq1ONVCcf-1&scaling=scale-down&content-scaling=fixed" 
-    data-en="https://www.figma.com/proto/NoFniGC6BhSutEvksX2G5a/Cristina-Miralles-CV?page-id=182%3A145&node-id=293-2&viewport=197%2C594%2C0.6&t=qr2myymXWOaMw8cl-1&scaling=scale-down&content-scaling=fixed" 
-    target="_blank" 
-    rel="noopener noreferrer">
-    CV
-  </a>
-</li>
-      </ul>
+</main>
+
+<footer class="bg-[#f4f4f2] border-t border-black/10">
+  <div class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-10 gap-6">
+    <div class="text-base font-black text-black font-headline uppercase">Cristina Miralles</div>
+    <p class="font-label text-[10px] tracking-[0.1em] uppercase text-[#777]">© 2026 Cristina Miralles. All rights reserved.</p>
+    <div class="flex gap-8">
+      <a class="font-label text-[10px] tracking-[0.1em] uppercase text-[#777] hover:text-[#0D00FF] transition-colors underline underline-offset-4" href="https://www.linkedin.com/in/cristina-miralles/" target="_blank">LinkedIn</a>
     </div>
   </div>
 </footer>
 
 <script>
-  // Nav border on scroll
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20));
+/* CURSOR */
+const cur = document.getElementById('cursor');
+document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
+document.querySelectorAll('a,button,.proj-card,[onclick]').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('hover'));
+});
 
-  // Reveal on scroll
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-  document.querySelectorAll('.hero .reveal').forEach((el, i) => setTimeout(() => el.classList.add('visible'), 80 + i * 80));
-
-  // Language toggle
-  const langBtn = document.getElementById('langBtn');
-  let lang = 'es';
-
-  function applyLang() {
-    langBtn.textContent = lang === 'es' ? 'EN' : 'ES';
-    document.documentElement.lang = lang;
-
-    document.querySelectorAll('[data-es][data-en]:not(.cv-link)').forEach(el => {
-      const text = el.getAttribute('data-' + lang);
-      if (!text) return;
-      if (text.includes('<')) { el.innerHTML = text; } else { el.textContent = text; }
-    });
-
-    document.querySelectorAll('.cv-link').forEach(el => {
-      el.href = el.getAttribute('data-' + lang);
-    });
-  }
-
-  applyLang();
-
-  langBtn.addEventListener('click', () => {
-    lang = lang === 'es' ? 'en' : 'es';
-    applyLang();
+/* HERO LINES ANIMATE */
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.hline > span').forEach((el, i) => {
+    setTimeout(() => el.classList.add('up'), 100 + i * 130);
   });
+});
+
+/* MAGNETIC TILT */
+document.querySelectorAll('.proj-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5;
+    const y = (e.clientY - r.top) / r.height - .5;
+    card.style.transform = `perspective(800px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-4px)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+
+/* SCROLL REVEAL */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* LANG TOGGLE */
+const T = {
+  es: {
+    'hero-hi':   'Hola :)',
+    'hero-name': 'Soy Cristina Miralles',
+    'hero-role': 'Diseñadora UX/UI Junior',
+    'hero-sub':  'Diseño experiencias que se adaptan al idioma de cada usuario.',
+    'work-title':'Trabajo<br/>Seleccionado',
+    'also-title':'Echa un vistazo<br/>también a...',
+    'gd-title':  'Proyectos de diseño gráfico',
+    'mg-title':  'Proyectos de motion graphics',
+    'proj5-title':'SELLO DISCOGRÁFICO INDIE',
+    'proj5-cover':'SELLO<br/>DISCOGRÁFICO<br/>INDIE',
+    'contact-title': 'Diseñemos<br/>juntos<span style="color:#f5d000"> :)</span>',
+    langBtn: 'EN'
+  },
+  en: {
+    'hero-hi':   'Hi :)',
+    'hero-name': "I'm Cristina Miralles",
+    'hero-role': 'UX/UI Junior Designer',
+    'hero-sub':  "I enjoy designing experiences that speak every user's language.",
+    'work-title':'Selected<br/>Work',
+    'also-title':'Take a look<br/>as well to',
+    'gd-title':  'Graphic Design Work',
+    'mg-title':  'Motion Graphics Work',
+    'proj5-title':'INDIE RECORD LABEL',
+    'proj5-cover':'INDIE<br/>RECORD<br/>LABEL',
+    'contact-title': "Let's Design<br/>Together<span style=\"color:#f5d000\"> :)</span>",
+    langBtn: 'ES'
+  }
+};
+let lang = 'es';
+function toggleLang() {
+  lang = lang === 'es' ? 'en' : 'es';
+  Object.entries(T[lang]).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = val;
+  });
+  document.querySelectorAll('[data-es]').forEach(el => {
+    const v = el.dataset[lang]; if (v) el.textContent = v;
+  });
+  document.querySelectorAll('nav a[data-es]').forEach(a => { a.textContent = a.dataset[lang]; });
+  document.documentElement.lang = lang;
+}
 </script>
 </body>
 </html>

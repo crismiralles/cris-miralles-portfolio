@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About — Cristina Miralles</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+* { cursor: none !important; }
+body { font-family: 'Instrument Sans', sans-serif; scroll-behavior: smooth; }
+.font-headline { font-family: 'Space Grotesk', sans-serif; }
+#cursor {
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+  font-size: 22px; color: #f5d000; font-weight: 900;
+  transform: translate(-50%, -50%);
+  transition: left .06s ease, top .06s ease, font-size .2s ease;
+  line-height: 1; user-select: none;
+}
+#cursor.hover { font-size: 34px; }
+
+.hline { overflow: hidden; display: block; }
+.hline > span {
+  display: block; transform: translateY(108%);
+  transition: transform .9s cubic-bezier(.16,1,.3,1);
+}
+.hline > span.up { transform: translateY(0); }
+
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* Skill row */
+.skill-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-top: 1px solid rgba(0,0,0,.1);
+  padding: 12px 0;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.skill-row:last-child { border-bottom: 1px solid rgba(0,0,0,.1); }
+</style>
+<script id="tailwind-config">
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: { "primary-fixed": "#0D00FF", "secondary": "#5f5e5e", "surface": "#f9f9f7", "primary": "#000" },
+      fontFamily: { headline: ["Space Grotesk"], body: ["Instrument Sans"], label: ["Instrument Sans"] },
+      borderRadius: { DEFAULT: "0px", lg: "0px", xl: "0px", full: "9999px" },
+    },
+  },
+}
+</script>
+</head>
+<body class="bg-[#f9f9f7] text-black selection:bg-[#0D00FF] selection:text-white overflow-x-hidden">
+
+<div id="cursor">✳</div>
+
+<!-- NAV -->
+<nav class="bg-[#f9f9f7] fixed top-0 w-full z-50 border-b border-black/10">
+  <div class="flex justify-between items-center w-full px-8 py-5 max-w-full mx-auto">
+    <a class="text-base font-bold tracking-tighter text-black font-headline uppercase" href="index.html">Cristina Miralles</a>
+    <div class="hidden md:flex items-center space-x-10">
+      <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#work" data-es="Trabajo" data-en="Work">Trabajo</a>
+      <a class="font-headline uppercase tracking-widest text-xs text-[#0D00FF] border-b-2 border-[#0D00FF] pb-0.5" href="about.html" data-es="Sobre mí" data-en="About">Sobre mí</a>
+      <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="graphic-design.html" data-es="Diseño Gráfico" data-en="Graphic Design">Diseño Gráfico</a>
+      <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+    </div>
+    <button onclick="toggleLang()" id="langBtn" class="bg-black text-[#f9f9f7] px-6 py-2.5 text-xs font-headline uppercase tracking-widest active:scale-95 transition-transform hover:bg-[#0D00FF]">EN</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="min-h-[70vh] flex flex-col justify-end px-8 pb-20 pt-44">
+  <div class="max-w-7xl mx-auto w-full">
+    <div class="hline mb-1">
+      <span class="font-headline font-bold tracking-tighter" style="font-size:clamp(2rem,4vw,3rem);color:#f5d000">Sobre mí :)</span>
+    </div>
+    <div class="hline mb-10">
+      <span id="about-h" class="font-headline font-bold uppercase tracking-tighter text-black block" style="font-size:clamp(2.4rem,7vw,7.5rem);line-height:.9">Cristina Miralles</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12">
+      <div class="md:col-start-7 md:col-span-6 reveal">
+        <p id="about-tagline" class="text-xl md:text-2xl font-light leading-snug text-black/70">
+          UX/UI Designer. Antes traductora
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- BACKGROUND TIMELINE -->
+<section class="py-24 px-8 bg-[#f4f4f2]">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal mb-16">
+      <h2 id="bg-h" class="text-5xl md:text-7xl font-headline font-bold uppercase tracking-tighter">Background</h2>
+    </div>
+    <div class="max-w-3xl space-y-0 reveal">
+
+      <div class="grid grid-cols-12 gap-6 border-t border-black/10 py-8">
+        <div class="col-span-3 md:col-span-2">
+          <span class="font-headline font-bold text-sm uppercase text-[#0D00FF]">2024–26</span>
+        </div>
+        <div class="col-span-9 md:col-span-10">
+          <h3 class="font-headline font-bold uppercase text-base mb-1" id="edu1-t">Ciclo Superior de Diseño Gráfico Interactivo</h3>
+          <p class="text-sm text-black/60 font-label" id="edu1-s">Diseño UX/UI, diseño gráfico, motion graphics, HTML/CSS/JS</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-12 gap-6 border-t border-black/10 py-8">
+        <div class="col-span-3 md:col-span-2">
+          <span class="font-headline font-bold text-sm uppercase text-[#0D00FF]">2023–24</span>
+        </div>
+        <div class="col-span-9 md:col-span-10">
+          <h3 class="font-headline font-bold uppercase text-base mb-1" id="edu2-t">Máster en Tecnologías de la Traducción</h3>
+          <p class="text-sm text-black/60 font-label" id="edu2-s">Localización de software, herramientas TAO, programación aplicada</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-12 gap-6 border-t border-b border-black/10 py-8">
+        <div class="col-span-3 md:col-span-2">
+          <span class="font-headline font-bold text-sm uppercase text-[#0D00FF]">2019–23</span>
+        </div>
+        <div class="col-span-9 md:col-span-10">
+          <h3 class="font-headline font-bold uppercase text-base mb-1" id="edu3-t">Grado en Traducción e Interpretación</h3>
+          <p class="text-sm text-black/60 font-label" id="edu3-s">Informática aplicada a la traducción · Localización de software</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="pt-32 pb-48 px-8 bg-[#f9f9f7]">
+  <div class="max-w-7xl mx-auto text-center reveal">
+    <h2 class="font-headline font-bold uppercase tracking-tighter mb-24 leading-none" style="font-size:clamp(3rem,10vw,9rem)">
+      Let's Design<br/>Together<span style="color:#f5d000"> :)</span>
+    </h2>
+    <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-32">
+      <a class="group flex flex-col items-center" href="mailto:cmcristinamc@gmail.com">
+        <span class="font-label text-[10px] uppercase tracking-[.3em] mb-2 text-[#777]">Email</span>
+        <span class="text-2xl md:text-3xl font-headline font-bold uppercase border-b border-transparent group-hover:border-[#0D00FF] transition-all group-hover:text-[#0D00FF]">cmcristinamc@gmail.com</span>
+      </a>
+      <a class="group flex flex-col items-center" href="https://www.linkedin.com/in/cristina-miralles/" target="_blank">
+        <span class="font-label text-[10px] uppercase tracking-[.3em] mb-2 text-[#777]">Social</span>
+        <span class="text-2xl md:text-3xl font-headline font-bold uppercase border-b border-transparent group-hover:border-[#0D00FF] transition-all group-hover:text-[#0D00FF]">LinkedIn</span>
+      </a>
+      <a class="group flex flex-col items-center" href="index.html#work">
+        <span class="font-label text-[10px] uppercase tracking-[.3em] mb-2 text-[#777]" id="cta-work-lbl">Ver proyectos</span>
+        <span class="text-2xl md:text-3xl font-headline font-bold uppercase border-b border-transparent group-hover:border-[#0D00FF] transition-all group-hover:text-[#0D00FF]" id="cta-work">Work →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-[#f4f4f2] border-t border-black/10">
+  <div class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-10 gap-6">
+    <a href="index.html" class="text-base font-black text-black font-headline uppercase">Cristina Miralles</a>
+    <p class="font-label text-[10px] tracking-[.1em] uppercase text-[#777]">© 2025 Cristina Miralles. All rights reserved.</p>
+    <div class="flex gap-8">
+      <a class="font-label text-[10px] tracking-[.1em] uppercase text-[#777] hover:text-[#0D00FF] transition-colors underline underline-offset-4" href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a class="font-label text-[10px] tracking-[.1em] uppercase text-[#777] hover:text-[#0D00FF] transition-colors underline underline-offset-4" href="https://behance.net" target="_blank">Behance</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* CURSOR */
+const cur = document.getElementById('cursor');
+document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
+document.querySelectorAll('a,button').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('hover'));
+});
+
+/* HERO LINES */
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.hline > span').forEach((el, i) => {
+    setTimeout(() => el.classList.add('up'), 100 + i * 130);
+  });
+});
+
+/* SCROLL REVEAL */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* LANG */
+const T = {
+  es: {
+    'about-h': 'Cristina Miralles',
+    'about-tagline': 'UX/UI Designer. Antes traductora. Siempre curiosa.',
+    'intro-quote': '"Antes traducía palabras entre idiomas. Hoy traduzco problemas en interfaces."',
+    'lbl-loc':'Ubicación','lbl-avail':'Disponibilidad','avail-val':'Abierta a oportunidades',
+    'lbl-lang':'Idiomas','lbl-edu':'Formación',
+    'skills-h':'Skills &amp;<br/>Tools',
+    'sk-ux-t':'Diseño UX/UI','sk-tech-t':'Tecnología &amp; Otros',
+    'bg-h':'Background',
+    'edu1-t':'Ciclo Superior de Diseño Gráfico Interactivo',
+    'edu1-s':'Diseño UX/UI, diseño gráfico, motion graphics, HTML/CSS/JS',
+    'edu2-t':'Máster en Tecnologías de la Traducción',
+    'edu2-s':'Localización de software, herramientas TAO, programación aplicada',
+    'edu3-t':'Grado en Traducción e Interpretación',
+    'edu3-s':'Informática aplicada a la traducción · Localización de software',
+    'bio-1': 'Mi background en traducción me da algo que pocos diseñadores tienen: <strong class="font-semibold text-black">obsesión por la precisión del lenguaje</strong>. Un botón mal etiquetado, un error ambiguo o un CTA confuso no es un detalle visual — es una barrera.',
+    'bio-2': 'Empecé estudiando Traducción e Interpretación. Las asignaturas de Localización de Software y Programación Web me atraparon desde el primer día. El Máster en Tecnologías de la Traducción fue el puente. Pero lo que encontré en el Ciclo Superior de Diseño Gráfico Interactivo fue la pieza que unía todo: diseño, código, comunicación y lógica en el mismo sitio.',
+    'bio-3': 'Soy analítica y muy organizada. No diseño por intuición sola — pregunto, investigo, estructuro, y luego diseño. Si algo no tiene una razón detrás, no entra en el diseño.',
+    'cta-work-lbl':'Ver proyectos','cta-work':'Work →',
+    langBtn:'EN'
+  },
+  en: {
+    'about-h': 'Cristina Miralles',
+    'about-tagline': 'UX/UI Designer. Former translator. Always curious.',
+    'intro-quote': '"I used to translate words between languages. Now I translate problems into interfaces."',
+    'lbl-loc':'Location','lbl-avail':'Availability','avail-val':'Open to opportunities',
+    'lbl-lang':'Languages','lbl-edu':'Education',
+    'skills-h':'Skills &amp;<br/>Tools',
+    'sk-ux-t':'UX/UI Design','sk-tech-t':'Technology &amp; Other',
+    'bg-h':'Background',
+    'edu1-t':'Higher Degree in Interactive Graphic Design',
+    'edu1-s':'UX/UI design, graphic design, motion graphics, HTML/CSS/JS',
+    'edu2-t':'Master\'s in Translation Technologies',
+    'edu2-s':'Software localisation, CAT tools, applied programming',
+    'edu3-t':'BA in Translation & Interpreting',
+    'edu3-s':'Applied computing in translation · Software localisation',
+    'bio-1': 'My translation background gives me something few designers have: <strong class="font-semibold text-black">an obsession with language precision</strong>. A mislabelled button, an ambiguous error or a confusing CTA isn\'t a visual detail — it\'s a barrier.',
+    'bio-2': 'I started with Translation & Interpreting, where Software Localisation and Programming courses captivated me immediately. The Master\'s in Translation Technologies was the bridge. What I found in the Interactive Graphic Design programme was the missing piece: design, code, communication and logic all in one place.',
+    'bio-3': 'I\'m analytical and very organised. I don\'t design on intuition alone — I ask, research, structure, then design. If something doesn\'t have a reason behind it, it doesn\'t make it into the design.',
+    'cta-work-lbl':'See projects','cta-work':'Work →',
+    langBtn:'ES'
+  }
+};
+let lang = 'es';
+function toggleLang() {
+  lang = lang === 'es' ? 'en' : 'es';
+  Object.entries(T[lang]).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = val;
+  });
+  document.querySelectorAll('[data-es]').forEach(el => {
+    const v = el.dataset[lang]; if (v) el.textContent = v;
+  });
+  document.querySelectorAll('nav a[data-es]').forEach(a => { a.textContent = a.dataset[lang]; });
+  document.documentElement.lang = lang;
+}
+</script>
+</body>
+</html>

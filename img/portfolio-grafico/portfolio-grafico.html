@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cristina Miralles — Diseño Gráfico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:      #ffffff;
+      --bg2:     #f5f5f3;
+      --surface: #f0f0ee;
+      --border:  rgba(0,0,0,0.1);
+      --ink:     #111110;
+      --ink-60:  rgba(17,17,16,.55);
+      --ink-30:  rgba(17,17,16,.30);
+      --accent:  #4287f5;
+      --serif:   'Instrument Serif', Georgia, serif;
+      --sans:    'DM Sans', system-ui, sans-serif;
+      --max-w:   1080px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 56px; display: flex; align-items: center; background: rgba(255,255,255,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .nav-back { font-size: 14px; color: var(--ink-60); display: flex; align-items: center; gap: 6px; transition: color .15s; }
+    .nav-back:hover { color: var(--accent); }
+    .nav-name { font-family: var(--serif); font-size: 16px; }
+    .nav-label { font-size: 12px; color: var(--ink-30); letter-spacing: .06em; text-transform: uppercase; }
+
+    /* HERO */
+    .hero { padding-top: 56px; border-bottom: 1px solid var(--border); }
+    .hero-inner { padding: 72px 0 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
+    .hero-eyebrow { font-size: 11px; color: var(--ink-30); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+    .hero-title { font-family: var(--serif); font-size: clamp(40px, 6vw, 72px); font-weight: 400; line-height: 1.0; letter-spacing: -.01em; }
+    .hero-title em { font-style: italic; color: var(--ink-60); }
+    .hero-body { font-size: 15px; font-weight: 300; line-height: 1.75; color: var(--ink-60); }
+    .hero-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; font-size: 13px; font-weight: 500; color: var(--ink); border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color .15s, border-color .15s; }
+    .hero-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* CATEGORY HEADER */
+    .cat-header { display: flex; align-items: baseline; justify-content: space-between; padding: 32px 0 24px; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+    .cat-title { font-family: var(--serif); font-size: clamp(22px, 3vw, 32px); font-weight: 400; letter-spacing: -.01em; }
+    .cat-count { font-size: 12px; color: var(--ink-30); }
+
+    /* GRID LAYOUTS */
+    .section { padding: 0 0 64px; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+
+    /* Full width */
+    .grid-full { display: flex; flex-direction: column; gap: 2px; margin-top: 2px; }
+    .grid-full .item { width: 100%; }
+
+    /* Two columns */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 2px; }
+
+    /* Two columns uneven: big left */
+    .grid-2-big { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2px; margin-top: 2px; }
+
+    /* Three columns */
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-top: 2px; }
+
+    /* Item */
+    .item { position: relative; overflow: hidden; background: var(--surface); cursor: pointer; }
+    .item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+    .item:hover img { transform: scale(1.03); }
+    .item-caption { padding: 14px 0 0; }
+    .item-title { font-size: 13px; font-weight: 500; color: var(--ink); }
+    .item-desc { font-size: 12px; color: var(--ink-30); margin-top: 2px; }
+
+    /* Fixed heights for grids */
+    .h-tall { height: 560px; }
+    .h-mid { height: 420px; }
+    .h-short { height: 320px; }
+    .h-square { aspect-ratio: 1; }
+    .h-portrait { aspect-ratio: 3/4; }
+    .h-landscape { aspect-ratio: 16/9; }
+    .h-wide { aspect-ratio: 4/3; }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(17,17,16,.95); align-items: center; justify-content: center; padding: 32px; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+    .lightbox-close { position: fixed; top: 20px; right: 24px; font-size: 28px; color: rgba(255,255,255,.6); cursor: pointer; background: none; border: none; line-height: 1; transition: color .15s; }
+    .lightbox-close:hover { color: #fff; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 28px 0; margin-top: 64px; }
+    footer .container { display: flex; justify-content: space-between; align-items: center; }
+    .foot-copy { font-size: 12px; color: var(--ink-30); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media(max-width: 768px) {
+      .container { padding: 0 20px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 24px; }
+      .grid-2, .grid-2-big, .grid-3 { grid-template-columns: 1fr; }
+      .h-tall, .h-mid { height: auto; aspect-ratio: 4/3; }
+      nav .nav-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <span class="nav-name">Cristina Miralles</span>
+    <span class="nav-label">Diseño Gráfico</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Diseño Gráfico · Print · Identidad · Packaging</p>
+        <h1 class="hero-title">Diseño que<br/><em>se ve y se siente.</em></h1>
+      </div>
+      <div>
+        <p class="hero-body">Una selección de piezas de diseño gráfico: packaging, identidad de marca, cartelería, editorial y print. Proyectos de ficción y académicos que muestran criterio visual, dominio tipográfico y capacidad de trabajar en distintos registros y formatos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGING -->
+<div class="container">
+  <div class="cat-header reveal">
+    <h2 class="cat-title">Packaging</h2>
+    <span class="cat-count">3 proyectos</span>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <!-- Beve full width -->
+    <div class="grid-full reveal">
+      <div class="item h-mid">
+        <img src="gfx-beve-packaging.png" alt="Beve — Packaging bebida vegetal" onclick="openLightbox(this.src)"/>
+      </div>
+      <div class="item-caption">
+        <p class="item-title">Beve — Packaging bebida vegetal</p>
+        <p class="item-desc">Identidad y diseño de packaging para una marca de bebidas vegetales ficticia. Tres variedades: avena, soja y almendra.</p>
+      </div>
+    </div>
+
+    <!-- Croissant + Pilas -->
+    <div class="grid-2 reveal" style="margin-top:2px;">
+      <div>
+        <div class="item h-mid">
+          <img src="gfx-croissant.png" alt="Maison Croissant — Packaging" onclick="openLightbox(this.src)"/>
+        </div>
+        <div class="item-caption">
+          <p class="item-title">Maison Croissant — Packaging</p>
+          <p class="item-desc">Diseño de caja para croissantería. Identidad fresca y directa con tipografía bold y color coral.</p>
+        </div>
+      </div>
+      <div>
+        <div class="item h-mid">
+          <img src="gfx-pilas.png" alt="Rediseño pilas AA — Packaging" onclick="openLightbox(this.src)"/>
+        </div>
+        <div class="item-caption">
+          <p class="item-title">Pilas AA Alcalinas — Rediseño packaging</p>
+          <p class="item-desc">Rediseño del packaging de las pilas de Mercadona. Exploración de gradiente y legibilidad en formato pequeño.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTIDAD & CARTELERÍA -->
+<div class="container">
+  <div class="cat-header reveal">
+    <h2 class="cat-title">Identidad & Cartelería</h2>
+    <span class="cat-count">4 piezas</span>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <!-- Logos Ragazzi -->
+    <div class="grid-2 reveal">
+      <div>
+        <div class="item h-square">
+          <img src="gfx-logo1.png" alt="Ragazzi — Logo alta gastronomía" onclick="openLightbox(this.src)"/>
+        </div>
+        <div class="item-caption">
+          <p class="item-title">Ragazzi — Alta gastronomía italiana</p>
+          <p class="item-desc">Logotipo para restaurante de alta gastronomía. Público objetivo: adulto, refinado. Estética clásica y elegante.</p>
+        </div>
+      </div>
+      <div>
+        <div class="item h-square">
+          <img src="gfx-logo2.png" alt="Ragazzi — Logo casual" onclick="openLightbox(this.src)"/>
+        </div>
+        <div class="item-caption">
+          <p class="item-title">Ragazzi — Versión casual</p>
+          <p class="item-desc">La misma marca, otro público. Rediseño del logotipo para una audiencia más joven e informal. Mismo nombre, carácter completamente distinto.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cartel Beve + Coffee -->
+    <div class="grid-2 reveal" style="margin-top:2px;">
+      <div>
+        <div class="item h-tall">
+          <img src="gfx-beve-cartel.png" alt="Beve — Cartel promocional" onclick="openLightbox(this.src)"/>
+        </div>
+        <div class="item-caption">
+          <p class="item-title">Beve — Cartel promocional</p>
+          <p class="item-desc">Pieza publicitaria para la marca Beve. Composición dinámica con producto y fotografía de estilo de vida.</p>
+        </div>
+      </div>
+      <div>
+        <div class="item h-tall">
+          <img src="gfx-coffee.png" alt="Coffee Poster" onclick="openLightbox(this.src)"/>
+        </div>
+        <div class="item-caption">
+          <p class="item-title">But, first… Coffee — Cartel</p>
+          <p class="item-desc">Cartel para cafetería. Ilustración de línea, tipografía serif y textura de papel encolado. Estética minimalista y cercana.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDITORIAL & PRINT -->
+<div class="container">
+  <div class="cat-header reveal">
+    <h2 class="cat-title">Editorial & Print</h2>
+    <span class="cat-count">6 piezas</span>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <!-- MoMA full -->
+    <div class="grid-full reveal">
+      <div class="item h-mid" style="background:#f4911b;">
+        <img src="gfx-moma.jpg" alt="MoMA Poster" onclick="openLightbox(this.src)" style="object-fit:contain;"/>
+      </div>
+      <div class="item-caption">
+        <p class="item-title">MoMA — Cartel institucional</p>
+        <p class="item-desc">Cartel para el Museum of Modern Art. Composición tipográfica con collage geométrico. Paleta vibrante sobre fondo naranja.</p>
+      </div>
+    </div>
+
+    <!-- Vinilo álbum -->
+    <div class="grid-2 reveal" style="margin-top:2px;">
+      <div>
+        <div class="item h-square">
+          <img src="gfx-vinilo1.jpg" alt="Interlude — Portada álbum" onclick="openLightbox(this.src)"/>
+        </div>
+        <div class="item-caption">
+          <p class="item-title">Interlude — Portada de álbum</p>
+          <p class="item-desc">Diseño de portada para el álbum "The Inbetween" de Interlude. Tipografía experimental sobre fondo rojo intenso.</p>
+        </div>
+      </div>
+      <div>
+        <div class="item h-square">
+          <img src="gfx-vinilo2.jpg" alt="Interlude — Contraportada" onclick="openLightbox(this.src)"/>
+        </div>
+        <div class="item-caption">
+          <p class="item-title">Interlude — Contraportada</p>
+          <p class="item-desc">Contraportada del mismo álbum con tracklist. Sistema tipográfico coherente y consistente con la portada.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tríptico -->
+    <div class="grid-2 reveal" style="margin-top:2px;">
+      <div>
+        <div class="item h-mid">
+          <img src="gfx-triptico1.png" alt="Tríptico Agenda Cultural — Portada" onclick="openLightbox(this.src)"/>
+        </div>
+        <div class="item-caption">
+          <p class="item-title">Agenda Cultural Barcelona 2025 — Portada tríptico</p>
+          <p class="item-desc">Tríptico para la agenda cultural del Ajuntament de Barcelona. Diseño en rojo y negro con composición editorial clara.</p>
+        </div>
+      </div>
+      <div>
+        <div class="item h-mid">
+          <img src="gfx-triptico2.png" alt="Tríptico Agenda Cultural — Interior" onclick="openLightbox(this.src)"/>
+        </div>
+        <div class="item-caption">
+          <p class="item-title">Agenda Cultural Barcelona 2025 — Interior tríptico</p>
+          <p class="item-desc">Desplegable interior con programación de abril, mayo y junio. Jerarquía tipográfica clara y grid estructurado.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Infografía full -->
+    <div class="grid-full reveal" style="margin-top:2px;">
+      <div class="item" style="background:var(--bg2);">
+        <img src="gfx-infografia.png" alt="Infografía cuidados domésticos" onclick="openLightbox(this.src)" style="object-fit:contain; max-height:600px; margin:0 auto; display:block;"/>
+      </div>
+      <div class="item-caption">
+        <p class="item-title">Infografía — Cuidado de personas y tareas domésticas</p>
+        <p class="item-desc">Visualización de datos sobre brecha de género en cuidados domésticos. Datos integrados en ilustración para máxima legibilidad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <span class="foot-copy">© 2026 Cristina Miralles · Diseño Gráfico</span>
+      </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <img id="lightbox-img" src="" alt=""/>
+</div>
+
+<script>
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  }, {threshold: 0.05});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
