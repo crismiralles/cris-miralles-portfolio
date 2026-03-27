@@ -22,8 +22,8 @@ body { font-family: 'Instrument Sans', sans-serif; scroll-behavior: smooth; }
 /* Graphic design grid items */
 .gd-item { transition: transform 0.4s cubic-bezier(.16,1,.3,1); }
 .gd-item:hover { transform: translateY(-4px); }
-.gd-img { filter: grayscale(100%); transition: filter 0.5s ease, transform 0.5s cubic-bezier(.16,1,.3,1); }
-.gd-item:hover .gd-img { filter: grayscale(0%); transform: scale(1.03); }
+.gd-img { transition: filter 0.5s ease, transform 0.5s cubic-bezier(.16,1,.3,1); }
+.gd-item:hover .gd-img { transform: scale(1.03); }
 
 /* Section label */
 .cat-label {
@@ -94,9 +94,8 @@ tailwind.config = {
 <div class="flex justify-between items-center w-full px-8 py-5 max-w-full mx-auto">
   <a class="text-base font-bold tracking-tighter text-black font-headline uppercase" href="index.html">Cristina Miralles</a>
   <div class="hidden md:flex items-center space-x-10">
-    <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#work" data-es="Trabajo" data-en="Work">Trabajo</a>
+    <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#work" data-es="Proyectos" data-en="Projects">Proyectos</a>
     <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#about" data-es="Sobre mí" data-en="About">Sobre mí</a>
-    <a class="font-headline uppercase tracking-widest text-xs text-[#0D00FF] border-b-2 border-[#0D00FF] pb-0.5" href="graphic-design.html" data-es="Diseño Gráfico" data-en="Graphic Design">Diseño Gráfico</a>
     <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#contact" data-es="Contacto" data-en="Contact">Contacto</a>
   </div>
   <button onclick="toggleLang()" id="langBtn" class="bg-black text-[#f9f9f7] px-6 py-2.5 text-xs font-headline uppercase tracking-widest active:scale-95 transition-transform hover:bg-[#0D00FF]">EN</button>
@@ -200,7 +199,7 @@ tailwind.config = {
       </div>
       <div class="gd-item">
         <div class="aspect-[4/3] bg-[#e2e3e1] overflow-hidden relative">
-          <img src="img/portfolio-grafico/gfx-beve-cartel.png" alt="Beve — Cartel promocional" class="gd-img w-full h-full object-cover"
+          <img src="img/portfolio-grafico/gfx-beve-cartel.png" alt="Beve — Cartel promocional" class="gd-img w-full h-full object-contain"
                onerror="this.parentElement.className='img-ph aspect-[4/3]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Beve — Cartel promocional',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
         </div>
         <div class="mt-4">
@@ -210,7 +209,7 @@ tailwind.config = {
       </div>
       <div class="gd-item">
         <div class="aspect-[4/3] bg-[#e2e3e1] overflow-hidden relative">
-          <img src="img/portfolio-grafico/gfx-coffee.png" alt="But First, Coffee — Cartel" class="gd-img w-full h-full object-cover"
+          <img src="img/portfolio-grafico/gfx-coffee.png" alt="But First, Coffee — Cartel" class="gd-img w-full h-full object-contain"
                onerror="this.parentElement.className='img-ph aspect-[4/3]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'But First, Coffee — Cartel',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
         </div>
         <div class="mt-4">
@@ -231,7 +230,7 @@ tailwind.config = {
     <div class="gd-item reveal mb-8 overflow-hidden">
       <div class="aspect-[16/7] bg-[#e2e3e1] overflow-hidden relative">
         <img src="img/portfolio-grafico/gfx-moma.jpg" alt="MaMa — Cartel institucional" class="gd-img w-full h-full object-contain"
-             onerror="this.parentElement.className='img-ph aspect-[16/7]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'MaMa — Cartel institucional · Añade tu imagen',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
+             onerror="this.parentElement.className='img-ph aspect-[16/7]';this.replaceWith(Object.assign(document.createElement('span'),{textContent:'MoMa — Cartel institucional · Añade tu imagen',className:'text-[10px] uppercase tracking-widest text-[#999]'}))"/>
       </div>
       <div class="mt-4"><span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Editorial</span><h3 class="text-xl font-headline font-bold uppercase tracking-tight">MoMa — Cartel institucional</h3></div>
     </div>
