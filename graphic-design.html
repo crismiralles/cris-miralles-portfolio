@@ -72,6 +72,32 @@ body { font-family: 'Instrument Sans', sans-serif; scroll-behavior: smooth; }
 /* Reveal */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.16,1,.3,1); }
 .reveal.visible { opacity: 1; transform: none; }
+
+/* Mobile menu */
+.mobile-menu {
+  display: none; position: fixed; top: 70px; left: 0; right: 0; background: #f9f9f7;
+  z-index: 40; border-bottom: 1px solid rgba(0,0,0,.1);
+  padding: 20px 32px; flex-direction: column; gap: 12px;
+}
+.mobile-menu.active { display: flex; }
+.mobile-menu a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: black; text-decoration: none;
+  opacity: 0.6; transition: opacity 0.2s;
+}
+.mobile-menu a:hover, .mobile-menu a.active { opacity: 1; color: #0D00FF; }
+
+.hamburger-btn {
+  display: none; background: none; border: none;
+  font-size: 24px; cursor: pointer; padding: 0;
+}
+.hamburger-btn.active { display: block; }
+@media (min-width: 768px) {
+  .hamburger-btn { display: none !important; }
+  .mobile-menu { display: none !important; }
+}
 </style>
 <script id="tailwind-config">
 tailwind.config = {
@@ -98,9 +124,17 @@ tailwind.config = {
     <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#about" data-es="Sobre mí" data-en="About">Sobre mí</a>
     <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="index.html#contact" data-es="Contacto" data-en="Contact">Contacto</a>
   </div>
+  <button onclick="toggleMenu()" class="hamburger-btn active md:hidden">☰</button>
   <button onclick="toggleLang()" id="langBtn" class="bg-black text-[#f9f9f7] px-6 py-2.5 text-xs font-headline uppercase tracking-widest active:scale-95 transition-transform hover:bg-[#0D00FF]">EN</button>
 </div>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#work" data-es="Proyectos" data-en="Projects">Proyectos</a>
+  <a href="index.html#about" data-es="Sobre mí" data-en="About">Sobre mí</a>
+  <a href="index.html#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+</div>
 
 <main>
 <!-- HEADER -->
@@ -395,6 +429,17 @@ function toggleLang() {
   document.querySelectorAll('nav a[data-es]').forEach(a => { a.textContent = a.dataset[currentLang]; });
   document.documentElement.lang = currentLang;
 }
+
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('active');
+}
+
+// Cerrar menú móvil cuando se hace clic en un enlace
+document.querySelectorAll('.mobile-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.remove('active');
+  });
+});
 
 // Hash scroll for #motion
 if (window.location.hash === '#motion') {
