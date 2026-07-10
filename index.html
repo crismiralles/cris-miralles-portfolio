@@ -1,430 +1,54 @@
 <!DOCTYPE html>
-<html class="light" lang="es">
+<html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Cristina Miralles — UX/UI Designer</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<style>
-* { cursor: none !important; }
-body { font-family: 'Instrument Sans', sans-serif; scroll-behavior: smooth; }
-.font-headline { font-family: 'Space Grotesk', sans-serif; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Cristina Miralles</title>
 
-/* Hero typography: reduce size only on desktop */
-#hero-name,
-#hero-role {
-  font-size: clamp(2.6rem, 8.5vw, 8.5rem);
-  line-height: .88;
-}
-@media (min-width: 768px) {
-  #hero-name,
-  #hero-role {
-    font-size: clamp(2.4rem, 7.0vw, 7.2rem);
-    line-height: .86;
-  }
-}
+  <!-- Fontshare: Switzer -->
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,800&display=swap" rel="stylesheet">
 
-#cursor {
-  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
-  font-size: 22px; color: #f5d000; font-weight: 900;
-  transform: translate(-50%, -50%);
-  transition: left .06s ease, top .06s ease, font-size .2s ease;
-  line-height: 1; user-select: none;
-}
-#cursor.hover { font-size: 34px; }
+  <!-- Bootstrap 5 CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-/* B&W → colour on hover */
-.proj-img {
-  filter: grayscale(100%);
-  transition: filter .65s ease, transform .7s cubic-bezier(.16,1,.3,1);
-}
-.group:hover .proj-img { filter: grayscale(0%); transform: scale(1.04); }
-
-.proj-card { transition: transform .4s cubic-bezier(.16,1,.3,1); }
-
-.typo-cover {
-  display: flex; align-items: center; justify-content: center;
-  background: #1a1a1a; color: #f9f9f7;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700; text-transform: uppercase;
-  letter-spacing: -.03em; line-height: .9; padding: 32px;
-  transition: background .6s ease;
-}
-.group:hover .typo-cover { background: #0D00FF; }
-
-.wip-badge {
-  position: absolute; top: 16px; right: 16px;
-  background: #f5d000; color: #000;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 9px; font-weight: 700;
-  letter-spacing: .15em; text-transform: uppercase; padding: 4px 10px;
-}
-
-/* Hero lines slide up on load */
-.hline { overflow: hidden; display: block; }
-.hline > span {
-  display: block; transform: translateY(108%);
-  transition: transform .9s cubic-bezier(.16,1,.3,1);
-}
-.hline > span.up { transform: translateY(0); }
-
-/* Staggered scroll reveal */
-.reveal {
-  opacity: 0; transform: translateY(28px);
-  transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
-}
-.reveal.visible { opacity: 1; transform: none; }
-
-/* Mobile menu */
-.mobile-menu {
-  display: none; position: fixed; top: 70px; left: 0; right: 0; background: #f9f9f7;
-  z-index: 40; border-bottom: 1px solid rgba(0,0,0,.1);
-  padding: 20px 32px; flex-direction: column; gap: 12px;
-}
-.mobile-menu.active { display: flex; }
-.mobile-menu a {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 12px; font-weight: 600;
-  letter-spacing: 0.15em; text-transform: uppercase;
-  color: black; text-decoration: none;
-  opacity: 0.6; transition: opacity 0.2s;
-}
-.mobile-menu a:hover, .mobile-menu a.active { opacity: 1; color: #0D00FF; }
-
-.hamburger-btn {
-  display: none; background: none; border: none;
-  font-size: 24px; cursor: pointer; padding: 0;
-}
-.hamburger-btn.active { display: block; }
-@media (min-width: 768px) {
-  .hamburger-btn { display: none !important; }
-  .mobile-menu { display: none !important; }
-}
-</style>
-<script id="tailwind-config">
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        "primary-fixed": "#0D00FF",
-        "surface-container-low": "#f4f4f2",
-        "surface-container-highest": "#e2e3e1",
-        "outline": "#777777",
-        "secondary": "#5f5e5e",
-        "surface": "#f9f9f7",
-        "primary": "#000000",
-      },
-      fontFamily: { headline: ["Space Grotesk"], body: ["Instrument Sans"], label: ["Instrument Sans"] },
-      borderRadius: { DEFAULT: "0px", lg: "0px", xl: "0px", full: "9999px" },
-    },
-  },
-}
-</script>
+  <!-- Nuestro CSS propio: siempre después de Bootstrap para poder sobreescribirlo -->
+  <link href="css/styles.css" rel="stylesheet">
 </head>
-<body class="bg-[#f9f9f7] text-black selection:bg-[#0D00FF] selection:text-white overflow-x-hidden">
-
-<div id="cursor">✳</div>
-
-<!-- NAV -->
-<nav class="bg-[#f9f9f7] fixed top-0 w-full z-50 border-b border-black/10">
-  <div class="flex justify-between items-center w-full px-8 py-5 max-w-full mx-auto">
-    <a class="text-base font-bold tracking-tighter text-black font-headline uppercase" href="index.html">Cristina Miralles</a>
-    <div class="hidden md:flex items-center space-x-10">
-      <a class="font-headline uppercase tracking-widest text-xs text-[#0D00FF] border-b-2 border-[#0D00FF] pb-0.5" href="#work" data-es="Proyectos" data-en="Work">Proyectos</a>
-      <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="about.html" data-es="Sobre mí" data-en="About me">Sobre mí</a>
-      <a class="font-headline uppercase tracking-widest text-xs text-black opacity-60 hover:opacity-100 transition-opacity" href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
-    </div>
-    <button onclick="toggleMenu()" class="hamburger-btn active md:hidden">☰</button>
-    <button onclick="toggleLang()" id="langBtn" class="bg-black text-[#f9f9f7] px-6 py-2.5 text-xs font-headline uppercase tracking-widest active:scale-95 transition-transform hover:bg-[#0D00FF]">EN</button>
-  </div>
-</nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#work" data-es="Proyectos" data-en="Projects">Proyectos</a>
-  <a href="about.html" data-es="Sobre mí" data-en="About">Sobre mí</a>
-  <a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
-</div>
-
+<body>
+  <!-- ============ HEADER FIJO (se repite en toda la web) ============ -->
+  <header class="site-header site-header--dark">
+    <a href="index.html" class="site-title-link">
+      <h1 class="site-title">Cristina Miralles</h1>
+    </a>
+  </header>
 <main>
-
-<!-- HERO -->
-<section class="min-h-screen flex flex-col justify-end px-8 pb-20 pt-40">
-  <div class="max-w-7xl mx-auto w-full">
-
-    <!-- Hi :) -->
-    <div class="hline mb-1">
-      <span id="hero-hi" class="font-headline font-bold tracking-tighter" style="font-size:clamp(2.2rem,4.5vw,3.5rem);color:#f5d000">Hola :)</span>
-    </div>
-
-    <!-- I'm Cristina Miralles -->
-    <div class="hline">
-      <span id="hero-name" class="font-headline font-bold uppercase tracking-tighter text-black block">Soy Cristina Miralles</span>
-    </div>
-
-    <!-- UX/UI Junior Designer -->
-    <div class="hline mb-12">
-      <span id="hero-role" class="font-headline font-bold uppercase tracking-tighter text-black block">Diseñadora UX/UI Junior</span>
-    </div>
-
-    <!-- Tagline right-aligned -->
-    <div class="grid grid-cols-1 md:grid-cols-12">
-      <div class="md:col-start-7 md:col-span-6 reveal">
-        <p id="hero-sub" class="text-xl md:text-2xl font-light leading-snug text-black/70">
-          Diseño experiencias que se adaptan al idioma de cada usuario
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- SELECTED WORK -->
-<section class="py-32 bg-[#f4f4f2]" id="work">
-  <div class="px-8 max-w-7xl mx-auto">
-
-    <div class="flex justify-between items-end mb-20 reveal">
-      <h2 id="work-title" class="text-5xl md:text-7xl font-headline font-bold uppercase tracking-tighter">Selected<br/>Work</h2>
-      <span class="font-label text-xs uppercase tracking-widest text-[#777]">01 — 05</span>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-y-28 gap-x-10">
-
-      <!-- 01 PAUSANA -->
-      <div class="md:col-span-7 group proj-card reveal" onclick="location.href='pausana.html'" style="cursor:none">
-        <div class="aspect-[4/5] bg-[#1a1a1a] overflow-hidden relative mb-5">
-          <img class="proj-img w-full h-full object-cover" src="img/pausana/pausana-mockups.png" alt="Pausana"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="typo-cover w-full h-full text-6xl md:text-8xl" style="display:none">PAUSANA</div>
-        </div>
-        <div class="flex justify-between items-start">
-          <div>
-            <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-2 block" data-es="UX/UI · App · Salud" data-en="UX/UI · App · Health">UX/UI · App · Salud</span>
-            <h3 class="text-3xl font-headline font-bold uppercase tracking-tight">PAUSANA</h3>
+  <section id="home" class="section-home">
+    <div class="container-fluid">
+      <div class="row align-items-center home-row">
+        <div class="col-md-6 home-photo-col text-md-end pe-md-5">
+          <h2 class="home-title">
+            <span id="typewriter-text"></span><span id="typewriter-cursor">|</span>
+          </h2>
+          <div class="home-photo-wrapper">
+            <img src="img/cris-peque.jpg" alt="Foto de Cristina Miralles" class="home-photo-image">
+            <span class="home-note text-start">that's me! :)</span>
           </div>
-          <span class="text-[#777] text-xs font-label mt-1">2025/2026</span>
+        </div>
+        <div class="col-md-6 home-text-col ps-md-5">
+          <nav class="home-nav">
+            <a href="ux-ui-design.html" class="home-nav-link">ux/ui design <span class="arrow">→</span></a>
+            <a href="graphic-design.html" class="home-nav-link">graphic design <span class="arrow">→</span></a>
+            <a href="about.html" class="home-nav-link">about me <span class="arrow">→</span></a>
+          </nav>
         </div>
       </div>
-
-      <!-- 02 WISH STONE -->
-      <div class="md:col-span-4 md:col-start-9 md:mt-44 group proj-card reveal" onclick="location.href='wish-stone.html'" style="cursor:none;transition-delay:.1s">
-        <div class="aspect-[3/4] bg-[#1a1a1a] overflow-hidden relative mb-5">
-          <img class="proj-img w-full h-full object-contain" src="img/wish-stone/product-wish-stone.png" alt="Wish Stone"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="typo-cover w-full h-full text-4xl md:text-5xl" style="display:none">WISH<br/>STONE</div>
-        </div>
-        <div class="flex justify-between items-start">
-          <div>
-            <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-2 block" data-es="UX/UI · E-Commerce" data-en="UX/UI · E-Commerce">UX/UI · E-Commerce</span>
-            <h3 class="text-2xl font-headline font-bold uppercase tracking-tight">WISH STONE</h3>
-          </div>
-          <span class="text-[#777] text-xs font-label mt-1">2026</span>
-        </div>
-      </div>
-
-      <!-- 03 RAÍCES VIVAS -->
-      <div class="md:col-span-5 md:-mt-28 group proj-card reveal" onclick="location.href='raices-vivas.html'" style="cursor:none;transition-delay:.08s">
-        <div class="aspect-square bg-[#1a1a1a] overflow-hidden relative mb-5">
-          <img class="proj-img w-full h-full object-cover" src="img/raices-vivas/mockup-raices-vivas.png" alt="Raíces Vivas"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="typo-cover w-full h-full text-4xl md:text-5xl" style="display:none">RAÍCES<br/>VIVAS</div>
-        </div>
-        <div class="flex justify-between items-start">
-          <div>
-            <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-2 block" data-es="UX/UI · Web Móvil · Social" data-en="UX/UI · Mobile Web · Social">UX/UI · Web Móvil · Social</span>
-            <h3 class="text-3xl font-headline font-bold uppercase tracking-tight">RAÍCES VIVAS</h3>
-          </div>
-          <span class="text-[#777] text-xs font-label mt-1">2025/2026</span>
-        </div>
-      </div>
-
-      <!-- 04 PULEVA -->
-      <div class="md:col-span-6 md:col-start-7 group proj-card reveal" onclick="location.href='puleva.html'" style="cursor:none;transition-delay:.15s">
-        <div class="aspect-[16/9] bg-[#1a1a1a] overflow-hidden relative mb-5">
-          <img class="proj-img w-full h-full object-cover" src="img/puleva/mockup.png" alt="Puleva"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="typo-cover w-full h-full text-5xl md:text-7xl" style="display:none">PULEVA</div>
-        </div>
-        <div class="flex justify-between items-start">
-          <div>
-            <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-2 block" data-es="UX/UI · Rediseño Web" data-en="UX/UI · Web Redesign">UX/UI · Rediseño Web</span>
-            <h3 class="text-3xl font-headline font-bold uppercase tracking-tight">PULEVA WEB</h3>
-          </div>
-          <span class="text-[#777] text-xs font-label mt-1">2026</span>
-        </div>
-      </div>
-
- <!-- 05 SELLO DISCOGRÁFICO — always typo, WIP -->
-      <div class="md:col-span-5 md:col-start-4 group proj-card reveal" onclick="location.href='sello.html'" style="cursor:none;transition-delay:.2s">
-        <div class="aspect-[4/3] overflow-hidden relative mb-5">
-          <div class="typo-cover w-full h-full text-5xl" style="min-height:200px" id="proj5-cover">SELLO<br/>DISCOGRÁFICO<br/>INDIE</div>
-          <div class="wip-badge" id="proj5-badge">Work In Progress</div>
-        </div>
-        <div class="flex justify-between items-start">
-          <div>
-            <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-2 block" data-es="UX/UI · Web · Música · En progreso" data-en="UX/UI · Web · Music · WIP">UX/UI · Web · Música · En progreso</span>
-            <h3 class="text-3xl font-headline font-bold uppercase tracking-tight" id="proj5-title">SELLO DISCOGRÁFICO INDIE</h3>
-          </div>
-          <span class="text-[#777] text-xs font-label mt-1">2025/2026</span>
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
-
-<!-- TAKE A LOOK AS WELL TO -->
-<section class="py-32 px-8 bg-[#f9f9f7]">
-  <div class="max-w-7xl mx-auto">
-    <div class="reveal mb-16">
-      <h2 id="also-title" class="text-4xl md:text-6xl font-headline font-bold uppercase tracking-tighter">Echa un vistazo<br/>también a...</h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-
-      <!-- Graphic Design -->
-      <a href="graphic-design.html" class="group block proj-card reveal">
-        <div class="aspect-[16/9] bg-[#e2e3e1] overflow-hidden relative mb-5">
-          <img class="proj-img w-full h-full object-cover" src="img/graphic-thumb.jpg" alt="Graphic Design"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="typo-cover w-full h-full text-4xl" style="display:none">GRAPHIC<br/>DESIGN</div>
-        </div>
-        <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Graphic Design · Packaging · Branding</span>
-        <h3 class="text-2xl font-headline font-bold uppercase tracking-tight" id="gd-title">Proyectos de diseño gráfico</h3>
-      </a>
-
-      <!-- Motion Graphics -->
-      <a href="graphic-design.html#motion" class="group block proj-card reveal" style="transition-delay:.1s">
-        <div class="aspect-[16/9] overflow-hidden relative mb-5">
-          <div class="typo-cover w-full h-full text-4xl" style="min-height:220px">MOTION<br/>GRAPHICS</div>
-        </div>
-        <span class="font-label text-[10px] uppercase tracking-widest text-[#0D00FF] mb-1 block">Motion · After Effects</span>
-        <h3 class="text-2xl font-headline font-bold uppercase tracking-tight" id="mg-title">Proyectos de motion graphics</h3>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- LET'S DESIGN TOGETHER :) -->
-<section class="pt-32 pb-48 px-8 bg-[#f4f4f2]" id="contact">
-  <div class="max-w-7xl mx-auto text-center reveal">
-    <h2 id="contact-title" class="font-headline font-bold uppercase tracking-tighter mb-24 leading-none" style="font-size:clamp(3rem,10vw,9rem)">
-      Diseñemos<br/>juntos<span style="color:#f5d000"> :)</span>
-    </h2>
-    <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-32">
-      <a class="group flex flex-col items-center" href="mailto:cmcristinamc@gmail.com">
-        <span class="font-label text-[10px] uppercase tracking-[0.3em] mb-2 text-[#777]">Email</span>
-        <span class="text-2xl md:text-3xl font-headline font-bold uppercase border-b border-transparent group-hover:border-[#0D00FF] transition-all group-hover:text-[#0D00FF]">cmcristinamc@gmail.com</span>
-      </a>
-      <a class="group flex flex-col items-center" href="https://www.linkedin.com/in/cristina-miralles/" target="_blank">
-        <span class="font-label text-[10px] uppercase tracking-[0.3em] mb-2 text-[#777]">Social</span>
-        <span class="text-2xl md:text-3xl font-headline font-bold uppercase border-b border-transparent group-hover:border-[#0D00FF] transition-all group-hover:text-[#0D00FF]">LinkedIn</span>
-      </a>
-    </div>
-  </div>
-</section>
-
+  </section>
 </main>
-
-<footer class="bg-[#f4f4f2] border-t border-black/10">
-  <div class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-10 gap-6">
-    <div class="text-base font-black text-black font-headline uppercase">Cristina Miralles</div>
-    <p class="font-label text-[10px] tracking-[0.1em] uppercase text-[#777]">© 2026 Cristina Miralles. All rights reserved.</p>
-    <div class="flex gap-8">
-      <a class="font-label text-[10px] tracking-[0.1em] uppercase text-[#777] hover:text-[#0D00FF] transition-colors underline underline-offset-4" href="https://www.linkedin.com/in/cristina-miralles/" target="_blank">LinkedIn</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-/* CURSOR */
-const cur = document.getElementById('cursor');
-document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
-document.querySelectorAll('a,button,.proj-card,[onclick]').forEach(el => {
-  el.addEventListener('mouseenter', () => cur.classList.add('hover'));
-  el.addEventListener('mouseleave', () => cur.classList.remove('hover'));
-});
-
-/* HERO LINES ANIMATE */
-window.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.hline > span').forEach((el, i) => {
-    setTimeout(() => el.classList.add('up'), 100 + i * 130);
-  });
-});
-
-/* MAGNETIC TILT */
-document.querySelectorAll('.proj-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - .5;
-    const y = (e.clientY - r.top) / r.height - .5;
-    card.style.transform = `perspective(800px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-4px)`;
-  });
-  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-});
-
-/* SCROLL REVEAL */
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.07 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-/* LANG TOGGLE */
-const T = {
-  es: {
-    'hero-hi':   'Hola :)',
-    'hero-name': 'Soy Cristina Miralles',
-    'hero-role': 'Diseñadora UX/UI Junior',
-    'hero-sub':  'Diseño experiencias que se adaptan al idioma de cada usuario.',
-    'work-title':'Trabajo<br/>Seleccionado',
-    'also-title':'Echa un vistazo<br/>también a...',
-    'gd-title':  'Proyectos de diseño gráfico',
-    'mg-title':  'Proyectos de motion graphics',
-    'proj5-title':'SELLO DISCOGRÁFICO INDIE',
-    'proj5-cover':'SELLO<br/>DISCOGRÁFICO<br/>INDIE',
-    'contact-title': 'Diseñemos<br/>juntos<span style="color:#f5d000"> :)</span>',
-    langBtn: 'EN'
-  },
-  en: {
-    'hero-hi':   'Hi :)',
-    'hero-name': "I'm Cristina Miralles",
-    'hero-role': 'UX/UI Junior Designer',
-    'hero-sub':  "I enjoy designing experiences that speak every user's language.",
-    'work-title':'Selected<br/>Work',
-    'also-title':'Take a look<br/>as well to',
-    'gd-title':  'Graphic Design Work',
-    'mg-title':  'Motion Graphics Work',
-    'proj5-title':'INDIE RECORD LABEL',
-    'proj5-cover':'INDIE<br/>RECORD<br/>LABEL',
-    'contact-title': "Let's Design<br/>Together<span style=\"color:#f5d000\"> :)</span>",
-    langBtn: 'ES'
-  }
-};
-let lang = 'es';
-function toggleLang() {
-  lang = lang === 'es' ? 'en' : 'es';
-  Object.entries(T[lang]).forEach(([id, val]) => {
-    const el = document.getElementById(id);
-    if (el) el.innerHTML = val;
-  });
-  document.querySelectorAll('[data-es]').forEach(el => {
-    const v = el.dataset[lang]; if (v) el.textContent = v;
-  });
-  document.querySelectorAll('nav a[data-es]').forEach(a => { a.textContent = a.dataset[lang]; });
-  document.documentElement.lang = lang;
-}
-
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('active');
-}
-
-// Cerrar menú móvil cuando se hace clic en un enlace
-document.querySelectorAll('.mobile-menu a').forEach(link => {
-  link.addEventListener('click', () => {
-    document.getElementById('mobileMenu').classList.remove('active');
-  });
-});
-</script>
+  <!-- Bootstrap JS bundle (incluye Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Nuestro JS propio, para las animaciones -->
+  <script src="js/script.js"></script>
 </body>
 </html>

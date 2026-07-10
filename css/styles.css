@@ -1,0 +1,721 @@
+/* ==========================================================
+   VARIABLES GLOBALES
+   Aquí centralizamos los valores del diseño para no repetirlos
+   ========================================================== */
+:root {
+  --color-bg: #FFFFFF;      /* blanco puro */
+  --color-text: #0D0D0D;    /* negro */
+  --color-line: #0D0D0D;    /* color de las líneas/subrayados */
+  --color-accent: #FE0000;  /* rojo de acento */
+
+  --font-display: "Switzer", sans-serif; /* títulos: peso 700-800 */
+  --font-body: "Switzer", sans-serif;    /* cuerpo de texto: peso 400 */
+
+  --header-height: 90px;    /* alto del header fijo, lo usaremos para el padding-top del body */
+}
+
+/* ==========================================================
+   RESET MÍNIMO
+   ========================================================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  padding-top: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==========================================================
+   HEADER
+   Header normal (no fijo/flotante). Por defecto fondo blanco y
+   texto negro, para las páginas con fondo blanco. En home usamos
+   la variante .site-header--dark (fondo negro, texto blanco) para
+   que se funda con el negro de la sección de debajo.
+   ========================================================== */
+.site-header {
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 2rem 1.5rem;
+}
+
+.site-header--dark {
+  background-color: var(--color-text);
+}
+
+.site-title-link {
+  display: inline-block;
+}
+
+.site-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+}
+
+.site-header--dark .site-title {
+  color: #FFFFFF;
+}
+
+.site-title-link:hover .site-title {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+/* --- Mini-menú persistente --- */
+.site-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.site-nav-link {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text);
+}
+
+.site-header--dark .site-nav-link {
+  color: #FFFFFF;
+}
+
+.site-nav-link:hover {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.site-nav-link.is-current {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* Se ocultan en móvil para no saturar el header estrecho */
+@media (max-width: 576px) {
+  .site-nav {
+    display: none;
+  }
+}
+
+/* ==========================================================
+   SCROLL SUAVE ENTRE SECCIONES
+   scroll-margin-top compensa el header fijo al saltar con anchors
+   ========================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: var(--header-height);
+}
+
+/* ==========================================================
+   SECCIÓN HOME
+   ========================================================== */
+.section-home {
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  padding: 3rem 2rem;
+  background-color: var(--color-text);
+  color: #FFFFFF;
+}
+
+.home-row {
+  width: 100%;
+}
+
+/* --- Columna foto --- */
+.home-photo-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.home-photo-placeholder {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 3 / 4;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1.5px dashed #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 1rem;
+}
+
+/* Foto real, a color */
+.home-photo-image {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+}
+
+.home-note {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- Columna texto / menú --- */
+.home-text-col {
+  /* El espaciado ahora lo dan las clases de Bootstrap (ps-md-5) en el HTML */
+}
+
+.home-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  margin-bottom: 1.5rem;
+  min-height: 1.3em; /* evita que la línea "salte" mientras se escribe */
+  color: #FFFFFF;
+}
+
+#typewriter-cursor {
+  font-weight: 400;
+  animation: blink 0.8s steps(1) infinite;
+}
+
+/* cuando el typewriter termina, JS añade esta clase para congelar el cursor */
+#typewriter-cursor.stopped {
+  animation: none;
+  opacity: 0;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* --- Menú como índice numerado (0001, 0002, 0003...) --- */
+.home-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  counter-reset: home-nav-counter;
+}
+
+.home-nav-link {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  position: relative;
+  width: fit-content;
+  color: #FFFFFF;
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+
+  /* estado inicial para la animación de entrada en cascada (paso JS) */
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.home-nav-link::before {
+  counter-increment: home-nav-counter;
+  content: "0" counter(home-nav-counter);
+  font-weight: 400;
+  font-size: 1rem;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.home-nav-link.is-visible {
+  animation: fade-up 0.5s ease forwards;
+}
+
+@keyframes fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================
+   FADE-IN-UP GENÉRICO
+   Reutilizable en cualquier elemento que queramos revelar
+   en cascada al cargar la página (ver about.html)
+   ========================================================== */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.fade-in-up.is-visible {
+  animation: fade-up 0.6s ease forwards;
+}
+
+/* subrayado que crece de izquierda a derecha en hover */
+.home-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-line);
+  transition: width 0.3s ease;
+}
+
+.home-nav-link:hover::after {
+  width: calc(100% - 2.2rem); /* deja fuera la flecha del subrayado */
+  background-color: var(--color-accent);
+}
+
+/* la flecha se desplaza un poco a la derecha en hover, y se pinta de rojo */
+.home-nav-link .arrow {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.home-nav-link:hover .arrow {
+  transform: translateX(6px);
+  color: var(--color-accent);
+}
+
+/* ==========================================================
+   TÍTULO DE SECCIÓN GENÉRICO (subrayado)
+   Reutilizable en about / graphic-design / ux-ui-design
+   ========================================================== */
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  margin-bottom: 2.5rem;
+}
+
+/* ==========================================================
+   PLACEHOLDER DE IMAGEN GENÉRICO
+   Reutilizable en ux-ui-design / graphic-design
+   ========================================================== */
+.img-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: rgba(17, 17, 17, 0.08);
+  border: 1.5px dashed var(--color-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(17, 17, 17, 0.5);
+}
+
+.img-placeholder-wide {
+  aspect-ratio: 16 / 9;
+}
+
+.img-placeholder-tall {
+  aspect-ratio: 9 / 16; /* proporción de pantalla de móvil, para Pausana */
+}
+
+/* ==========================================================
+   SECCIÓN UX/UI DESIGN
+   ========================================================== */
+.section-uxui {
+  padding: 5rem 2rem;
+}
+
+.project-block {
+  margin-bottom: 4rem;
+}
+
+.project-block:last-child {
+  margin-bottom: 0;
+}
+
+.project-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.project-desc {
+  font-weight: 400;
+  color: rgba(17, 17, 17, 0.7);
+}
+
+/* --- Listado de proyectos: numeración automática --- */
+.project-list {
+  counter-reset: project-counter;
+}
+
+/* --- Fila clicable de cada proyecto (sustituye a la antigua portada con imagen) --- */
+.project-row {
+  counter-increment: project-counter;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 1.75rem 1.25rem;
+  border-top: 1px solid rgba(18, 18, 18, 0.15);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.project-block:last-child .project-row {
+  border-bottom: 1px solid rgba(18, 18, 18, 0.15);
+}
+
+.project-row:hover {
+  background-color: rgba(18, 18, 18, 0.05);
+}
+
+.project-row:focus-visible {
+  outline: 2px solid var(--color-line);
+  outline-offset: -2px;
+}
+
+/* Número de proyecto generado automáticamente (01, 02, 03...) */
+.project-index {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.1rem;
+  opacity: 0.4;
+  flex-shrink: 0;
+  width: 2ch;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.project-index::before {
+  content: counter(project-counter, decimal-leading-zero);
+}
+
+.project-row:hover .project-index {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+.project-row .project-title {
+  flex: 1 1 auto;
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  font-weight: 700;
+}
+
+.project-toggle-label {
+  font-size: 0.95rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.project-toggle-label .arrow {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.project-row:hover .project-toggle-label .arrow {
+  transform: translateX(6px);
+  color: var(--color-accent);
+}
+
+/* --- Estado abierto: invertimos los colores de toda la fila --- */
+.project-row.is-open {
+  background-color: var(--color-text);
+  color: var(--color-bg);
+}
+
+.project-row.is-open .project-index {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+/* --- Contenido desplegado (dentro del collapse de Bootstrap) --- */
+.project-details-inner {
+  padding-top: 2rem;
+}
+
+.project-details-text {
+  max-width: 60ch;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* --- Bloques del detalle: Objetivo / Proceso / Resultado --- */
+.process-block {
+  margin-bottom: 3rem;
+}
+
+.process-block:last-child {
+  margin-bottom: 0;
+}
+
+.process-step-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.25rem;
+}
+
+.process-step-text {
+  max-width: 55ch;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Cada paso del proceso (Investigación, Benchmark...) */
+.process-step {
+  padding: 1.75rem 0;
+  border-top: 1px solid rgba(17, 17, 17, 0.15);
+}
+
+.process-step:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.process-step-subtitle {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+}
+
+/* Editorial: texto e imagen lado a lado en escritorio, apilados en móvil.
+   Si solo hay un elemento dentro (texto o imagen), ocupa el ancho disponible solo. */
+.process-step-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.process-step-body .process-step-text {
+  flex: 1 1 320px;
+}
+
+.process-step-body .process-step-image {
+  flex: 1 1 280px;
+  max-width: 420px;
+}
+
+/* Variante "solo imagen" (ej. wireframes, público objetivo): más grande que
+   cuando va junto a texto, pero con un límite razonable para que no ocupe
+   todo el ancho de pantalla en escritorio */
+.process-step-body--image-only .process-step-image {
+  flex: 1 1 100%;
+  max-width: 640px;
+}
+
+/* Imagen real (no placeholder) dentro de un paso de proceso */
+img.process-step-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
+
+/* Cuando un paso tiene varias imágenes a la vez (ej. Investigación de Pausana):
+   ocupan todo el ancho disponible, en una rejilla que se adapta sola */
+.process-step-image-group {
+  flex: 1 1 100%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.process-step-image-group img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
+
+/* Imagen de resultado en formato móvil: la centramos y la limitamos en ancho
+   para que no se estire a pantalla completa */
+.result-img-mobile {
+  max-width: 320px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Imágenes reales dentro de los grids de Resultado */
+.project-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
+
+/* ==========================================================
+   SECUENCIAS DE IMÁGENES TIPO GIF (ver ux-ui-design.html)
+   Tamaño de recuadro fijo (no salta al cambiar de frame);
+   cada imagen se encaja entera dentro, sin recortar.
+   ========================================================== */
+.image-sequence {
+  background-color: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 2px;
+  position: relative;
+}
+
+.image-sequence--pc {
+  aspect-ratio: 1512 / 982;
+}
+
+.image-sequence--tablet {
+  aspect-ratio: 834 / 1194;
+}
+
+.image-sequence--mobile {
+  aspect-ratio: 390 / 844;
+}
+
+.image-sequence .image-sequence-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Enlace a un proyecto en vivo (ej. landing de Panorama en GitHub Pages) */
+.result-live-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.result-live-link:hover {
+  color: var(--color-accent);
+}
+
+.result-live-link .arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.result-live-link:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Etiqueta fija debajo del recuadro (PC / Tablet / Móvil) */
+.image-sequence-label {
+  text-align: center;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+  margin: 0.5rem 0 0;
+}
+
+/* Aviso superpuesto: "pasa el cursor" en escritorio, "toca" en táctil.
+   Se oculta en cuanto la secuencia empieza a reproducirse. */
+.image-sequence-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  background-color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.image-sequence.is-playing .image-sequence-hint {
+  opacity: 0;
+}
+
+.image-sequence-hint-touch {
+  display: none;
+}
+
+/* Dispositivos sin hover real (móvil/tablet táctil): mostramos el aviso de "toca" */
+@media (hover: none) {
+  .image-sequence-hint-hover {
+    display: none;
+  }
+  .image-sequence-hint-touch {
+    display: block;
+  }
+}
+
+/* Nota breve sobre el proyecto (ej. "proyecto personal") */
+.process-note {
+  font-style: italic;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================
+   SECCIÓN GRAPHIC DESIGN
+   ========================================================== */
+.section-graphic {
+  padding: 5rem 2rem;
+}
+
+.graphic-grid {
+  margin-bottom: 4rem;
+}
+
+.section-title-sm {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================
+   SECCIÓN ABOUT ME
+   ========================================================== */
+.section-about {
+  padding: 5rem 2rem;
+}
+
+.about-content {
+  max-width: 65ch;
+}
+
+.about-text {
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+  font-size: 1.05rem;
+}
+
+.about-contact a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.25s ease;
+}
+
+.about-contact a:hover {
+  color: var(--color-accent);
+}

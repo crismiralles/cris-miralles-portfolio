@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UX/UI Design — Cristina Miralles</title>
+
+  <!-- Fontshare: Switzer -->
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Nuestro CSS propio: siempre después de Bootstrap para poder sobreescribirlo -->
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ============ HEADER FIJO (se repite en toda la web) ============ -->
+  <header class="site-header">
+    <a href="index.html" class="site-title-link">
+      <h1 class="site-title">Cristina Miralles</h1>
+    </a>
+    <nav class="site-nav">
+      <a href="ux-ui-design.html" class="site-nav-link is-current">ux/ui design</a>
+      <a href="graphic-design.html" class="site-nav-link">graphic design</a>
+      <a href="about.html" class="site-nav-link">about me</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ SECCIÓN: UX/UI DESIGN ============ -->
+    <section id="ux-ui-design" class="section-uxui">
+      <div class="container-fluid section-inner" id="ux-ui-accordion">
+        <h2 class="section-title">ux/ui design</h2>
+
+        <div class="project-list">
+
+          <!-- Proyecto 1: Panorama -->
+          <div class="project-block">
+            <div class="project-row" data-bs-toggle="collapse" data-bs-target="#details-panorama"
+                 role="button" tabindex="0" aria-expanded="false" aria-controls="details-panorama">
+              <span class="project-index"></span>
+              <h3 class="project-title">panorama <span class="project-desc">— website responsive de sello discográfico</span></h3>
+              <span class="project-toggle-label">ver más <span class="arrow">→</span></span>
+            </div>
+
+            <div class="collapse project-details" id="details-panorama" data-bs-parent="#ux-ui-accordion">
+              <div class="project-details-inner">
+
+                <p class="process-note">Proyecto personal: ideado y desarrollado de principio a fin sin cliente real.</p>
+
+                <div class="process-block">
+                  <h4 class="process-step-title">Objetivo</h4>
+                  <p class="process-step-text">Diseñar una web responsive para el sello discográfico Panorama que reflejara su identidad visual y facilitara el descubrimiento de música y artistas.</p>
+                </div>
+
+                <div class="process-block">
+                  <h4 class="process-step-title">Proceso</h4>
+
+                  <div class="process-step">
+                    <h5 class="process-step-subtitle">Investigación</h5>
+                    <div class="process-step-body">
+                      <p class="process-step-text">Entrevistas a seguidores del sello para entender cómo descubren música nueva y qué esperan de una web de un sello independiente.</p>
+                      <img class="process-step-image" src="img/ux-ui/investigacion-panorama.png" alt="Investigación del proyecto Panorama">
+                    </div>
+                  </div>
+
+                  <div class="process-step">
+                    <h5 class="process-step-subtitle">Benchmark</h5>
+                    <div class="process-step-body">
+                      <p class="process-step-text">Análisis de otras webs de sellos y tiendas de merchandising para identificar patrones de navegación y oportunidades de diferenciación visual.</p>
+                    </div>
+                  </div>
+
+                  <div class="process-step">
+                    <h5 class="process-step-subtitle">Wireframes</h5>
+                    <div class="process-step-body process-step-body--image-only">
+                      <img class="process-step-image" src="img/ux-ui/wireframes-panorama.png" alt="Wireframes del proyecto Panorama">
+                    </div>
+                  </div>
+
+                  <div class="process-step">
+                    <h5 class="process-step-subtitle">Prototipo</h5>
+                    <div class="process-step-body">
+                      <p class="process-step-text">Prototipo navegable en alta fidelidad para validar el flujo de compra antes de pasar a desarrollo.</p>
+                      <img class="process-step-image" src="img/ux-ui/prototipo-panorama.png" alt="Prototipo del proyecto Panorama">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="process-block">
+                  <h4 class="process-step-title">Resultado</h4>
+                  <a href="https://crismiralles.github.io/landing-page/" class="result-live-link" target="_blank" rel="noopener noreferrer">ver landing en vivo <span class="arrow">→</span></a>
+                  <div class="row g-3 project-grid">
+                    <div class="col-6 col-md-4">
+                      <div class="image-sequence image-sequence--pc" data-folder="img/ux-ui/panorama/pc" data-prefix="pc" data-frames="9" data-ext="jpg" data-fps="2">
+                        <img class="image-sequence-img" src="img/ux-ui/panorama/pc/pc-1.jpg" alt="Panorama en escritorio (secuencia animada)">
+                        <span class="image-sequence-hint">
+                          <span class="image-sequence-hint-hover">pasa el cursor para ver</span>
+                          <span class="image-sequence-hint-touch">toca para reproducir</span>
+                        </span>
+                      </div>
+                      <p class="image-sequence-label">PC</p>
+                    </div>
+                    <div class="col-6 col-md-4">
+                      <div class="image-sequence image-sequence--tablet" data-folder="img/ux-ui/panorama/tablet" data-prefix="tablet" data-frames="11" data-ext="jpg" data-fps="2">
+                        <img class="image-sequence-img" src="img/ux-ui/panorama/tablet/tablet-1.jpg" alt="Panorama en tablet (secuencia animada)">
+                        <span class="image-sequence-hint">
+                          <span class="image-sequence-hint-hover">pasa el cursor para ver</span>
+                          <span class="image-sequence-hint-touch">toca para reproducir</span>
+                        </span>
+                      </div>
+                      <p class="image-sequence-label">Tablet</p>
+                    </div>
+                    <div class="col-6 col-md-4">
+                      <div class="image-sequence image-sequence--mobile" data-folder="img/ux-ui/panorama/movil" data-prefix="movil" data-frames="11" data-ext="jpg" data-fps="2">
+                        <img class="image-sequence-img" src="img/ux-ui/panorama/movil/movil-1.jpg" alt="Panorama en móvil (secuencia animada)">
+                        <span class="image-sequence-hint">
+                          <span class="image-sequence-hint-hover">pasa el cursor para ver</span>
+                          <span class="image-sequence-hint-touch">toca para reproducir</span>
+                        </span>
+                      </div>
+                      <p class="image-sequence-label">Móvil</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Proyecto 2: Wish Stone -->
+          <div class="project-block">
+            <div class="project-row" data-bs-toggle="collapse" data-bs-target="#details-wishstone"
+                 role="button" tabindex="0" aria-expanded="false" aria-controls="details-wishstone">
+              <span class="project-index"></span>
+              <h3 class="project-title">wish stone <span class="project-desc">— e-commerce de una piedra</span></h3>
+              <span class="project-toggle-label">ver más <span class="arrow">→</span></span>
+            </div>
+
+            <div class="collapse project-details" id="details-wishstone" data-bs-parent="#ux-ui-accordion">
+              <div class="project-details-inner">
+
+                <div class="process-block">
+                  <h4 class="process-step-title">Objetivo</h4>
+                  <p class="process-step-text">Crear un e-commerce minimalista alrededor de un único producto simbólico, donde la experiencia de compra transmitiera el mismo mensaje que el proporcionado al propio objeto.</p>
+                </div>
+
+                <div class="process-block">
+                  <h4 class="process-step-title">Proceso</h4>
+
+                  <div class="process-step">
+                    <h5 class="process-step-subtitle">Investigación</h5>
+                    <div class="process-step-body">
+                      <p class="process-step-text">Estudio de e-commerces de producto único y de marcas que venden una experiencia más que un objeto, para entender qué recursos generan deseo sin necesitar catálogo.</p>
+                    </div>
+                  </div>
+
+                  <div class="process-step">
+                    <h5 class="process-step-subtitle">Público objetivo</h5>
+                    <div class="process-step-body process-step-body--image-only">
+                      <img class="process-step-image" src="img/ux-ui/publico-objetivo-wish-stone.png" alt="Público objetivo del proyecto Wish Stone">
+                    </div>
+                  </div>
+
+                  <div class="process-step">
+                    <h5 class="process-step-subtitle">Moodboard</h5>
+                    <div class="process-step-body process-step-body--image-only">
+                      <img class="process-step-image" src="img/ux-ui/moodboard-wish-stone.png" alt="Moodboard del proyecto Wish Stone">
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="process-block">
+                  <h4 class="process-step-title">Resultado</h4>
+                  <div class="row g-3 project-grid">
+                    <div class="col-6 col-md-4"><img src="img/ux-ui/Home-wish-stone.png" alt="Home del e-commerce Wish Stone"></div>
+                    <div class="col-6 col-md-4"><img src="img/ux-ui/Product-wish-stone.png" alt="Ficha de producto Wish Stone"></div>
+                    <div class="col-6 col-md-4"><img src="img/ux-ui/Bag-wish-stone.png" alt="Carrito de Wish Stone"></div>
+                    <div class="col-6 col-md-4"><img src="img/ux-ui/Payment-wish-stone.png" alt="Pago de Wish Stone"></div>
+                    <div class="col-6 col-md-4"><img src="img/ux-ui/Delivery-wish-stone.png" alt="Entrega de Wish Stone"></div>
+                    <div class="col-6 col-md-4"><img src="img/ux-ui/Contact-wish-stone.png" alt="Contacto de Wish Stone"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Proyecto 3: Lemon Studio -->
+          <div class="project-block">
+            <div class="project-row" data-bs-toggle="collapse" data-bs-target="#details-lemonstudio"
+                 role="button" tabindex="0" aria-expanded="false" aria-controls="details-lemonstudio">
+              <span class="project-index"></span>
+              <h3 class="project-title">lemon studio <span class="project-desc">— landing page de un e-commerce de una joyería</span></h3>
+              <span class="project-toggle-label">ver más <span class="arrow">→</span></span>
+            </div>
+
+            <div class="collapse project-details" id="details-lemonstudio" data-bs-parent="#ux-ui-accordion">
+              <div class="project-details-inner">
+
+                <div class="process-block">
+                  <p class="process-step-text">Landing page para Lemon Studio, un estudio de joyería ficticio. Este proyecto se resolvió directamente en el diseño final, sin fases de investigación documentadas.</p>
+                </div>
+
+                <div class="process-block">
+                  <h4 class="process-step-title">Resultado</h4>
+                  <div class="row g-3 project-grid justify-content-center">
+                    <div class="col-md-8"><img src="img/ux-ui/landing-lemon-studio.jpg" alt="Landing page de Lemon Studio"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Proyecto 4: Pausana -->
+          <div class="project-block">
+            <div class="project-row" data-bs-toggle="collapse" data-bs-target="#details-pausana"
+                 role="button" tabindex="0" aria-expanded="false" aria-controls="details-pausana">
+              <span class="project-index"></span>
+              <h3 class="project-title">pausana <span class="project-desc">— app de yoga</span></h3>
+              <span class="project-toggle-label">ver más <span class="arrow">→</span></span>
+            </div>
+
+            <div class="collapse project-details" id="details-pausana" data-bs-parent="#ux-ui-accordion">
+              <div class="project-details-inner">
+
+                <div class="process-block">
+                  <h4 class="process-step-title">Objetivo</h4>
+                  <p class="process-step-text">Diseñar una app de yoga que acompañe a las mujeres en su día a día, con recomendaciones personalizadas según su estado físico y hormonal.</p>
+                </div>
+
+                <div class="process-block">
+                  <h4 class="process-step-title">Proceso</h4>
+
+                  <div class="process-step">
+                    <h5 class="process-step-subtitle">Investigación</h5>
+                    <div class="process-step-body">
+                      <p class="process-step-text">Se realizaron 5 user personas y 2 encuestas cuantitativas, aquí se muestran los resultados de esas encuestas.</p>
+                      <div class="process-step-image-group">
+                        <img src="img/ux-ui/encuesta-cuantitativa-pausana.png" alt="Resultados de la encuesta cuantitativa de Pausana">
+                        <img src="img/ux-ui/customer-journey-map1.png" alt="Customer journey map 1 de Pausana">
+                        <img src="img/ux-ui/customer-journey-map2.png" alt="Customer journey map 2 de Pausana">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="process-step">
+                    <h5 class="process-step-subtitle">Investigación</h5>
+                    <div class="process-step-body">
+                      <p class="process-step-text">Se realizó un card sorting y el resultado de la arquitectura de la información fue el siguiente mapa de navegación.</p>
+                      <img class="process-step-image" src="img/ux-ui/mapa-navegacion-pausana.png" alt="Mapa de navegación de Pausana">
+                    </div>
+                  </div>
+
+                  <div class="process-step">
+                    <h5 class="process-step-subtitle">Benchmark</h5>
+                    <div class="process-step-body">
+                      <p class="process-step-text">Análisis de apps de bienestar y fitness para identificar buenas prácticas en la personalización de rutinas y el acompañamiento emocional.</p>
+                    </div>
+                  </div>
+
+                  <div class="process-step">
+                    <h5 class="process-step-subtitle">Wireframes</h5>
+                    <div class="process-step-body process-step-body--image-only">
+                      <img class="process-step-image" src="img/ux-ui/wireframes-pausana.png" alt="Wireframes de Pausana">
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="process-block">
+                  <h4 class="process-step-title">Resultado</h4>
+                  <div class="row g-3 project-grid">
+                    <div class="col-12"><img class="result-img-mobile" src="img/ux-ui/pausana-resultado.gif" alt="Resultado final de Pausana"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bootstrap JS bundle (incluye Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Nuestro JS propio, para las animaciones -->
+  <script src="js/script.js"></script>
+</body>
+</html>
